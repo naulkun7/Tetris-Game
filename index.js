@@ -18,4 +18,5 @@ const view = new View({
 
 const controller = new Controller(game, view);
 
-// Get the audio element
+let audio = document.getElementById("soundtrack");
+audio.volume = 0.1;
