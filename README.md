@@ -13,7 +13,7 @@
 5. [References](#References)
 
 ## Introduction <a name="Introduction"></a> :smile:
-### Group: 2 :star_struck:
+### Group: 9 :star_struck:
 ### Our team member
 | Index | Name                   |     ID      |              Email               | Github account             |
 |:------|:-----------------------|:-----------:|:--------------------------------:|:---------------------------|
@@ -21,10 +21,6 @@
 | 2     | Nguyễn Hoàng Luân | ITITIU20012 | luannguyenn.2k2@gmail.com | naulkun7           |
 | 3     | Nguyễn Hoàng Thiên Phúc         | ITITIU20279 |  |   thienphuc1802           |
 | 4     | Nguyễn Hoàng Nhân    | ITITIU20 |  |                          |           
-
-### Topic **Tetris Game**  
-Why we choose this topic :question:  
-....
   
 ### Tasks  
 | Index | Task                                                         | PersonInCharge | Contribution |
@@ -65,10 +61,9 @@ Skills: Work in GitHub, Canva, Google docx,...handle some bugs and practice team
 Knowledge: Database, Java
 
 ## Installation <a name="Installation"></a> 
-- Step 1: Clone following repository to your local  [HospitalDatabaseManagement_repository](https://github.com/naulkun7/Hospital-Data-Manangement-System.git)  
-    + IntelliJ: Copy the repository URL --> Open IntelliJ IDEA --> Choose "Get from VCS" --> Paste the URL on your clipboard to "URL" field --> Press Enter or Clone  
-    + Netbeans: Copy the repository URL --> Open Netbeans IDE -->  Go to File --> Choose Import --> In folder Git choose Project from Git --> Choose Clone URL and click Next--> Paste URL in "URL" field and click Next --> Choose branch "main" and click Next --> Finish   
+- Step 1: Clone following repository to your local  [HospitalDatabaseManagement_repository](https://github.com/naulkun7/Hospital-Data-Manangement-System.git)     
     + VSCode: Copy the repository URL --> Open VSCode --> Ctrl + Shift + P --> Type "gitcl" --> Choose "Git Clone" and paste the URL in   
+    + WebStorm: Copy the repository URL --> Open WebStorm --> Choose "Get from VCS" --> Paste the URL on your clipboard to "URL" field --> Press Enter or Clone
 - Step 2: Open "src" package --> Choose "..." class in "src" folder   
 - Step 3: Run and modify it as you want
 ## PowerPoint <a name="PowerPoint"></a> 📖
@@ -79,4 +74,5 @@ Knowledge: Database, Java
    
 ## References <a name="References"></a> :book:
 Thanks to the incredibly rich resources that helped us make this project happen 
-1. Principles of Database Management Lab 05-06
+1. Data Structures and Algorithms Lectures (Dr. Tran Thanh Tung)
+2. Data Structures and Algorithms Labs (MSc. Nguyen Quang Phu)
