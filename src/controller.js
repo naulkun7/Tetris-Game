@@ -4,7 +4,6 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
-
     this.update = this.update.bind(this);
 
     view.on("keypress", this._handleKeyPress.bind(this));
@@ -19,16 +18,30 @@ export default class Controller {
     this._updateView();
   }
 
+  pauseAudio() {
+    let audio = document.getElementById("soundtrack");
+    audio.pause();
+    let pauseAudio = document.getElementById("pauseEffect");
+    pauseAudio.play();
+  }
+
+  resumeAudio() {
+    let audio = document.getElementById("soundtrack");
+    audio.play();
+  }
+
   play() {
     this._isPlaying = true;
     this._startTimer();
     this._updateView();
+    this.resumeAudio();
   }
 
   pause() {
     this._isPlaying = false;
     this._stopTimer();
     this._updateView();
+    this.pauseAudio();
   }
 
   reset() {

@@ -15,4 +15,7 @@ const view = new View({
   rows: GRID_ROWS,
   columns: GRID_COLUMNS,
 });
+
 const controller = new Controller(game, view);
+
+// Get the audio element

@@ -54,6 +54,22 @@ export default class View {
       this.width / 2,
       this.height / 2
     );
+
+    // Render tutorial text below the "Press ENTER to Start" text
+    this.context.font = '10px "Press Start 2P"';
+    this.context.fillText("TUTORIAL", this.width / 2, this.height / 2 + 40);
+
+    this.context.fillText(
+      "Use the <-|-> to move left and right",
+      this.width / 2,
+      this.height / 2 + 60
+    );
+
+    this.context.fillText(
+      "Use space to drop down",
+      this.width / 2,
+      this.height / 2 + 80
+    );
   }
 
   renderMainScreen(state) {
