@@ -18,6 +18,7 @@ export default class Game {
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
+    this._holdPiece = null;
   }
 
   get level() {
@@ -33,6 +34,7 @@ export default class Game {
       activePiece: this._activePiece,
       nextPiece: this._nextPiece,
       isGameOver: this._topOut,
+      holdPiece: this._holdPiece,
     };
   }
 
@@ -93,6 +95,15 @@ export default class Game {
       this._activePiece.rotate(false);
     }
   }
+
+_swapPiece() {
+  const temp = this._activePiece;
+  this._activePiece = this._holdPiece || this._activePiece;
+  this._holdPiece = temp;
+  // Reset the position of the active piece
+  this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
+  this._activePiece.y = -1;
+}
 
   _update() {
     this._updatePlayfield();

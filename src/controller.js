@@ -110,6 +110,10 @@ export default class Controller {
         this._game.dropPiece();
         this._updateView();
         break;
+      case 67: // 'c' key
+        this._game._swapPiece();
+        this._updateView();
+        break;
     }
   }
 

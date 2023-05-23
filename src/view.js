@@ -133,7 +133,7 @@ export default class View {
     });
   }
 
-  _renderPanel({ level, score, lines, nextPiece }) {
+  _renderPanel({ level, score, lines, nextPiece, holdPiece }) {
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
     this.context.fillStyle = "white";
@@ -150,6 +150,17 @@ export default class View {
       width: this.blockWidth * 0.5,
       height: this.blockHeight * 0.5,
     });
+
+    this.context.fillText("Hold:", this.panelX, this.panelY + 196);
+
+    if (holdPiece) {
+      this._renderPiece(holdPiece, {
+        x: this.panelX,
+        y: this.panelY + 220,
+        width: this.blockWidth * 0.5,
+        height: this.blockHeight * 0.5,
+      });
+  }
   }
 
   _renderPiece(
