@@ -50,7 +50,7 @@ export default class Piece {
 
   constructor(type = Piece.getRandomType(), x = 0, y = 0) {
     if (!Piece.types.includes(type)) {
-      throw new Error("Invalid peice type");
+      throw new Error("Invalid piece type");
     }
 
     this.type = type;
@@ -58,7 +58,7 @@ export default class Piece {
     this.x = x;
     this.y = y;
     this.boxShadow =
-      "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;"; // Define the box shadow style
+      "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px"; // Define the box shadow style
   }
 
   get width() {
