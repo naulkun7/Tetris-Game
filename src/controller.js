@@ -28,6 +28,8 @@ export default class Controller {
   resumeAudio() {
     let audio = document.getElementById("soundtrack");
     audio.play();
+    let pauseAudio = document.getElementById("pauseEffect");
+    pauseAudio.pause();
   }
 
   play() {
