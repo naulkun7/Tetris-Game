@@ -52,7 +52,7 @@ export default class View {
     this.context.fillText(
       "Press ENTER to Start",
       this.width / 2,
-      this.height / 2
+      this.height / 3
     );
 
     // Render tutorial text below the "Press ENTER to Start" text

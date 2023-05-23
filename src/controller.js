@@ -21,8 +21,11 @@ export default class Controller {
   pauseAudio() {
     let audio = document.getElementById("soundtrack");
     audio.pause();
-    let pauseAudio = document.getElementById("pauseEffect");
-    pauseAudio.play();
+  }
+
+  pauseEffect() {
+    let pauseEffect = document.getElementById("pauseEffect");
+    pauseEffect.play();
   }
 
   resumeAudio() {
@@ -44,6 +47,7 @@ export default class Controller {
     this._stopTimer();
     this._updateView();
     this.pauseAudio();
+    this.pauseEffect();
   }
 
   reset() {
@@ -56,6 +60,7 @@ export default class Controller {
 
     if (state.isGameOver) {
       this._view.renderEndScreen(state);
+      this.pauseAudio();
     } else if (!this._isPlaying) {
       this._view.renderPauseScreen(state);
     } else {

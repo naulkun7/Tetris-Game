@@ -105,6 +105,7 @@ export default class Game {
   }
 
   _updatePlayfield() {
+    this._playLockSoundEffect();
     this._playfield.lockPiece(this._activePiece);
   }
 
@@ -112,6 +113,7 @@ export default class Game {
     const clearedLines = this._playfield.clearLines();
 
     if (clearedLines > 0) {
+      this._playClearLineSoundEffect();
       this._score += Game.points[clearedLines] * (this.level + 1);
       this._lines += clearedLines;
     }
@@ -125,5 +127,17 @@ export default class Game {
       (this._playfield.columns - this._activePiece.width) / 2
     );
     this._activePiece.y = -1;
+  }
+
+  _playClearLineSoundEffect() {
+    let clearLineAudio = document.getElementById("getScore");
+    clearLineAudio.volume = 0.5;
+    clearLineAudio.play();
+  }
+
+  _playLockSoundEffect() {
+    // Play the sound effect here
+    let lockSound = document.getElementById("lockSound");
+    lockSound.play();
   }
 }
