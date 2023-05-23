@@ -84,6 +84,10 @@ export default class Controller {
   }
 
   _handleKeyDown(event) {
+    if (!this._isPlaying) {
+      return; // Do nothing if the game is paused
+    }
+
     switch (event.keyCode) {
       case 37: // LEFT ARROW
         this._game.movePieceLeft();

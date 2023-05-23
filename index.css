@@ -1,16 +1,18 @@
 body {
     margin: 0;
     background-color: black;
+    overflow: hidden;
 }
 
 #root {
-    padding: 3rem;
+    /* padding: 10px; */
     text-align: center
 }
 
 #root h1 {
     font-family: 'Press Start 2P', Consolas, monospace;
     color: white;
+    margin-bottom: 10px;
 }
 
 #root canvas {
