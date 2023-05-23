@@ -185,12 +185,34 @@ export default class View {
     }
   }
 
-  _renderBlock({ x, y, width, height, lineWidth = 2, color = "black" }) {
+  _renderBlock({ x, y, width, height, color, lineWidth }) {
     this.context.fillStyle = color;
     this.context.strokeStyle = "black";
     this.context.lineWidth = lineWidth;
+
+    // Add box-shadow properties
+    this.context.shadowColor = "rgba(0, 0, 0, 0.16)";
+    this.context.shadowBlur = 6;
+    this.context.shadowOffsetX = 0;
+    this.context.shadowOffsetY = 3;
+
     this.context.fillRect(x, y, width, height);
     this.context.strokeRect(x, y, width, height);
+
+    // Add additional box-shadow properties for a second shadow
+    this.context.shadowColor = "rgba(0, 0, 0, 0.23)";
+    this.context.shadowBlur = 6;
+    this.context.shadowOffsetX = 0;
+    this.context.shadowOffsetY = 3;
+
+    this.context.fillRect(x, y, width, height);
+    this.context.strokeRect(x, y, width, height);
+
+    // Reset box-shadow properties
+    this.context.shadowColor = "transparent";
+    this.context.shadowBlur = 0;
+    this.context.shadowOffsetX = 0;
+    this.context.shadowOffsetY = 0;
   }
 
   _renderGrid() {
