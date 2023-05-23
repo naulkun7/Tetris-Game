@@ -19,9 +19,9 @@
 | Index | Name                   |     ID      |              Email               | Github account             |
 |:------|:-----------------------|:-----------:|:--------------------------------:|:---------------------------|
 | 1     | Trần Quang Trí | ITITIU20325 | tranwangtristudy@gmail.com | WangTris |
-| 2     | Nguyễn Hoàng Luân | ITITIU20012 | luannguyenn.2k2@gmail.com | naulkun7           |
-| 3     | Nguyễn Hoàng Thiên Phúc  | ITITIU20279 |  |   thienphuc1802           |
-| 4     | Trần Ngọc Nhân    | ITITIU20264 | nhantran4102002@gmail.com | petertran410 |           
+| 2     | Nguyễn Hoàng Luân | ITITIU20012 | luannguyenn.2k2@gmail.com | naulkun7 |
+| 3     | Nguyễn Hoàng Thiên Phúc  | ITITIU20279 | nguyenhoangthienphuc1802@gmail.com |   thienphuc1802 |
+| 4     | Trần Ngọc Nhân | ITITIU20264 | nhantran4102002@gmail.com | petertran410 |           
 
 ### Tasks  
 | Index | Task                                                         | Person In Charge | Contribution |
@@ -34,10 +34,15 @@
 ## Requirement for software:  
 
 ### Environment :computer:
-Language: HTML, CSS, JavaScript  
+Language:  
+
+![image](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![image](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![image](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 Platform:    
-Visual Studio Code  
+  
+![image](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)  
 MySQL  
 
 Library:   
