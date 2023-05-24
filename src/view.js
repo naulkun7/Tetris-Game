@@ -45,7 +45,7 @@ export default class View {
   }
 
   renderStartScreen() {
-    this._clearScreen("rgba(0, 0, 0, 0.75)");
+    this._clearScreen();
 
     this.context.fillStyle = "white";
     this.context.font = '18px "Press Start 2P"';
@@ -94,6 +94,11 @@ export default class View {
       "Press ENTER to Resume",
       this.width / 2,
       this.height / 2
+    );
+    this.context.fillText(
+      "Press R to Restart",
+      this.width / 2,
+      this.height / 2 + 48
     );
   }
 
