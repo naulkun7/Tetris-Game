@@ -36,6 +36,12 @@ export default class Controller {
     this.play();
   }
 
+  getName() {
+    let name = document.getElementById("name").value;
+    console.log(name);
+    return name;
+  }
+
   _updateView() {
     const state = this._game.state;
 
@@ -77,6 +83,7 @@ export default class Controller {
         } else if (this._isPlaying) {
           this.pause();
         } else {
+          this.getName();
           this.play();
         }
         break;
