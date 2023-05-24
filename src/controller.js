@@ -4,6 +4,7 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
+    this.difficultySelected = false; // Add this
     this.update = this.update.bind(this);
 
     view.on("keypress", this._handleKeyPress.bind(this));
@@ -57,7 +58,7 @@ export default class Controller {
 
   restartGame() {
     this._game.reset(); // Assuming this method resets your game
-    this._view.renderStartScreen(); // Render the start screen
+    this._view.renderChoosingDifficulty(); // Render the start screen
     this._isPlaying = false; // The game should not be playing at the start screen
     this._stopTimer(); // Stop the game timer, if it's running
   }
@@ -98,13 +99,16 @@ export default class Controller {
   _handleKeyPress(event) {
     switch (event.keyCode) {
       case 13: // ENTER
-        if (this._game.state.isGameOver) {
-          console.log(this._game.state);
-          this.reset();
-        } else if (this._isPlaying) {
-          this.pause();
+        if (this.difficultySelected) {
+          if (this._game.state.isGameOver) {
+            this.reset();
+          } else if (this._isPlaying) {
+            this.pause();
+          } else {
+            this.play();
+          }
         } else {
-          this.play();
+          this.renderChoosingDifficulty();
         }
         break;
     }
@@ -153,5 +157,17 @@ export default class Controller {
         this._startTimer();
         break;
     }
+  }
+
+  renderChoosingDifficulty() {
+    // Render choosing difficulty screen
+    this._view.renderChoosingDifficulty();
+
+    // Listen to user input for difficulty selection
+    this._view.on("difficultySelected", (difficulty) => {
+      this._game.setDifficulty(difficulty); // Assuming this method changes game's difficulty
+      this.difficultySelected = true;
+      this._view.renderStartScreen(); // Re-render the start screen
+    });
   }
 }

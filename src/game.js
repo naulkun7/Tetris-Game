@@ -1,6 +1,5 @@
 import Playfield from "./playfield.js";
 import Piece from "./piece.js";
-
 export default class Game {
   static points = {
     1: 40,
@@ -16,11 +15,37 @@ export default class Game {
   _nextPiece = null;
   _ghostPiece = null;
 
+  difficulty = null;
+  _baseLevel = 0;
+  _linesPerLevel = 10;
+
+  _gameInProgress = false;
+
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
     this._updateGhostPiece();
+    this.baseLevel = 0;
+    this.linesPerLevel = 10;
     this._speed = 1000; // Set initial speed to 1000 milliseconds
+    this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
+    document.addEventListener("keydown", (event) => {
+      if (this._gameInProgress) {
+        // Check if the game is in progress
+        event.preventDefault(); // Prevent the default behavior of the keys
+
+        // Handle other gameplay-related key actions here...
+      } else {
+        // Handle difficulty selection keys
+        if (event.key.toLowerCase() === "e") {
+          this.setDifficulty("easy");
+        } else if (event.key.toLowerCase() === "n") {
+          this.setDifficulty("normal");
+        } else if (event.key.toLowerCase() === "h") {
+          this.setDifficulty("hard");
+        }
+      }
+    });
     this.gameLoop();
   }
 
@@ -42,8 +67,24 @@ export default class Game {
   }
   // end of gameSpeed
 
+  setDifficulty(difficulty) {
+    this.difficulty = difficulty;
+    if (difficulty === "easy") {
+      this._linesPerLevel = 10;
+      this._baseLevel = 0;
+    } else if (difficulty === "normal") {
+      this._linesPerLevel = 5;
+      this._baseLevel = 1;
+    } else if (difficulty === "hard") {
+      this._linesPerLevel = 5;
+      this._baseLevel = 5;
+    }
+  }
+
   get level() {
-    return Math.floor(this._lines * 0.2);
+    console.log(this.linesPerLevel);
+    console.log(this.baseLevel);
+    return Math.floor(this._lines / this._linesPerLevel) + this._baseLevel;
   }
 
   get state() {
@@ -166,7 +207,7 @@ export default class Game {
       this._topOut = true;
     } else {
       const level = this.level;
-      const speed = 1000 - level * 100; // Decrease speed by 100 milliseconds per level
+      const speed = 1000 - (level + this.baseLevel) * 100; // Decrease speed by 100 milliseconds per level
 
       setTimeout(() => {
         this.movePieceDown();

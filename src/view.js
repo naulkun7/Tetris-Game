@@ -74,6 +74,47 @@ export default class View {
     );
   }
 
+  renderChoosingDifficulty() {
+    this._clearScreen();
+
+    this.context.fillStyle = "white";
+    this.context.font = '18px "Press Start 2P"';
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
+    this.context.fillText("Choose Difficulty", this.width / 2, this.height / 3);
+
+    this.context.font = '16px "Press Start 2P"';
+    this.context.fillText("Press E for EASY", this.width / 2, this.height / 2);
+
+    this.context.fillText(
+      "Press N for NORMAL",
+      this.width / 2,
+      this.height / 2 + 40
+    );
+    this.context.fillText(
+      "Press H for HARD",
+      this.width / 2,
+      this.height / 2 + 80
+    );
+
+    // Listen to user input
+    this.on("keydown", (event) => {
+      if (event.key.toLowerCase() === "e") {
+        document.dispatchEvent(
+          new CustomEvent("difficultySelected", { detail: "easy" })
+        );
+      } else if (event.key.toLowerCase() === "n") {
+        document.dispatchEvent(
+          new CustomEvent("difficultySelected", { detail: "normal" })
+        );
+      } else if (event.key.toLowerCase() === "h") {
+        document.dispatchEvent(
+          new CustomEvent("difficultySelected", { detail: "hard" })
+        );
+      }
+    });
+  }
+
   renderMainScreen(state) {
     this._clearScreen();
     this._renderPlayfield(state);
