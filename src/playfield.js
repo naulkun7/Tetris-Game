@@ -72,11 +72,20 @@ export default class Playfield extends Array {
 
   _removeLines(lines) {
     for (let index of lines) {
-      this.splice(index, 1);
-      this.unshift(new Array(this.columns).fill(0));
+      this.deleteRowWithEffect(index);
     }
 
     return lines.length;
+  }
+
+  deleteRowWithEffect(index) {
+    // Fill the row with a color
+    this[index].fill("white");
+    // After 100 milliseconds, remove the row and add a new empty one at the top
+    setTimeout(() => {
+      this.splice(index, 1);
+      this.unshift(new Array(this.columns).fill(0));
+    }, 100);
   }
 
   _isOutOfBounds(x, y) {
