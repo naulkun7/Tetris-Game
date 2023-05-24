@@ -60,6 +60,7 @@ export default class View {
       (this.height / 2) + 50
 
     )
+
   }
 
   renderMainScreen(state) {
@@ -85,7 +86,7 @@ export default class View {
     );
   }
 
-  renderEndScreen({ score, Name }) {
+  renderEndScreen({ score, name }) {
     this._clearScreen();
 
     this.context.fillStyle = "white";
@@ -93,7 +94,7 @@ export default class View {
     this.context.textAlign = "center";
     this.context.textBaseline = "middle";
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 48);
-    this.context.fillText(`Name: ${Name}`, this.width / 2 - 100, this.height / 2);
+    this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2);
     this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2);
 
     this.context.fillText(

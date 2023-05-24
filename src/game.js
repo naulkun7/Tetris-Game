@@ -9,6 +9,8 @@ export default class Game {
     4: 1200,
   };
 
+
+  _name = document.getElementById("name").value;
   _score = 0;
   _lines = 0;
   _topOut = false;
@@ -26,6 +28,7 @@ export default class Game {
 
   get state() {
     return {
+      name: this._name,
       score: this._score,
       level: this.level,
       lines: this._lines,
