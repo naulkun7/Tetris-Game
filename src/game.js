@@ -74,9 +74,12 @@ export default class Game {
   dropPiece() {
     if (this._topOut) return;
 
+    let cellsDropped = 0;
+
     // Move the piece down until it hits something
     while (!this._playfield.hasCollision(this._activePiece)) {
       this._activePiece.y += 1;
+      cellsDropped++;
     }
 
     // Move the piece up by one, as the last move caused a collision
@@ -84,6 +87,9 @@ export default class Game {
 
     // Lock the piece and update the game state
     this._update();
+
+    // Update the score based on the number of cells dropped
+    this._score += cellsDropped * 2;
   }
 
   rotatePiece() {

@@ -132,6 +132,7 @@ export default class Controller {
         this._stopTimer();
         this._game.movePieceDown();
         this._updateView();
+        this._game._score += 1;
         break;
       case 32: // SPACE
         this._game.dropPiece();
