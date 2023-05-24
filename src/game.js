@@ -8,7 +8,10 @@ export default class Game {
     3: 300,
     4: 1200,
   };
-
+  myFunction() {
+    a = document.getElementById("name").value
+    console.log(a);
+  }
 
   _name = document.getElementById("name").value;
   _score = 0;
@@ -129,4 +132,5 @@ export default class Game {
     );
     this._activePiece.y = -1;
   }
+
 }

@@ -12,7 +12,8 @@
     "axe/name-role-value": [
       "default",
       {
-        "input-button-name": "off"
+        "input-button-name": "off",
+        "button-name": "off"
       }
     ],
     "button-type": "off"
