@@ -4,6 +4,7 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
+    this._undo = null;
 
     this.update = this.update.bind(this);
 
@@ -121,3 +122,5 @@ export default class Controller {
     }
   }
 }
+
+
