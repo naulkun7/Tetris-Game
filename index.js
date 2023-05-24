@@ -7,6 +7,7 @@ const GRID_COLUMNS = 10;
 
 const element = document.querySelector("#root");
 
+
 const game = new Game(GRID_ROWS, GRID_COLUMNS);
 const view = new View({
   element,
