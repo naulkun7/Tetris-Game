@@ -151,12 +151,12 @@ export default class View {
       height: this.blockHeight * 0.5,
     });
 
-    this.context.fillText("Hold:", this.panelX, this.panelY + 196);
+    this.context.fillText("Hold:", this.panelX, this.panelY + 192);
 
     if (holdPiece) {
       this._renderPiece(holdPiece, {
         x: this.panelX,
-        y: this.panelY + 220,
+        y: this.panelY + 240,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
       });

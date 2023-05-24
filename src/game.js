@@ -19,6 +19,7 @@ export default class Game {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
     this._holdPiece = null;
+    this._hasSwapped = false;
   }
 
   get level() {
@@ -96,14 +97,19 @@ export default class Game {
     }
   }
 
-_swapPiece() {
-  const temp = this._activePiece;
-  this._activePiece = this._holdPiece || this._activePiece;
-  this._holdPiece = temp;
-  // Reset the position of the active piece
-  this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
-  this._activePiece.y = -1;
-}
+  _swapPiece() {
+    if (!this._hasSwapped) {
+      const temp = this._activePiece;
+      this._activePiece = this._holdPiece || this._activePiece;
+      this._holdPiece = temp;
+      // Reset the position of the active piece
+      this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
+      this._activePiece.y = -1;
+      this._hasSwapped = true;
+    }
+  }
+
+  
 
   _update() {
     this._updatePlayfield();
@@ -113,6 +119,9 @@ _swapPiece() {
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
     }
+
+    // Reset the swap flag when a new piece becomes active
+    this._hasSwapped = false;
   }
 
   _updatePlayfield() {
