@@ -140,28 +140,65 @@ export default class Game {
   //   }
   // }
 
+  // undo() {
+  //   if (this._gameStatesStack.length > 1) {
+  //     // Restore the previous game state from the stack
+  //     this._gameStatesStack.pop();
+  //     const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
+
+  //     // Restore the game properties
+  //     this._score = previousState.score;
+  //     this._lines = previousState.lines;
+  //     this._topOut = previousState.topOut;
+  //     this._activePiece = previousState.activePiece;
+  //     this._nextPiece = previousState.nextPiece;
+  //     this._playfield = previousState.playfield;
+
+  //     // Update the pieces' positions
+  //     this._activePiece.x = previousState.activePiece.x;
+  //     this._activePiece.y = previousState.activePiece.y;
+  //     this._nextPiece.x = previousState.nextPiece.x;
+  //     this._nextPiece.y = previousState.nextPiece.y;
+
+  //     // Update the view
+  //     this._update();
+  //   }
+
   undo() {
     if (this._gameStatesStack.length > 1) {
-      // Restore the previous game state from the stack
+      // Remove the current game state from the stack
       this._gameStatesStack.pop();
+  
+      // Get the previous game state from the stack
       const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
-
+  
       // Restore the game properties
       this._score = previousState.score;
       this._lines = previousState.lines;
       this._topOut = previousState.topOut;
-      this._activePiece = previousState.activePiece;
-      this._nextPiece = previousState.nextPiece;
-      this._playfield = previousState.playfield;
-
-      // Update the pieces' positions
+  
+      // Restore the active piece and its position
+      this._activePiece = new Piece();
+      this._activePiece.shape = previousState.activePiece.shape;
       this._activePiece.x = previousState.activePiece.x;
       this._activePiece.y = previousState.activePiece.y;
-      this._nextPiece.x = previousState.nextPiece.x;
-      this._nextPiece.y = previousState.nextPiece.y;
-
+  
+      // Restore the next piece and its position
+      // this._nextPiece = new Piece();
+      // this._nextPiece.shape = previousState.nextPiece.shape;
+      // this._nextPiece.x = previousState.nextPiece.x;
+      // this._nextPiece.y = previousState.nextPiece.y;
+  
+      // Restore the playfield
+      this._playfield = new Playfield(previousState.playfield.rows, previousState.playfield.columns);
+      for (let y = 0; y < previousState.playfield.rows; y++) {
+        for (let x = 0; x < previousState.playfield.columns; x++) {
+          this._playfield[y][x] = previousState.playfield[y][x];
+        }
+      }
+  
       // Update the view
-      this._update();
+      this._updateView();
     }
   }
 

@@ -80,11 +80,10 @@ export default class Controller {
           this.play();
         }
         break;
+      case 117:
       case 85: // U
-        if (!this._isPlaying) {
-          this._game.undo();
-          this._updateView();
-        }
+        this._game.undo();
+        this._updateView();
         break;
     }
   }
