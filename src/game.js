@@ -52,6 +52,8 @@ export default class Game {
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._activePiece.x += 1;
+    } else {
+      this._updateGhostPiece();
     }
   }
 
@@ -60,6 +62,8 @@ export default class Game {
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._activePiece.x -= 1;
+    } else {
+      this._updateGhostPiece();
     }
   }
 
@@ -72,7 +76,7 @@ export default class Game {
       this._activePiece.y -= 1;
       this._update();
     } else {
-      this._updateGhostPiece(); // Update the ghost piece each time the active piece moves
+      this._updateGhostPiece();
     }
   }
 
