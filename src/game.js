@@ -106,11 +106,17 @@ export default class Game {
     this._ghostPiece.rotate();
 
     if (this._playfield.hasCollision(this._activePiece)) {
-      this._activePiece.rotate(false);
-      this._ghostPiece.rotate(false);
-    } else {
-      this._updateGhostPiece(); // Update the ghost piece's position after rotation
+      let shiftDirection =
+        this._activePiece.x <= this._playfield.columns / 2 ? 1 : -1;
+      while (this._playfield.hasCollision(this._activePiece)) {
+        this._activePiece.x += shiftDirection;
+      }
+
+      this._ghostPiece.x = this._activePiece.x;
+      this._ghostPiece.y = this._activePiece.y;
     }
+
+    this._updateGhostPiece(); // Update the ghost piece's position after rotation
   }
 
   _update() {
