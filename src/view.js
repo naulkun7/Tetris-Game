@@ -124,7 +124,7 @@ export default class View {
     this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
   }
 
-  _renderPlayfield({ playfield, activePiece }) {
+  _renderPlayfield({ playfield, activePiece, ghostPiece }) {
     for (let y = 0; y < playfield.length; y++) {
       const line = playfield[y];
 
@@ -149,6 +149,17 @@ export default class View {
       width: this.blockWidth,
       height: this.blockHeight,
     });
+
+    this._renderPiece(
+      ghostPiece,
+      {
+        x: this.playfieldX,
+        y: this.playfieldY,
+        width: this.blockWidth,
+        height: this.blockHeight,
+      },
+      "rgba(127,127,127,0.5)"
+    ); // Render the ghost piece in a different style
   }
 
   _renderPanel({ level, score, lines, nextPiece }) {
@@ -172,7 +183,8 @@ export default class View {
 
   _renderPiece(
     piece,
-    { x, y, width = this.blockWidth, height = this.blockHeight }
+    { x, y, width = this.blockWidth, height = this.blockHeight },
+    color = null
   ) {
     for (let block of piece) {
       if (block) {
@@ -181,7 +193,7 @@ export default class View {
           y: y + block.y * height,
           width,
           height,
-          color: View.colors[block.type],
+          color: color || View.colors[block.type],
         });
       }
     }

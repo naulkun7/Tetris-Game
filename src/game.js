@@ -14,10 +14,12 @@ export default class Game {
   _topOut = false;
   _activePiece = null;
   _nextPiece = null;
+  _ghostPiece = null;
 
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
+    this._updateGhostPiece();
   }
 
   get level() {
@@ -33,6 +35,7 @@ export default class Game {
       activePiece: this._activePiece,
       nextPiece: this._nextPiece,
       isGameOver: this._topOut,
+      ghostPiece: this._ghostPiece,
     };
   }
 
@@ -68,6 +71,8 @@ export default class Game {
     if (this._playfield.hasCollision(this._activePiece)) {
       this._activePiece.y -= 1;
       this._update();
+    } else {
+      this._updateGhostPiece(); // Update the ghost piece each time the active piece moves
     }
   }
 
@@ -104,6 +109,7 @@ export default class Game {
     this._updatePlayfield();
     this._updateScore();
     this._updatePieces();
+    this._updateGhostPiece();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -133,6 +139,24 @@ export default class Game {
       (this._playfield.columns - this._activePiece.width) / 2
     );
     this._activePiece.y = -1;
+    this._ghostPiece = new Piece(
+      this._activePiece.type,
+      this._activePiece.x,
+      this._activePiece.y
+    );
+  }
+
+  _updateGhostPiece() {
+    // Update the position of the ghost piece to be directly below the active piece
+    this._ghostPiece.x = this._activePiece.x;
+    this._ghostPiece.y = this._activePiece.y;
+
+    while (!this._playfield.hasCollision(this._ghostPiece)) {
+      this._ghostPiece.y += 1;
+    }
+
+    // Move the ghost piece up by one, as the last move caused a collision
+    this._ghostPiece.y -= 1;
   }
 
   _playClearLineSoundEffect() {
