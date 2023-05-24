@@ -55,6 +55,13 @@ export default class Controller {
     this.play();
   }
 
+  restartGame() {
+    this._game.reset(); // Assuming this method resets your game
+    this._view.renderStartScreen(); // Render the start screen
+    this._isPlaying = false; // The game should not be playing at the start screen
+    this._stopTimer(); // Stop the game timer, if it's running
+  }
+
   _updateView() {
     const state = this._game.state;
 
@@ -104,8 +111,8 @@ export default class Controller {
   }
 
   _handleKeyDown(event) {
-    if (!this._isPlaying) {
-      return; // Do nothing if the game is paused
+    if (!this._isPlaying && event.keyCode !== 82) {
+      return; // Do nothing if the game is paused and the key is not "R"
     }
 
     switch (event.keyCode) {
@@ -129,6 +136,12 @@ export default class Controller {
       case 32: // SPACE
         this._game.dropPiece();
         this._updateView();
+        break;
+      case 82: // R key
+        if (event.repeat) {
+          return; // Do nothing if the R key is held down
+        }
+        this.restartGame();
         break;
     }
   }

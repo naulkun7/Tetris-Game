@@ -45,6 +45,8 @@ export default class View {
   }
 
   renderStartScreen() {
+    this._clearScreen("rgba(0, 0, 0, 0.75)");
+
     this.context.fillStyle = "white";
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = "center";
