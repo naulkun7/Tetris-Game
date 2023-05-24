@@ -20,10 +20,30 @@ export default class Game {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
     this._updateGhostPiece();
+    this._speed = 1000; // Set initial speed to 1000 milliseconds
+    this.gameLoop();
   }
 
+  //Use to create gameSpeed
+  get speed() {
+    return this._speed - this.level * 50; // Decrease the speed by 50 milliseconds for each level
+  }
+
+  async gameLoop() {
+    if (!this._topOut) {
+      await this.delay(this.speed); // Delay the next loop iteration based on the current speed
+      this.movePieceDown();
+      this.gameLoop(); // Loop the function
+    }
+  }
+
+  delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  // end of gameSpeed
+
   get level() {
-    return Math.floor(this._lines * 0.1);
+    return Math.floor(this._lines * 0.2);
   }
 
   get state() {
@@ -103,6 +123,7 @@ export default class Game {
 
   rotatePiece() {
     const initialX = this._activePiece.x; // Store the initial x-coordinate of the active piece
+    const maxShifts = 3; // Maximum number of shifts to try before reverting the rotation
 
     this._activePiece.rotate();
     this._ghostPiece.rotate();
@@ -110,17 +131,22 @@ export default class Game {
     if (this._playfield.hasCollision(this._activePiece)) {
       let shiftDirection =
         this._activePiece.x <= this._playfield.columns / 2 ? 1 : -1;
+      let shifts = 0;
 
-      // Shift the active piece horizontally until it doesn't collide
-      while (this._playfield.hasCollision(this._activePiece)) {
+      // Shift the active piece horizontally until it doesn't collide or the maxShifts is reached
+      while (
+        this._playfield.hasCollision(this._activePiece) &&
+        shifts < maxShifts
+      ) {
         this._activePiece.x += shiftDirection;
+        shifts++;
+      }
 
-        // If the shifted piece exceeds the top boundary, revert the rotation and exit the loop
-        if (this._activePiece.y < 0) {
-          this._activePiece.rotateCounterClockwise();
-          this._activePiece.x = initialX; // Restore the initial x-coordinate
-          return;
-        }
+      // If the shifted piece still collides after the maxShifts, revert the rotation
+      if (this._playfield.hasCollision(this._activePiece)) {
+        this._activePiece.rotateCounterClockwise();
+        this._activePiece.x = initialX; // Restore the initial x-coordinate
+        return;
       }
 
       this._ghostPiece.x = this._activePiece.x;
@@ -138,6 +164,13 @@ export default class Game {
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
+    } else {
+      const level = this.level;
+      const speed = 1000 - level * 100; // Decrease speed by 100 milliseconds per level
+
+      setTimeout(() => {
+        this.movePieceDown();
+      }, speed);
     }
   }
 
@@ -163,7 +196,7 @@ export default class Game {
     this._activePiece.x = Math.floor(
       (this._playfield.columns - this._activePiece.width) / 2
     );
-    this._activePiece.y = -1;
+    this._activePiece.y = 0;
     this._ghostPiece = new Piece(
       this._activePiece.type,
       this._activePiece.x,
