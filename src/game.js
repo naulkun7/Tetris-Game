@@ -102,14 +102,25 @@ export default class Game {
   }
 
   rotatePiece() {
+    const initialX = this._activePiece.x; // Store the initial x-coordinate of the active piece
+
     this._activePiece.rotate();
     this._ghostPiece.rotate();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       let shiftDirection =
         this._activePiece.x <= this._playfield.columns / 2 ? 1 : -1;
+
+      // Shift the active piece horizontally until it doesn't collide
       while (this._playfield.hasCollision(this._activePiece)) {
         this._activePiece.x += shiftDirection;
+
+        // If the shifted piece exceeds the top boundary, revert the rotation and exit the loop
+        if (this._activePiece.y < 0) {
+          this._activePiece.rotateCounterClockwise();
+          this._activePiece.x = initialX; // Restore the initial x-coordinate
+          return;
+        }
       }
 
       this._ghostPiece.x = this._activePiece.x;
