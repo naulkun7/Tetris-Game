@@ -4,7 +4,6 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
-    this._undo = null;
 
     this.update = this.update.bind(this);
 
@@ -79,6 +78,12 @@ export default class Controller {
           this.pause();
         } else {
           this.play();
+        }
+        break;
+      case 85: // U
+        if (!this._isPlaying) {
+          this._game.undo();
+          this._updateView();
         }
         break;
     }
