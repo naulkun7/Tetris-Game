@@ -80,11 +80,6 @@ export default class Controller {
           this.play();
         }
         break;
-      case 117:
-      case 85: // U
-        this._game.undo();
-        this._updateView();
-        break;
     }
   }
 
@@ -113,6 +108,10 @@ export default class Controller {
         break;
       case 32: // SPACE
         this._game.dropPiece();
+        this._updateView();
+        break;
+      case 192: // `
+        this._game.undo();
         this._updateView();
         break;
     }
