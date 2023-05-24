@@ -99,9 +99,13 @@ export default class Game {
 
   rotatePiece() {
     this._activePiece.rotate();
+    this._ghostPiece.rotate();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._activePiece.rotate(false);
+      this._ghostPiece.rotate(false);
+    } else {
+      this._updateGhostPiece(); // Update the ghost piece's position after rotation
     }
   }
 
