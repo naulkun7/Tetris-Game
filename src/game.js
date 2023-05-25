@@ -91,8 +91,6 @@ export default class Game {
   }
 
   get level() {
-    console.log(this.linesPerLevel);
-    console.log(this.baseLevel);
     return Math.floor(this._lines / this._linesPerLevel) + this._baseLevel;
   }
 

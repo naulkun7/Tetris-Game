@@ -15,8 +15,9 @@ export default class View {
     this.height = height;
 
     this.canvas = document.createElement("canvas");
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
+    this.adjustCanvasSize();
+    window.addEventListener("resize", () => this.adjustCanvasSize());
+
     this.context = this.canvas.getContext("2d");
 
     this.playfieldBorderWidth = 4;
@@ -38,6 +39,33 @@ export default class View {
     this.panelHeight = this.height;
 
     this.element.appendChild(this.canvas);
+  }
+
+  adjustCanvasSize() {
+    const isMobile = window.innerWidth < 768; // Adjust the threshold as needed
+    const maxWidth = Math.min(window.innerWidth, this.width);
+    const maxHeight = Math.min(window.innerHeight, this.height);
+    let canvasWidth, canvasHeight;
+
+    if (isMobile) {
+      const totalColumns = 3;
+      const mainColumnWidthRatio = 7 / totalColumns;
+      const aspectRatio = mainColumnWidthRatio / (mainColumnWidthRatio + 1);
+
+      if (maxWidth / maxHeight > aspectRatio) {
+        canvasWidth = maxHeight * aspectRatio;
+        canvasHeight = maxHeight;
+      } else {
+        canvasWidth = maxWidth;
+        canvasHeight = maxWidth / aspectRatio;
+      }
+    } else {
+      canvasWidth = this.width;
+      canvasHeight = this.height;
+    }
+
+    this.canvas.width = canvasWidth;
+    this.canvas.height = canvasHeight;
   }
 
   on(event, handler) {

@@ -5,6 +5,7 @@ body {
 }
 
 #root {
+    height: auto;
     padding: 10px;
     text-align: center
 }
@@ -17,6 +18,61 @@ body {
 
 #root canvas {
     display: block;
-    margin: 40px auto;
+    margin: 0 auto;
+}
 
+#virtual-keys {
+    display: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    #virtual-keys {
+        display: block;
+    }
+
+    #virtual-keys {
+        display: flex !important;
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        /* Adjust the width as needed */
+        justify-content: space-around;
+    }
+
+    #virtual-keys button {
+        padding: 10px;
+        font-size: 20px;
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 48px;
+        text-align: center;
+    }
+
+    #virtual-keys button:hover {
+        background-color: #eaeaea;
+        cursor: pointer;
+    }
+
+    #virtual-keys button:active {
+        background-color: #d9d9d9;
+    }
+
+    #left-button::before {
+        content: '\2190';
+    }
+
+    #right-button::before {
+        content: '\2192';
+    }
+
+    #up-button::before {
+        content: '\0052';
+    }
+
+    #down-button::before {
+        content: '\2193';
+    }
 }
