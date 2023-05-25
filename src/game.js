@@ -15,7 +15,12 @@ export default class Game {
   _topOut = false;
   _activePiece = null;
   _nextPiece = null;
-
+  _name1 = "Luan"
+  _score1 = 30;
+  _name2 = "Tri"
+  _score2 = 500
+  _name3 = "Nhan"
+  _score3 = 600
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
@@ -36,6 +41,12 @@ export default class Game {
       activePiece: this._activePiece,
       nextPiece: this._nextPiece,
       isGameOver: this._topOut,
+      name1: this._name1,
+      score1: this._score1,
+      name2: this._name2,
+      score2: this._score2,
+      name3: this._name3,
+      score3: this._score3,
     };
   }
 

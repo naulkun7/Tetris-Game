@@ -86,7 +86,7 @@ export default class View {
     );
   }
 
-  renderEndScreen({ score, name }) {
+  renderEndScreen({ score, name, score1, name1, score2, name2, name3, score3 }) {
     this._clearScreen();
 
     this.context.fillStyle = "white";
@@ -99,14 +99,14 @@ export default class View {
     this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 25);
     this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 25);
 
-    this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 50);
-    this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 50);
+    this.context.fillText(`Name: ${name1}`, this.width / 2 - 100, this.height / 2 + 50);
+    this.context.fillText(`Score: ${score1}`, this.width / 2 + 150, this.height / 2 + 50);
 
-    this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 75);
-    this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 75);
+    this.context.fillText(`Name: ${name2}`, this.width / 2 - 100, this.height / 2 + 75);
+    this.context.fillText(`Score: ${score2}`, this.width / 2 + 150, this.height / 2 + 75);
 
-    this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 100);
-    this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 100);
+    this.context.fillText(`Name: ${name3}`, this.width / 2 - 100, this.height / 2 + 100);
+    this.context.fillText(`Score: ${score3}`, this.width / 2 + 150, this.height / 2 + 100);
 
     this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 125);
     this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 125);
