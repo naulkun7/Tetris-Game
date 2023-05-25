@@ -136,6 +136,7 @@ export default class Controller {
 
   _toggleMute() {
     this._isMuted = !this._isMuted;
+    this._game._isSoundMuted = !this._game._isSoundMuted;
 
     if (this._isMuted) {
       this.pauseAudio();
@@ -180,10 +181,6 @@ export default class Controller {
         }
         this.restartGame();
         break;
-      // case 192: // `
-      //   this._game.undo();
-      //   this._update.currentState();
-      //   break;
     }
   }
 
