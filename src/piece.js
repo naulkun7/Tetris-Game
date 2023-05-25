@@ -50,7 +50,7 @@ export default class Piece {
 
   constructor(type = Piece.getRandomType(), x = 0, y = 0) {
     if (!Piece.types.includes(type)) {
-      throw new Error("Invalid peice type");
+      throw new Error("Invalid piece type");
     }
 
     this.type = type;

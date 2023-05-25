@@ -1,12 +1,12 @@
 export default class View {
   static colors = {
-    I: "cyan",
-    J: "blue",
-    L: "orange",
-    O: "yellow",
-    S: "green",
-    T: "purple",
-    Z: "red",
+    I: "#00ffff",
+    J: "#0000ff",
+    L: "#ff7f00",
+    O: "#ffff00",
+    S: "#00ff00",
+    T: "#800080",
+    Z: "#ff0000",
   };
 
   constructor({ element, width, height, rows, columns }) {
@@ -44,7 +44,22 @@ export default class View {
     document.addEventListener(event, handler);
   }
 
+  renderWelcomeScreen() {
+    this._clearScreen();
+
+    this.context.fillStyle = "black";
+    this.context.fillRect(0, 0, this.width, this.height);
+
+    this.context.fillStyle = "white";
+    this.context.font = '18px "Press Start 2P"';
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
+    this.context.fillText("WELCOME", this.width / 2, this.height / 2 - 30);
+  }
+
   renderStartScreen() {
+    this._clearScreen();
+
     this.context.fillStyle = "white";
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = "center";
@@ -52,8 +67,65 @@ export default class View {
     this.context.fillText(
       "Press ENTER to Start",
       this.width / 2,
-      this.height / 2
+      this.height / 3
     );
+
+    // Render tutorial text below the "Press ENTER to Start" text
+    this.context.font = '10px "Press Start 2P"';
+    this.context.fillText("TUTORIAL", this.width / 2, this.height / 2 + 40);
+
+    this.context.fillText(
+      "Use the <-|-> to move left and right",
+      this.width / 2,
+      this.height / 2 + 60
+    );
+
+    this.context.fillText(
+      "Use space to drop down",
+      this.width / 2,
+      this.height / 2 + 80
+    );
+  }
+
+  renderChoosingDifficulty() {
+    this._clearScreen();
+
+    this.context.fillStyle = "white";
+    this.context.font = '18px "Press Start 2P"';
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
+    this.context.fillText("Choose Difficulty", this.width / 2, this.height / 3);
+
+    this.context.font = '16px "Press Start 2P"';
+    this.context.fillText("Press E for EASY", this.width / 2, this.height / 2);
+
+    this.context.fillText(
+      "Press N for NORMAL",
+      this.width / 2,
+      this.height / 2 + 40
+    );
+    this.context.fillText(
+      "Press H for HARD",
+      this.width / 2,
+      this.height / 2 + 80
+    );
+
+    // Listen to user input
+    this.on("keydown", (event) => {
+      if (event.key.toLowerCase() === "e") {
+        document.dispatchEvent(
+          new CustomEvent("difficultySelected", { detail: "easy" })
+        );
+      } else if (event.key.toLowerCase() === "n") {
+        document.dispatchEvent(
+          new CustomEvent("difficultySelected", { detail: "normal" })
+        );
+      } else if (event.key.toLowerCase() === "h") {
+        document.dispatchEvent(
+          new CustomEvent("difficultySelected", { detail: "hard" })
+        );
+      }
+    });
   }
 
   renderMainScreen(state) {
@@ -76,6 +148,16 @@ export default class View {
       "Press ENTER to Resume",
       this.width / 2,
       this.height / 2
+    );
+    this.context.fillText(
+      "Press R to Restart",
+      this.width / 2,
+      this.height / 2 + 48
+    );
+    this.context.fillText(
+      "Press 0 to MUTE ALL",
+      this.width / 2,
+      this.height / 2 + 96
     );
   }
 
@@ -106,7 +188,7 @@ export default class View {
     this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
   }
 
-  _renderPlayfield({ playfield, activePiece }) {
+  _renderPlayfield({ playfield, activePiece, ghostPiece }) {
     for (let y = 0; y < playfield.length; y++) {
       const line = playfield[y];
 
@@ -131,6 +213,17 @@ export default class View {
       width: this.blockWidth,
       height: this.blockHeight,
     });
+
+    this._renderPiece(
+      ghostPiece,
+      {
+        x: this.playfieldX,
+        y: this.playfieldY,
+        width: this.blockWidth,
+        height: this.blockHeight,
+      },
+      "rgba(127,127,127,0.5)"
+    ); // Render the ghost piece in a different style
   }
 
   _renderPanel({ level, score, lines, nextPiece }) {
@@ -154,7 +247,8 @@ export default class View {
 
   _renderPiece(
     piece,
-    { x, y, width = this.blockWidth, height = this.blockHeight }
+    { x, y, width = this.blockWidth, height = this.blockHeight },
+    color = null
   ) {
     for (let block of piece) {
       if (block) {
@@ -163,18 +257,40 @@ export default class View {
           y: y + block.y * height,
           width,
           height,
-          color: View.colors[block.type],
+          color: color || View.colors[block.type],
         });
       }
     }
   }
 
-  _renderBlock({ x, y, width, height, lineWidth = 2, color = "black" }) {
+  _renderBlock({ x, y, width, height, color, lineWidth }) {
     this.context.fillStyle = color;
     this.context.strokeStyle = "black";
     this.context.lineWidth = lineWidth;
+
+    // Add box-shadow properties
+    this.context.shadowColor = "rgba(0, 0, 0, 0.16)";
+    this.context.shadowBlur = 6;
+    this.context.shadowOffsetX = 0;
+    this.context.shadowOffsetY = 3;
+
     this.context.fillRect(x, y, width, height);
     this.context.strokeRect(x, y, width, height);
+
+    // Add additional box-shadow properties for a second shadow
+    this.context.shadowColor = "rgba(0, 0, 0, 0.23)";
+    this.context.shadowBlur = 6;
+    this.context.shadowOffsetX = 0;
+    this.context.shadowOffsetY = 3;
+
+    this.context.fillRect(x, y, width, height);
+    this.context.strokeRect(x, y, width, height);
+
+    // Reset box-shadow properties
+    this.context.shadowColor = "transparent";
+    this.context.shadowBlur = 0;
+    this.context.shadowOffsetX = 0;
+    this.context.shadowOffsetY = 0;
   }
 
   _renderGrid() {

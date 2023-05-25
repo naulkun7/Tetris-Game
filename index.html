@@ -13,7 +13,7 @@
   </head>
   <body>
     <div id="root">
-      <h1>
+      <h1 id="game-title">
         <span style="color: red">T</span>
         <span style="color: orange">E</span>
         <span style="color: yellow">T</span>
@@ -22,6 +22,12 @@
         <span style="color: purple">S</span>
       </h1>
     </div>
+
+    <audio id="soundtrack" src="/audio/soundtrack.mp3" loop></audio>
+    <audio id="pauseEffect" src="/audio/pauseSound.mp3"></audio>
+    <audio id="getScore" src="/audio/getScore.wav"></audio>
+    <audio id="lockSound" src="/audio/hitEffect.wav"></audio>
+
     <script src="./index.js" type="module"></script>
   </body>
 </html>
