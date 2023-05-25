@@ -1,0 +1,14 @@
+{
+    "player1": {
+        "name": "Phuc",
+        "score": 500
+    },
+    "player2": {
+        "name": "Luan",
+        "score": 500
+    },
+    "player3": {
+        "name": "Tri",
+        "score": 500
+    }
+}

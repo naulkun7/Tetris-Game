@@ -97,10 +97,10 @@ export default class Piece {
       for (let x = 0; x < this.blocks[y].length; x++) {
         yield this.blocks[y][x] === 1
           ? {
-              x: this.x + x,
-              y: this.y + y,
-              type: this.type,
-            }
+            x: this.x + x,
+            y: this.y + y,
+            type: this.type,
+          }
           : null;
       }
     }

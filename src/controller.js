@@ -4,7 +4,7 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
-
+    this.name = "";
     this.update = this.update.bind(this);
 
     view.on("keypress", this._handleKeyPress.bind(this));
@@ -84,6 +84,7 @@ export default class Controller {
           this.pause();
         } else {
           this.getName();
+
           this.play();
         }
         break;

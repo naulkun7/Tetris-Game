@@ -1,7 +1,5 @@
 import Playfield from "./playfield.js";
 import Piece from "./piece.js";
-import Controller from "./controller.js";
-
 export default class Game {
   static points = {
     1: 40,
@@ -9,7 +7,8 @@ export default class Game {
     3: 300,
     4: 1200,
   };
-
+  // name1 = new name();
+  // controll = new Controller
   _name = document.getElementById("name").value;
   _score = 0;
   _lines = 0;
@@ -20,6 +19,7 @@ export default class Game {
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
+
   }
 
   get level() {
@@ -45,6 +45,7 @@ export default class Game {
     this._topOut = false;
     this._playfield.reset();
     this._updatePieces();
+    _name = document.getElementById("name").value;
   }
 
   movePieceLeft() {
@@ -101,6 +102,7 @@ export default class Game {
     this._updatePlayfield();
     this._updateScore();
     this._updatePieces();
+    this._updateName();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -118,6 +120,9 @@ export default class Game {
       this._score += Game.points[clearedLines] * (this.level + 1);
       this._lines += clearedLines;
     }
+  }
+  _updateName() {
+    this._name = document.getElementById("name").value;
   }
 
   _updatePieces() {
