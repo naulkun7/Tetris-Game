@@ -154,6 +154,11 @@ export default class View {
       this.width / 2,
       this.height / 2 + 48
     );
+    this.context.fillText(
+      "Press 0 to MUTE ALL",
+      this.width / 2,
+      this.height / 2 + 96
+    );
   }
 
   renderEndScreen({ score }) {

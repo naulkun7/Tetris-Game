@@ -4,6 +4,8 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
+    this._isMuted = true;
+
     this.difficultySelected = false; // Add this
     this.update = this.update.bind(this);
 
@@ -24,15 +26,18 @@ export default class Controller {
     audio.pause();
   }
 
-  pauseEffect() {
+  pause_Effect() {
     let pauseEffect = document.getElementById("pauseEffect");
     pauseEffect.play();
   }
 
   playLockEffect() {
-    let lockSound = document.getElementById("lockSound");
-    lockSound.play();
+    if (!this._isMuted) {
+      let lockSound = document.getElementById("lockSound");
+      lockSound.play();
+    }
   }
+
   pauseLockEffect() {
     let lockSound = document.getElementById("lockSound");
     lockSound.pause();
@@ -41,23 +46,26 @@ export default class Controller {
   resumeAudio() {
     let audio = document.getElementById("soundtrack");
     audio.play();
-    let pauseAudio = document.getElementById("pauseEffect");
-    pauseAudio.pause();
   }
 
   play() {
     this._isPlaying = true;
     this._startTimer();
     this._updateView();
-    this.resumeAudio();
+    if (!this._isMuted) {
+      this.resumeAudio();
+    }
   }
 
   pause() {
     this._isPlaying = false;
     this._stopTimer();
     this._updateView();
-    this.pauseAudio();
-    this.pauseEffect();
+    if (!this._isMuted) {
+      this.pauseAudio();
+      this.pause_Effect();
+      this.pauseLockEffect();
+    }
   }
 
   reset() {
@@ -104,7 +112,6 @@ export default class Controller {
       this._interval = null;
     }
   }
-
   _handleKeyPress(event) {
     switch (event.keyCode) {
       case 13: // ENTER
@@ -121,6 +128,20 @@ export default class Controller {
           this.renderChoosingDifficulty();
         }
         break;
+      case 48: // 0 key
+        this._toggleMute();
+        break;
+    }
+  }
+
+  _toggleMute() {
+    this._isMuted = !this._isMuted;
+
+    if (this._isMuted) {
+      this.pauseAudio();
+      this.pauseLockEffect(); // Pause the lock effect sound
+    } else {
+      this.resumeAudio();
     }
   }
 
@@ -150,8 +171,8 @@ export default class Controller {
         break;
       case 32: // SPACE
         this._game.dropPiece();
-        this._updateView();
         this.playLockEffect();
+        this._updateView();
         break;
       case 82: // R key
         if (event.repeat) {

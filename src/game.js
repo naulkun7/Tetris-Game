@@ -54,12 +54,21 @@ export default class Game {
     return this._speed - this.level * 50; // Decrease the speed by 50 milliseconds for each level
   }
 
-  async gameLoop() {
-    if (!this._topOut) {
-      await this.delay(this.speed); // Delay the next loop iteration based on the current speed
-      this.movePieceDown();
-      this.gameLoop(); // Loop the function
-    }
+  gameLoop() {
+    const loop = async () => {
+      try {
+        while (!this._topOut) {
+          await this.delay(this.speed); // Delay the next loop iteration based on the current speed
+          this.movePieceDown();
+        }
+      } catch (error) {
+        console.error("An error occurred in the game loop:", error);
+      }
+    };
+
+    loop().catch((error) => {
+      console.error("An error occurred while starting the game loop:", error);
+    });
   }
 
   delay(ms) {
@@ -236,7 +245,7 @@ export default class Game {
     this._activePiece.x = Math.floor(
       (this._playfield.columns - this._activePiece.width) / 2
     );
-    this._activePiece.y = -1;
+    this._activePiece.y = 0;
     this._ghostPiece = new Piece(
       this._activePiece.type,
       this._activePiece.x,
