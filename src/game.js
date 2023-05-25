@@ -58,8 +58,12 @@ export default class Game {
     const loop = async () => {
       try {
         while (!this._topOut) {
-          await this.delay(this.speed); // Delay the next loop iteration based on the current speed
-          this.movePieceDown();
+          if (this._isPlaying) {
+            await this.delay(this.speed); // Delay the next loop iteration based on the current speed
+            this.movePieceDown();
+          } else {
+            await this.delay(100); // Delay the loop iteration by a fixed amount when the game is paused
+          }
         }
       } catch (error) {
         console.error("An error occurred in the game loop:", error);
@@ -69,10 +73,6 @@ export default class Game {
     loop().catch((error) => {
       console.error("An error occurred while starting the game loop:", error);
     });
-  }
-
-  delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   }
   // end of gameSpeed
 
