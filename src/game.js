@@ -14,7 +14,7 @@ export default class Game {
   _topOut = false;
   _activePiece = null;
   _nextPiece = null;
-  // _gameStatesStack = [];
+  _gameStatesStack = [];
 
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
