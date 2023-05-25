@@ -13,7 +13,6 @@ export default class Game {
   _topOut = false;
   _activePiece = null;
   _nextPiece = null;
-  // _gameStatesStack = [];
   _ghostPiece = null;
 
   difficulty = null;
@@ -25,7 +24,7 @@ export default class Game {
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
-    this._gameStatesStack = [];
+    // this._gameStatesStack = [];
     this._updateGhostPiece();
     this.baseLevel = 0;
     this.linesPerLevel = 10;
@@ -209,51 +208,28 @@ export default class Game {
   }
 
   // Start undo() function //
+  // undo() {
+  //   // Check if there are any states to undo
+  //   if (this._gameStatesStack.length <= 1) {
+  //     console.log("Cannot undo further.");
+  //     return;
+  //   }
   
-  _updateView() {
-    // Clear the previous view
-    this._clearView();
-
-    // Render the playfield
-    for (let y = 0; y < this._playfield.length; y++) {
-      for (let x = 0; x < this._playfield[y].length; x++) {
-        const block = this._playfield[y][x];
-        if (block) {
-          this._renderBlock(x, y, block.color);
-        }
-      }
-    }
-
-    // Render the active piece
-    for (let block of this._activePiece.blocks) {
-      const x = this._activePiece.x + block.x;
-      const y = this._activePiece.y + block.y;
-      this._renderBlock(x, y, this._activePiece.color);
-    }
-
-    // Render the next piece
-    for (let block of this._nextPiece.blocks) {
-      const x = this._nextPiece.x + block.x;
-      const y = this._nextPiece.y + block.y;
-      this._renderBlock(x, y, this._nextPiece.color);
-    }
-
-    // Render the score and lines
-    // Replace the following lines with your specific rendering logic
-    console.log("Score:", this._score);
-    console.log("Lines:", this._lines);
-  }
-
-  _clearView() {
-    // Replace this method with your specific view clearing logic
-    // For example, if you're rendering on a canvas, you would clear the canvas here
-  }
-
-  _renderBlock(x, y, color) {
-    // Replace this method with your specific block rendering logic
-    // For example, if you're rendering on a canvas, you would draw a colored rectangle here
-    console.log("Render block at", x, y, "with color", color);
-  }
+  //   // Pop the current state from the stack
+  //   this._gameStatesStack.pop();
+  
+  //   // Get the previous state from the stack
+  //   const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
+  
+  //   // Restore the game state from the previous state
+  //   this._score = previousState.score;
+  //   this._lines = previousState.lines;
+  //   this._topOut = previousState.isGameOver;
+  //   this._playfield = previousState.playfield;
+  //   this._activePiece = previousState.activePiece;
+  //   this._nextPiece = previousState.nextPiece;
+  //   this._ghostPiece = previousState.ghostPiece;
+  // }
   // End undo() function //
 
   _update() {
@@ -262,6 +238,9 @@ export default class Game {
     this._updateScore();
     this._updatePieces();
     this._updateGhostPiece();
+
+    // Push the current game state onto the stack
+    // this._gameStatesStack.push(this.state);
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -273,16 +252,6 @@ export default class Game {
         this.movePieceDown();
       }, speed);
     }
-
-    // const currentState = {
-    //   score: this._score,
-    //   lines: this._lines,
-    //   topOut: this._topOut,
-    //   activePiece: this._activePiece,
-    //   nextPiece: this._nextPiece,
-    //   playfield: this._playfield,
-    // };
-    // this._gameStatesStack.push(currentState);
   }
 
   _updatePlayfield() {

@@ -180,10 +180,10 @@ export default class Controller {
         }
         this.restartGame();
         break;
-      case 192: // `
-        this._game.undo();
-        this._update.currentState();
-        break;
+      // case 192: // `
+      //   this._game.undo();
+      //   this._update.currentState();
+      //   break;
     }
   }
 
