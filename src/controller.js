@@ -182,7 +182,7 @@ export default class Controller {
         break;
       case 192: // `
         this._game.undo();
-        this._updateView();
+        this._update.currentState();
         break;
     }
   }

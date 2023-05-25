@@ -208,35 +208,53 @@ export default class Game {
     this._updateGhostPiece(); // Update the ghost piece's position after rotation
   }
 
-  undo() {
-    if (this._gameStatesStack.length > 1) {
-      // Restore the previous game state from the stack
-      const currentState = this._gameStatesStack.pop();
-      const previousState =
-        this._gameStatesStack[this._gameStatesStack.length - 1];
+  // Start undo() function //
+  
+  _updateView() {
+    // Clear the previous view
+    this._clearView();
 
-      // Restore the game properties
-      this._score = previousState.score;
-      this._lines = previousState.lines;
-      this._topOut = previousState.topOut;
-      this._activePiece = previousState.activePiece;
-      this._nextPiece = previousState.nextPiece;
-      this._playfield = previousState.playfield;
-
-      // Update the pieces' positions
-      this._activePiece.x = previousState.activePiece.x;
-      this._activePiece.y = previousState.activePiece.y;
-      this._nextPiece.x = previousState.nextPiece.x;
-      this._nextPiece.y = previousState.nextPiece.y;
-
-      // Clear the playfield and relock the pieces
-      this._playfield.reset();
-      this._updatePlayfield();
-
-      // Update the view
-      this._updateView();
+    // Render the playfield
+    for (let y = 0; y < this._playfield.length; y++) {
+      for (let x = 0; x < this._playfield[y].length; x++) {
+        const block = this._playfield[y][x];
+        if (block) {
+          this._renderBlock(x, y, block.color);
+        }
+      }
     }
+
+    // Render the active piece
+    for (let block of this._activePiece.blocks) {
+      const x = this._activePiece.x + block.x;
+      const y = this._activePiece.y + block.y;
+      this._renderBlock(x, y, this._activePiece.color);
+    }
+
+    // Render the next piece
+    for (let block of this._nextPiece.blocks) {
+      const x = this._nextPiece.x + block.x;
+      const y = this._nextPiece.y + block.y;
+      this._renderBlock(x, y, this._nextPiece.color);
+    }
+
+    // Render the score and lines
+    // Replace the following lines with your specific rendering logic
+    console.log("Score:", this._score);
+    console.log("Lines:", this._lines);
   }
+
+  _clearView() {
+    // Replace this method with your specific view clearing logic
+    // For example, if you're rendering on a canvas, you would clear the canvas here
+  }
+
+  _renderBlock(x, y, color) {
+    // Replace this method with your specific block rendering logic
+    // For example, if you're rendering on a canvas, you would draw a colored rectangle here
+    console.log("Render block at", x, y, "with color", color);
+  }
+  // End undo() function //
 
   _update() {
     // Update the game state
@@ -256,15 +274,15 @@ export default class Game {
       }, speed);
     }
 
-    const currentState = {
-      score: this._score,
-      lines: this._lines,
-      topOut: this._topOut,
-      activePiece: this._activePiece,
-      nextPiece: this._nextPiece,
-      playfield: this._playfield,
-    };
-    this._gameStatesStack.push(currentState);
+    // const currentState = {
+    //   score: this._score,
+    //   lines: this._lines,
+    //   topOut: this._topOut,
+    //   activePiece: this._activePiece,
+    //   nextPiece: this._nextPiece,
+    //   playfield: this._playfield,
+    // };
+    // this._gameStatesStack.push(currentState);
   }
 
   _updatePlayfield() {
@@ -320,50 +338,5 @@ export default class Game {
     let clearLineAudio = document.getElementById("getScore");
     clearLineAudio.volume = 0.5;
     clearLineAudio.play();
-  }
-
-  _updateView() {
-    // Clear the previous view
-    this._clearView();
-
-    // Render the playfield
-    for (let y = 0; y < this._playfield.length; y++) {
-      for (let x = 0; x < this._playfield[y].length; x++) {
-        const block = this._playfield[y][x];
-        if (block) {
-          this._renderBlock(x, y, block.color);
-        }
-      }
-    }
-
-    // Render the active piece
-    for (let block of this._activePiece.blocks) {
-      const x = this._activePiece.x + block.x;
-      const y = this._activePiece.y + block.y;
-      this._renderBlock(x, y, this._activePiece.color);
-    }
-
-    // Render the next piece
-    for (let block of this._nextPiece.blocks) {
-      const x = this._nextPiece.x + block.x;
-      const y = this._nextPiece.y + block.y;
-      this._renderBlock(x, y, this._nextPiece.color);
-    }
-
-    // Render the score and lines
-    // Replace the following lines with your specific rendering logic
-    console.log("Score:", this._score);
-    console.log("Lines:", this._lines);
-  }
-
-  _clearView() {
-    // Replace this method with your specific view clearing logic
-    // For example, if you're rendering on a canvas, you would clear the canvas here
-  }
-
-  _renderBlock(x, y, color) {
-    // Replace this method with your specific block rendering logic
-    // For example, if you're rendering on a canvas, you would draw a colored rectangle here
-    console.log("Render block at", x, y, "with color", color);
   }
 }
