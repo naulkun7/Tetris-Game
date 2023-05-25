@@ -136,6 +136,7 @@ export default class Controller {
 
   _toggleMute() {
     this._isMuted = !this._isMuted;
+    this._game._isSoundMuted = !this._game._isSoundMuted;
 
     if (this._isMuted) {
       this.pauseAudio();

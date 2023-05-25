@@ -18,7 +18,7 @@ export default class Game {
   difficulty = null;
   _baseLevel = 0;
   _linesPerLevel = 10;
-
+  _isSoundMuted = false;
   _gameInProgress = false;
 
   constructor(rows, columns) {
@@ -267,8 +267,10 @@ export default class Game {
   }
 
   _playClearLineSoundEffect() {
-    let clearLineAudio = document.getElementById("getScore");
-    clearLineAudio.volume = 0.5;
-    clearLineAudio.play();
+    if (this._isSoundMuted) {
+      let clearLineAudio = document.getElementById("getScore");
+      clearLineAudio.volume = 0.5;
+      clearLineAudio.play();
+    }
   }
 }
