@@ -21,6 +21,8 @@ export default class Game {
   _isSoundMuted = false;
   _gameInProgress = false;
 
+  _gameStatesStack = [];
+
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
@@ -30,14 +32,15 @@ export default class Game {
     this._speed = 1000; // Set initial speed to 1000 milliseconds
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
 
-    this.undoStack = []; // Stack to store game state snapshots for undo
-
     document.addEventListener("keydown", (event) => {
       if (this._gameInProgress) {
         // Check if the game is in progress
         event.preventDefault(); // Prevent the default behavior of the keys
 
         // Handle other gameplay-related key actions here...
+        if (event.key.toLowerCase() === "`") {
+          this.undo();
+        }
       } else {
         // Handle difficulty selection keys
         if (event.key.toLowerCase() === "e") {
@@ -209,6 +212,73 @@ export default class Game {
     this._updateGhostPiece(); // Update the ghost piece's position after rotation
   }
 
+  // undo() {
+  //   if (this._history.length <= 1) {
+  //     console.log("Cannot undo")
+  //     return; // Cannot undo further
+  //   }
+  
+  //   // Restore the previous game state
+  //   const previousState = this._history.pop();
+  //   const currentState = this._history[this._history.length - 1];
+  
+  //   this._grid = previousState.grid;
+  //   this._piece = previousState.piece;
+  //   this._score = previousState.score;
+  //   this._level = previousState.level;
+  //   this._linesCleared = previousState.linesCleared;
+  
+  //   // Update the view
+  //   this._updateView();
+  
+  //   // Resume the timer if the game was playing
+  //   if (currentState.isPlaying) {
+  //     this._startTimer();
+  //   }
+  // }
+
+  // undo() {
+  //   if (this._gameStatesStack.length <= 1) {
+  //     console.log("Nothing to undo.");
+  //     return;
+  //   }
+  
+  //   // Remove the current state from the stack
+  //   this._gameStatesStack.pop();
+  
+  //   // Retrieve the previous state from the stack
+  //   const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
+  
+  //   // Restore the game state to the previous state
+  //   this._score = previousState.score;
+  //   this._lines = previousState.lines;
+  //   this._playfield = previousState.playfield;
+  //   this._activePiece = previousState.activePiece;
+  //   this._nextPiece = previousState.nextPiece;
+  //   this._ghostPiece = previousState.ghostPiece;
+  // }
+
+  undo() {
+    if (this._gameStatesStack.length <= 1) {
+      console.log("Nothing to undo.");
+      return;
+    }
+  
+    // Remove the current state from the stack
+    this._gameStatesStack.pop();
+  
+    // Retrieve the previous state from the stack
+    const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
+  
+    // Restore the game state to the previous state
+    this._score = previousState.score;
+    this._lines = previousState.lines;
+    this._playfield = previousState.playfield;
+    this._activePiece = Object.assign(new Piece(), previousState.activePiece);
+    this._nextPiece = Object.assign(new Piece(), previousState.nextPiece);
+    this._ghostPiece = Object.assign(new Piece(), previousState.ghostPiece);
+  }
+  
   _update() {
     // this._savePlayfieldState();
     this._updatePlayfield();
@@ -216,7 +286,8 @@ export default class Game {
     this._updatePieces();
     this._updateGhostPiece();
 
-    
+    const currentState = this.state;
+    this._gameStatesStack.push(currentState);
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -228,10 +299,6 @@ export default class Game {
         this.movePieceDown();
       }, speed);
     }
-
-    this.captureGameState();
-    this.view.drawGrid(this.playfield.grid);
-    this.view.drawPiece(this.currentPiece);
   }
 
   _updatePlayfield() {
@@ -275,44 +342,6 @@ export default class Game {
     // Move the ghost piece up by one, as the last move caused a collision
     this._ghostPiece.y -= 1;
   }
-
-  // Capture game state and push onto the undo stack
-  captureGameState() {
-    const gridSnapshot = this.playfield.cloneGrid();
-    const pieceSnapshot = this.currentPiece.clone();
-    const linesCleared = this.linesCleared;
-
-    this.undoStack.push({
-      gridSnapshot,
-      pieceSnapshot,
-      linesCleared,
-    });
-  }
-
-  // <---- Save playField -----> //
-  undo() {
-    if (this.undoStack.length === 0) {
-      // console.log("Nothing to undo.");
-      return;
-    }
-
-    // Restore previous game state
-    const { gridSnapshot, pieceSnapshot, linesCleared } = this.undoStack.pop();
-    this.playfield.grid = gridSnapshot;
-    this.currentPiece = pieceSnapshot;
-
-    // Update lines cleared
-    this.linesCleared -= linesCleared;
-
-    // Redraw the grid and current piece
-    this.view.drawGrid(this.playfield.grid);
-    this.view.drawPiece(this.currentPiece);
-
-    // console.log("Undo complete.");
-  }
-
-  // <----- END UNDO ----->
-
 
   _playClearLineSoundEffect() {
     if (this._isSoundMuted) {
