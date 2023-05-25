@@ -216,7 +216,6 @@ export default class Game {
   }
 
   _updatePlayfield() {
-    this._playLockSoundEffect();
     this._playfield.lockPiece(this._activePiece);
   }
 
@@ -237,7 +236,7 @@ export default class Game {
     this._activePiece.x = Math.floor(
       (this._playfield.columns - this._activePiece.width) / 2
     );
-    this._activePiece.y = 0;
+    this._activePiece.y = -1;
     this._ghostPiece = new Piece(
       this._activePiece.type,
       this._activePiece.x,
@@ -262,11 +261,5 @@ export default class Game {
     let clearLineAudio = document.getElementById("getScore");
     clearLineAudio.volume = 0.5;
     clearLineAudio.play();
-  }
-
-  _playLockSoundEffect() {
-    // Play the sound effect here
-    let lockSound = document.getElementById("lockSound");
-    lockSound.play();
   }
 }

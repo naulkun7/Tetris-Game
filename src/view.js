@@ -44,6 +44,19 @@ export default class View {
     document.addEventListener(event, handler);
   }
 
+  renderWelcomeScreen() {
+    this._clearScreen();
+
+    this.context.fillStyle = "black";
+    this.context.fillRect(0, 0, this.width, this.height);
+
+    this.context.fillStyle = "white";
+    this.context.font = '18px "Press Start 2P"';
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
+    this.context.fillText("WELCOME", this.width / 2, this.height / 2 - 30);
+  }
+
   renderStartScreen() {
     this._clearScreen();
 

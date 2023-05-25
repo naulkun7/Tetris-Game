@@ -11,7 +11,7 @@ export default class Controller {
     view.on("keydown", this._handleKeyDown.bind(this));
     view.on("keyup", this._handleKeyUp.bind(this));
 
-    this._view.renderStartScreen();
+    this._view.renderWelcomeScreen();
   }
 
   update() {
@@ -27,6 +27,15 @@ export default class Controller {
   pauseEffect() {
     let pauseEffect = document.getElementById("pauseEffect");
     pauseEffect.play();
+  }
+
+  playLockEffect() {
+    let lockSound = document.getElementById("lockSound");
+    lockSound.play();
+  }
+  pauseLockEffect() {
+    let lockSound = document.getElementById("lockSound");
+    lockSound.pause();
   }
 
   resumeAudio() {
@@ -104,6 +113,7 @@ export default class Controller {
             this.reset();
           } else if (this._isPlaying) {
             this.pause();
+            this.pauseLockEffect();
           } else {
             this.play();
           }
@@ -141,6 +151,7 @@ export default class Controller {
       case 32: // SPACE
         this._game.dropPiece();
         this._updateView();
+        this.playLockEffect();
         break;
       case 82: // R key
         if (event.repeat) {
@@ -167,6 +178,7 @@ export default class Controller {
     this._view.on("difficultySelected", (difficulty) => {
       this._game.setDifficulty(difficulty); // Assuming this method changes game's difficulty
       this.difficultySelected = true;
+      this._isPlaying = false;
       this._view.renderStartScreen(); // Re-render the start screen
     });
   }
