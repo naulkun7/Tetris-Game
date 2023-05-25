@@ -86,7 +86,7 @@ export default class View {
     );
   }
 
-  renderEndScreen({ score, name, score1, name1, score2, name2, name3, score3 }) {
+  renderEndScreen({ score4, name, score1, name1, score2, name2 }) {
     this._clearScreen();
 
     this.context.fillStyle = "white";
@@ -97,7 +97,7 @@ export default class View {
 
 
     this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 25);
-    this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 25);
+    this.context.fillText(`Score: ${score4}`, this.width / 2 + 150, this.height / 2 + 25);
 
     this.context.fillText(`Name: ${name1}`, this.width / 2 - 100, this.height / 2 + 50);
     this.context.fillText(`Score: ${score1}`, this.width / 2 + 150, this.height / 2 + 50);
@@ -105,11 +105,7 @@ export default class View {
     this.context.fillText(`Name: ${name2}`, this.width / 2 - 100, this.height / 2 + 75);
     this.context.fillText(`Score: ${score2}`, this.width / 2 + 150, this.height / 2 + 75);
 
-    this.context.fillText(`Name: ${name3}`, this.width / 2 - 100, this.height / 2 + 100);
-    this.context.fillText(`Score: ${score3}`, this.width / 2 + 150, this.height / 2 + 100);
 
-    this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 125);
-    this.context.fillText(`Score: ${score}`, this.width / 2 + 150, this.height / 2 + 125);
     this.context.fillText(
       "Press ENTER to Restart",
       this.width / 2,
@@ -155,7 +151,7 @@ export default class View {
     });
   }
 
-  _renderPanel({ level, score, lines, nextPiece }) {
+  _renderPanel({ level, score, lines, nextPiece, }) {
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
     this.context.fillStyle = "white";

@@ -10,17 +10,18 @@ export default class Game {
   // name1 = new name();
   // controll = new Controller
   _name = document.getElementById("name").value;
+
   _score = 0;
   _lines = 0;
   _topOut = false;
   _activePiece = null;
   _nextPiece = null;
-  _name1 = "Luan"
-  _score1 = 30;
-  _name2 = "Tri"
-  _score2 = 500
-  _name3 = "Nhan"
-  _score3 = 600
+  _name1 = ""
+  _score1 = 0;
+  _name2 = ""
+  _score2 = 0;
+  _score4 = 0;
+  _count = 0;
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
@@ -33,6 +34,7 @@ export default class Game {
 
   get state() {
     return {
+      score4: this._score4,
       name: this._name,
       score: this._score,
       level: this.level,
@@ -45,18 +47,18 @@ export default class Game {
       score1: this._score1,
       name2: this._name2,
       score2: this._score2,
-      name3: this._name3,
-      score3: this._score3,
+      count: this._count,
     };
   }
 
   reset() {
+    this._count++;
     this._score = 0;
     this._lines = 0;
     this._topOut = false;
     this._playfield.reset();
     this._updatePieces();
-    _name = document.getElementById("name").value;
+
   }
 
   movePieceLeft() {
@@ -111,10 +113,29 @@ export default class Game {
 
   _update() {
     this._updatePlayfield();
-    this._updateScore();
-    this._updatePieces();
-    this._updateName();
+    if (this._count == 0) {
+      this._updateScore();
+      this._score4 = this._score
+    }
+    if (this._count == 1) {
+      this._updateScore();
+      this._score1 = this._score
+    }
 
+    if (this._count == 2) {
+      this._updateScore();
+      this._score2 = this._score
+    }
+    this._updatePieces();
+    if (this._count == 0) {
+      this._updateName();
+    }
+    if (this._count == 1) {
+      this._updateName1();
+    }
+    if (this._count == 2) {
+      this._updateName2();
+    }
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
     }
@@ -132,8 +153,30 @@ export default class Game {
       this._lines += clearedLines;
     }
   }
+  _updateScore1() {
+    const clearedLines = this._playfield.clearLines();
+
+    if (clearedLines > 0) {
+      this._score1 += Game.points[clearedLines] * (this.level + 1);
+      this._lines += clearedLines;
+    }
+  }
+  _updateScore2() {
+    const clearedLines = this._playfield.clearLines();
+
+    if (clearedLines > 0) {
+      this._score2 += Game.points[clearedLines] * (this.level + 1);
+      this._lines += clearedLines;
+    }
+  }
   _updateName() {
     this._name = document.getElementById("name").value;
+  }
+  _updateName1() {
+    this._name1 = document.getElementById("name").value;
+  }
+  _updateName2() {
+    this._name2 = document.getElementById("name").value;
   }
 
   _updatePieces() {
