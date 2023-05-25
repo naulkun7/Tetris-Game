@@ -29,6 +29,9 @@ export default class Game {
     this.linesPerLevel = 10;
     this._speed = 1000; // Set initial speed to 1000 milliseconds
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
+
+    this.undoStack = []; // Stack to store game state snapshots for undo
+
     document.addEventListener("keydown", (event) => {
       if (this._gameInProgress) {
         // Check if the game is in progress
@@ -207,10 +210,13 @@ export default class Game {
   }
 
   _update() {
+    // this._savePlayfieldState();
     this._updatePlayfield();
     this._updateScore();
     this._updatePieces();
     this._updateGhostPiece();
+
+    
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -222,6 +228,10 @@ export default class Game {
         this.movePieceDown();
       }, speed);
     }
+
+    this.captureGameState();
+    this.view.drawGrid(this.playfield.grid);
+    this.view.drawPiece(this.currentPiece);
   }
 
   _updatePlayfield() {
@@ -265,6 +275,44 @@ export default class Game {
     // Move the ghost piece up by one, as the last move caused a collision
     this._ghostPiece.y -= 1;
   }
+
+  // Capture game state and push onto the undo stack
+  captureGameState() {
+    const gridSnapshot = this.playfield.cloneGrid();
+    const pieceSnapshot = this.currentPiece.clone();
+    const linesCleared = this.linesCleared;
+
+    this.undoStack.push({
+      gridSnapshot,
+      pieceSnapshot,
+      linesCleared,
+    });
+  }
+
+  // <---- Save playField -----> //
+  undo() {
+    if (this.undoStack.length === 0) {
+      // console.log("Nothing to undo.");
+      return;
+    }
+
+    // Restore previous game state
+    const { gridSnapshot, pieceSnapshot, linesCleared } = this.undoStack.pop();
+    this.playfield.grid = gridSnapshot;
+    this.currentPiece = pieceSnapshot;
+
+    // Update lines cleared
+    this.linesCleared -= linesCleared;
+
+    // Redraw the grid and current piece
+    this.view.drawGrid(this.playfield.grid);
+    this.view.drawPiece(this.currentPiece);
+
+    // console.log("Undo complete.");
+  }
+
+  // <----- END UNDO ----->
+
 
   _playClearLineSoundEffect() {
     if (this._isSoundMuted) {

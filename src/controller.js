@@ -181,6 +181,10 @@ export default class Controller {
         }
         this.restartGame();
         break;
+      case 192: // ` key
+        this._game.undo();
+        this.updateView();
+        break;
     }
   }
 
