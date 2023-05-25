@@ -18,13 +18,12 @@ export default class Game {
   difficulty = null;
   _baseLevel = 0;
   _linesPerLevel = 10;
-
+  _isSoundMuted = false;
   _gameInProgress = false;
 
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
-    // this._gameStatesStack = [];
     this._updateGhostPiece();
     this.baseLevel = 0;
     this.linesPerLevel = 10;
@@ -207,40 +206,11 @@ export default class Game {
     this._updateGhostPiece(); // Update the ghost piece's position after rotation
   }
 
-  // Start undo() function //
-  // undo() {
-  //   // Check if there are any states to undo
-  //   if (this._gameStatesStack.length <= 1) {
-  //     console.log("Cannot undo further.");
-  //     return;
-  //   }
-  
-  //   // Pop the current state from the stack
-  //   this._gameStatesStack.pop();
-  
-  //   // Get the previous state from the stack
-  //   const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
-  
-  //   // Restore the game state from the previous state
-  //   this._score = previousState.score;
-  //   this._lines = previousState.lines;
-  //   this._topOut = previousState.isGameOver;
-  //   this._playfield = previousState.playfield;
-  //   this._activePiece = previousState.activePiece;
-  //   this._nextPiece = previousState.nextPiece;
-  //   this._ghostPiece = previousState.ghostPiece;
-  // }
-  // End undo() function //
-
   _update() {
-    // Update the game state
     this._updatePlayfield();
     this._updateScore();
     this._updatePieces();
     this._updateGhostPiece();
-
-    // Push the current game state onto the stack
-    // this._gameStatesStack.push(this.state);
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -256,14 +226,6 @@ export default class Game {
 
   _updatePlayfield() {
     this._playfield.lockPiece(this._activePiece);
-
-    // Lock the active piece and restore the playfield
-    this._playfield.lockPiece(this._activePiece);
-    for (let block of this._playfield) {
-      if (block && block !== this._activePiece) {
-        this._playfield[block.y][block.x] = block;
-      }
-    }
   }
 
   _updateScore() {
@@ -279,6 +241,7 @@ export default class Game {
   _updatePieces() {
     this._activePiece = this._nextPiece || new Piece();
     this._nextPiece = new Piece();
+    console.log("_updatePieces", this._activePiece, this._nextPiece);
     this._activePiece.x = Math.floor(
       (this._playfield.columns - this._activePiece.width) / 2
     );
@@ -304,8 +267,10 @@ export default class Game {
   }
 
   _playClearLineSoundEffect() {
-    let clearLineAudio = document.getElementById("getScore");
-    clearLineAudio.volume = 0.5;
-    clearLineAudio.play();
+    if (this._isSoundMuted) {
+      let clearLineAudio = document.getElementById("getScore");
+      clearLineAudio.volume = 0.5;
+      clearLineAudio.play();
+    }
   }
 }
