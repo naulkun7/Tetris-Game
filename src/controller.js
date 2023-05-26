@@ -117,13 +117,17 @@ export default class Controller {
   _handleKeyPress(event) {
     switch (event.keyCode) {
       case 13: // ENTER
+        document.getElementById("name").blur();
         if (this.difficultySelected) {
           if (this._game.state.isGameOver) {
+            document.getElementById("name").blur();
             this.reset();
           } else if (this._isPlaying) {
+            document.getElementById("name").blur();
             this.pause();
             this.pauseLockEffect();
           } else {
+            document.getElementById("name").blur();
             this.play();
           }
         } else {

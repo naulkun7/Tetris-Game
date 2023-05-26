@@ -7,7 +7,7 @@ export default class Game {
     3: 300,
     4: 1200,
   };
-
+  _name = document.getElementById("name").value;
   _score = 0;
   _lines = 0;
   _topOut = false;
@@ -20,7 +20,12 @@ export default class Game {
   _linesPerLevel = 10;
   _isSoundMuted = false;
   _gameInProgress = false;
-
+  _name1 = ""
+  _score1 = 0;
+  _name2 = ""
+  _score2 = 0;
+  _score4 = 0;
+  _count = 0;
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
@@ -96,6 +101,8 @@ export default class Game {
 
   get state() {
     return {
+      score4: this._score4,
+      name: this._name,
       score: this._score,
       level: this.level,
       lines: this._lines,
@@ -104,10 +111,16 @@ export default class Game {
       nextPiece: this._nextPiece,
       isGameOver: this._topOut,
       ghostPiece: this._ghostPiece,
+      name1: this._name1,
+      score1: this._score1,
+      name2: this._name2,
+      score2: this._score2,
+      count: this._count,
     };
   }
 
   reset() {
+    this._count++;
     this._score = 0;
     this._lines = 0;
     this._topOut = false;
@@ -206,7 +219,29 @@ export default class Game {
 
   _update() {
     this._updatePlayfield();
-    this._updateScore();
+    if (this._count == 0) {
+      this._updateScore();
+      this._score4 = this._score
+    }
+    if (this._count == 1) {
+      this._updateScore();
+      this._score1 = this._score
+    }
+
+    if (this._count == 2) {
+      this._updateScore();
+      this._score2 = this._score
+    }
+    this._updatePieces();
+    if (this._count == 0) {
+      this._updateName();
+    }
+    if (this._count == 1) {
+      this._updateName1();
+    }
+    if (this._count == 2) {
+      this._updateName2();
+    }
     this._updatePieces();
     this._updateGhostPiece();
 
@@ -234,6 +269,15 @@ export default class Game {
       this._score += Game.points[clearedLines] * (this.level + 1);
       this._lines += clearedLines;
     }
+  }
+  _updateName() {
+    this._name = document.getElementById("name").value;
+  }
+  _updateName1() {
+    this._name1 = document.getElementById("name").value;
+  }
+  _updateName2() {
+    this._name2 = document.getElementById("name").value;
   }
 
   _updatePieces() {
