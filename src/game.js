@@ -21,7 +21,7 @@ export default class Game {
   _isSoundMuted = false;
   _gameInProgress = false;
 
-  _gameStatesStack = [];
+  // _gameStatesStack = [];
 
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
@@ -32,15 +32,17 @@ export default class Game {
     this._speed = 1000; // Set initial speed to 1000 milliseconds
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
 
+    // this._history = [];
+
     document.addEventListener("keydown", (event) => {
       if (this._gameInProgress) {
         // Check if the game is in progress
         event.preventDefault(); // Prevent the default behavior of the keys
 
         // Handle other gameplay-related key actions here...
-        if (event.key.toLowerCase() === "`") {
-          this.undo();
-        }
+        // if (event.key.toLowerCase() === "q") {
+        //   this.undo();
+        // }
       } else {
         // Handle difficulty selection keys
         if (event.key.toLowerCase() === "e") {
@@ -217,20 +219,20 @@ export default class Game {
   //     console.log("Cannot undo")
   //     return; // Cannot undo further
   //   }
-  
+
   //   // Restore the previous game state
   //   const previousState = this._history.pop();
   //   const currentState = this._history[this._history.length - 1];
-  
+
   //   this._grid = previousState.grid;
   //   this._piece = previousState.piece;
   //   this._score = previousState.score;
   //   this._level = previousState.level;
   //   this._linesCleared = previousState.linesCleared;
-  
+
   //   // Update the view
   //   this._updateView();
-  
+
   //   // Resume the timer if the game was playing
   //   if (currentState.isPlaying) {
   //     this._startTimer();
@@ -242,13 +244,13 @@ export default class Game {
   //     console.log("Nothing to undo.");
   //     return;
   //   }
-  
+
   //   // Remove the current state from the stack
   //   this._gameStatesStack.pop();
-  
+
   //   // Retrieve the previous state from the stack
   //   const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
-  
+
   //   // Restore the game state to the previous state
   //   this._score = previousState.score;
   //   this._lines = previousState.lines;
@@ -258,27 +260,66 @@ export default class Game {
   //   this._ghostPiece = previousState.ghostPiece;
   // }
 
-  undo() {
-    if (this._gameStatesStack.length <= 1) {
-      console.log("Nothing to undo.");
-      return;
-    }
-  
-    // Remove the current state from the stack
-    this._gameStatesStack.pop();
-  
-    // Retrieve the previous state from the stack
-    const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
-  
-    // Restore the game state to the previous state
-    this._score = previousState.score;
-    this._lines = previousState.lines;
-    this._playfield = previousState.playfield;
-    this._activePiece = Object.assign(new Piece(), previousState.activePiece);
-    this._nextPiece = Object.assign(new Piece(), previousState.nextPiece);
-    this._ghostPiece = Object.assign(new Piece(), previousState.ghostPiece);
-  }
-  
+  // undo() {
+  //   if (this._gameStatesStack.length <= 1) {
+  //     console.log("Nothing to undo.");
+  //     return;
+  //   }
+
+  //   // Remove the current state from the stack
+  //   this._gameStatesStack.pop();
+
+  //   // Retrieve the previous state from the stack
+  //   const previousState = this._gameStatesStack[this._gameStatesStack.length - 1];
+
+  //   // Restore the game state to the previous state
+  //   this._score = previousState.score;
+  //   this._lines = previousState.lines;
+  //   this._playfield = previousState.playfield;
+  //   this._activePiece = Object.assign(new Piece(), previousState.activePiece);
+  //   this._nextPiece = Object.assign(new Piece(), previousState.nextPiece);
+  //   this._ghostPiece = Object.assign(new Piece(), previousState.ghostPiece);
+
+  //   // this._update();
+  // }
+
+  // captureGameState() {
+  //   const gameState = {
+  //     grid: this._grid,
+  //     piece: this._piece,
+  //     score: this._score,
+  //     level: this._level,
+  //     linesCleared: this._linesCleared,
+  //     isPlaying: this._isPlaying
+  //   };
+
+  //   this._history.push(gameState);
+  //   this.update();
+  // }
+
+  // undo() {
+  //   if (this._history.length <= 1) {
+  //     console.log("Nothing happen");
+  //     return; // Cannot undo further
+  //   }
+
+  //   if (this._history.length > 1) {
+  //     // Restore the previous game state
+  //     const previousState = this._history.pop();
+  //     const currentState = this._history[this._history.length - 1];
+
+  //     this._grid = previousState.grid;
+  //     this._piece = previousState.piece;
+  //     this._score = previousState.score;
+  //     this._level = previousState.level;
+  //     this._linesCleared = previousState.linesCleared;
+  //     this._isPlaying = currentState.isPlaying;
+  //   }
+
+  //   // Update the view
+  //   this._update();
+  // }
+
   _update() {
     // this._savePlayfieldState();
     this._updatePlayfield();
@@ -286,8 +327,7 @@ export default class Game {
     this._updatePieces();
     this._updateGhostPiece();
 
-    const currentState = this.state;
-    this._gameStatesStack.push(currentState);
+    // this.undo();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
