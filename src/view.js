@@ -261,8 +261,9 @@ export default class View {
         y: this.playfieldY,
         width: this.blockWidth,
         height: this.blockHeight,
+        color: "rgba(127,127,127,0.5)",
       },
-      "rgba(127,127,127,0.5)"
+      
     ); // Render the ghost piece in a different style
   }
 
