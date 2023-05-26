@@ -100,7 +100,7 @@ export default class Game {
   _swapPiece() {
     if (!this._hasSwapped) {
       const temp = this._activePiece;
-      this._activePiece = this._holdPiece || this._activePiece;
+      this._activePiece = this._holdPiece || new Piece();
       this._holdPiece = temp;
       // Reset the position of the active piece
       this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
