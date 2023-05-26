@@ -189,6 +189,10 @@ export default class Controller {
         }
         this.restartGame();
         break;
+      case 67: // 'c' key
+        this._game._swapPiece();
+        this._updateView();
+        break;
     }
   }
 

@@ -33,6 +33,8 @@ export default class Game {
     this.baseLevel = 0;
     this.linesPerLevel = 10;
     this._speed = 1000; // Set initial speed to 1000 milliseconds
+    this._holdPiece = null;
+    this._hasSwapped = false;
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
     document.addEventListener("keydown", (event) => {
       if (this._gameInProgress) {
@@ -116,6 +118,7 @@ export default class Game {
       name2: this._name2,
       score2: this._score2,
       count: this._count,
+      holdPiece: this._holdPiece,
     };
   }
 
@@ -217,6 +220,30 @@ export default class Game {
     this._updateGhostPiece(); // Update the ghost piece's position after rotation
   }
 
+  _swapPiece() {
+    if (!this._hasSwapped) {
+      if (!this._holdPiece) {
+        this._holdPiece = this._activePiece;
+        this._activePiece = this._nextPiece; // Get the next piece from the queue
+        this._nextPiece = new Piece();
+      } else {
+        let temp = this._activePiece;
+        this._activePiece = this._holdPiece;
+        this._holdPiece = temp;
+      }
+      // Reset the position of the active piece
+      this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
+      this._activePiece.y = -1;
+
+      // Set the position of the held piece within the "Hold" area
+      this._holdPiece.x = 0;
+      this._holdPiece.y = 0;
+      this._hasSwapped = true;
+    }
+  }
+
+  
+
   _update() {
     this._updatePlayfield();
     if (this._count == 0) {
@@ -255,6 +282,9 @@ export default class Game {
         this.movePieceDown();
       }, speed);
     }
+
+    // Reset the swap flag when a new piece becomes active
+    this._hasSwapped = false;
   }
 
   _updatePlayfield() {
