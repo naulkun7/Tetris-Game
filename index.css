@@ -59,20 +59,4 @@ body {
     #virtual-keys button:active {
         background-color: #d9d9d9;
     }
-
-    #left-button::before {
-        content: '\2190';
-    }
-
-    #right-button::before {
-        content: '\2192';
-    }
-
-    #up-button::before {
-        content: '\0052';
-    }
-
-    #down-button::before {
-        content: '\2193';
-    }
 }

@@ -20,9 +20,9 @@ export default class Game {
   _linesPerLevel = 10;
   _isSoundMuted = false;
   _gameInProgress = false;
-  _name1 = ""
+  _name1 = "";
   _score1 = 0;
-  _name2 = ""
+  _name2 = "";
   _score2 = 0;
   _score4 = 0;
   _count = 0;
@@ -232,7 +232,9 @@ export default class Game {
         this._holdPiece = temp;
       }
       // Reset the position of the active piece
-      this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
+      this._activePiece.x = Math.floor(
+        (this._playfield.columns - this._activePiece.width) / 2
+      );
       this._activePiece.y = -1;
 
       // Set the position of the held piece within the "Hold" area
@@ -242,22 +244,20 @@ export default class Game {
     }
   }
 
-  
-
   _update() {
     this._updatePlayfield();
     if (this._count == 0) {
       this._updateScore();
-      this._score4 = this._score
+      this._score4 = this._score;
     }
     if (this._count == 1) {
       this._updateScore();
-      this._score1 = this._score
+      this._score1 = this._score;
     }
 
     if (this._count == 2) {
       this._updateScore();
-      this._score2 = this._score
+      this._score2 = this._score;
     }
     this._updatePieces();
     if (this._count == 0) {
