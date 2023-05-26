@@ -73,9 +73,11 @@ export default class Controller {
     switch (event.keyCode) {
       case 13: // ENTER
         if (this._game.state.isGameOver) {
+          document.getElementById("name").blur();
           console.log(this._game.state);
           this.reset();
         } else if (this._isPlaying) {
+          document.getElementById("name").blur();
           this.pause();
         } else {
           document.getElementById("name").blur();
