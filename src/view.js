@@ -143,29 +143,32 @@ export default class View {
     this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 24);
     this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 48);
     this.context.fillText("Next:", this.panelX, this.panelY + 96);
-
-    this._renderPiece(nextPiece, {
-      x: this.panelX,
-      y: this.panelY + 120,
-      width: this.blockWidth * 0.5,
-      height: this.blockHeight * 0.5,
-    });
-
     this.context.fillText("Hold:", this.panelX, this.panelY + 192);
+
+    if (nextPiece) {
+      this._renderPiece(nextPiece, {
+        x: this.panelX,
+        y: this.panelY + 120,
+        width: this.blockWidth * 0.5,
+        height: this.blockHeight * 0.5,
+        // color: "white", 
+      });
+    }
 
     if (holdPiece) {
       this._renderPiece(holdPiece, {
         x: this.panelX,
-        y: this.panelY + 240,
+        y: this.panelY + 220,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
+        // color: "white",
       });
   }
   }
 
   _renderPiece(
     piece,
-    { x, y, width = this.blockWidth, height = this.blockHeight }
+    { x, y, width = this.blockWidth, height = this.blockHeight, color = null }
   ) {
     for (let block of piece) {
       if (block) {
@@ -174,7 +177,7 @@ export default class View {
           y: y + block.y * height,
           width,
           height,
-          color: View.colors[block.type],
+          color: color || View.colors[block.type] ,
         });
       }
     }

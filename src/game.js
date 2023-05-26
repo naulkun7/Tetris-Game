@@ -99,12 +99,22 @@ export default class Game {
 
   _swapPiece() {
     if (!this._hasSwapped) {
-      const temp = this._activePiece;
-      this._activePiece = this._holdPiece || new Piece();
-      this._holdPiece = temp;
+      if (!this._holdPiece) {
+        this._holdPiece = this._activePiece;
+        this._activePiece = this._nextPiece; // Get the next piece from the queue
+        this._nextPiece = new Piece();
+      } else {
+        let temp = this._activePiece;
+        this._activePiece = this._holdPiece;
+        this._holdPiece = temp;
+      }
       // Reset the position of the active piece
       this._activePiece.x = Math.floor((this._playfield.columns - this._activePiece.width) / 2);
       this._activePiece.y = -1;
+
+      // Set the position of the held piece within the "Hold" area
+      this._holdPiece.x = 0;
+      this._holdPiece.y = 0;
       this._hasSwapped = true;
     }
   }
