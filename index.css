@@ -11,9 +11,19 @@ body {
 }
 
 #root h1 {
+    display: flex;
+    justify-content: center;
     font-family: 'Press Start 2P', Consolas, monospace;
     color: white;
     margin-bottom: 10px;
+}
+
+#root h1 span {
+    margin: 0 20px;
+}
+
+#root #name {
+    margin: 20px 0;
 }
 
 #root canvas {
@@ -25,7 +35,7 @@ body {
     display: none !important;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     #virtual-keys {
         display: block;
     }

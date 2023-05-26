@@ -48,6 +48,9 @@ export default class View {
     let canvasWidth, canvasHeight;
 
     if (isMobile) {
+      canvasWidth = this.width;
+      canvasHeight = this.height;
+    } else {
       const totalColumns = 3;
       const mainColumnWidthRatio = 7 / totalColumns;
       const aspectRatio = mainColumnWidthRatio / (mainColumnWidthRatio + 1);
@@ -59,9 +62,6 @@ export default class View {
         canvasWidth = maxWidth;
         canvasHeight = maxWidth / aspectRatio;
       }
-    } else {
-      canvasWidth = this.width;
-      canvasHeight = this.height;
     }
 
     this.canvas.width = canvasWidth;
@@ -198,16 +198,38 @@ export default class View {
     this.context.textBaseline = "middle";
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 48);
 
+    this.context.fillText(
+      `Name: ${name}`,
+      this.width / 2 - 100,
+      this.height / 2 + 25
+    );
+    this.context.fillText(
+      `Score: ${score4}`,
+      this.width / 2 + 150,
+      this.height / 2 + 25
+    );
 
-    this.context.fillText(`Name: ${name}`, this.width / 2 - 100, this.height / 2 + 25);
-    this.context.fillText(`Score: ${score4}`, this.width / 2 + 150, this.height / 2 + 25);
+    this.context.fillText(
+      `Name: ${name1}`,
+      this.width / 2 - 100,
+      this.height / 2 + 50
+    );
+    this.context.fillText(
+      `Score: ${score1}`,
+      this.width / 2 + 150,
+      this.height / 2 + 50
+    );
 
-    this.context.fillText(`Name: ${name1}`, this.width / 2 - 100, this.height / 2 + 50);
-    this.context.fillText(`Score: ${score1}`, this.width / 2 + 150, this.height / 2 + 50);
-
-    this.context.fillText(`Name: ${name2}`, this.width / 2 - 100, this.height / 2 + 75);
-    this.context.fillText(`Score: ${score2}`, this.width / 2 + 150, this.height / 2 + 75);
-
+    this.context.fillText(
+      `Name: ${name2}`,
+      this.width / 2 - 100,
+      this.height / 2 + 75
+    );
+    this.context.fillText(
+      `Score: ${score2}`,
+      this.width / 2 + 150,
+      this.height / 2 + 75
+    );
 
     this.context.fillText(
       "Press ENTER to Restart",
@@ -215,7 +237,6 @@ export default class View {
       this.height / 2 + 200
     );
   }
-
 
   _clearScreen(color = "black") {
     this.context.fillStyle = color;
@@ -254,17 +275,13 @@ export default class View {
       height: this.blockHeight,
     });
 
-    this._renderPiece(
-      ghostPiece,
-      {
-        x: this.playfieldX,
-        y: this.playfieldY,
-        width: this.blockWidth,
-        height: this.blockHeight,
-        color: "rgba(127,127,127,0.5)",
-      },
-      
-    ); // Render the ghost piece in a different style
+    this._renderPiece(ghostPiece, {
+      x: this.playfieldX,
+      y: this.playfieldY,
+      width: this.blockWidth,
+      height: this.blockHeight,
+      color: "rgba(127,127,127,0.5)",
+    }); // Render the ghost piece in a different style
   }
 
   _renderPanel({ level, score, lines, nextPiece, holdPiece }) {
@@ -285,7 +302,7 @@ export default class View {
         y: this.panelY + 120,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
-        // color: "white", 
+        // color: "white",
       });
     }
 
@@ -297,7 +314,7 @@ export default class View {
         height: this.blockHeight * 0.5,
         // color: "white",
       });
-  }
+    }
   }
 
   _renderPiece(
