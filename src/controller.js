@@ -1,4 +1,3 @@
-
 export default class Controller {
   constructor(game, view) {
     this._game = game;
@@ -37,15 +36,12 @@ export default class Controller {
     this.play();
   }
 
-
-
   _updateView() {
     const state = this._game.state;
 
     if (state.isGameOver) {
-      localStorage.setItem(state.name, state.score)
+      localStorage.setItem(state.name, state.score);
       this._view.renderEndScreen(state);
-
     } else if (!this._isPlaying) {
       this._view.renderPauseScreen(state);
     } else {
@@ -82,7 +78,7 @@ export default class Controller {
         } else if (this._isPlaying) {
           this.pause();
         } else {
-
+          document.getElementById("name").blur();
           this.play();
         }
         break;
