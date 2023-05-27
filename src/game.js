@@ -127,6 +127,7 @@ export default class Game {
     this._score = 0;
     this._lines = 0;
     this._topOut = false;
+    this._holdPiece = null;
     this._playfield.reset();
     this._updatePieces();
   }
@@ -272,7 +273,6 @@ export default class Game {
       this._updateScore();
       this._score2 = this._score;
     }
-    this._updatePieces();
     if (this._count == 0) {
       this._updateName();
     }
