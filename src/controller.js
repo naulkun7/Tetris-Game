@@ -193,6 +193,12 @@ export default class Controller {
         this._game._swapPiece();
         this._updateView();
         break;
+      case 85: // U key
+        if (this._isPlaying) {
+          this._game.undo();
+          this._updateView();
+        }
+        break;
     }
   }
 

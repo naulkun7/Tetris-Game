@@ -10,6 +10,19 @@ export default class Playfield extends Array {
     }
   }
 
+  // Create a clone to save the playField to render when restore the state
+  clone() {
+    const clone = new Playfield(this.rows, this.columns);
+
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.columns; x++) {
+        clone[y][x] = this[y][x];
+      }
+    }
+
+    return clone;
+  }
+
   hasCollision(piece) {
     for (let block of piece) {
       if (
@@ -80,11 +93,13 @@ export default class Playfield extends Array {
   }
 
   _isOutOfBounds(x, y) {
-    return this[y] === undefined || this[y][x] === undefined;
+    // return this[y] === undefined || this[y][x] === undefined;
+    return x < 0 || x >= this.columns || y < 0 || y >= this.rows;
   }
 
   _isOccupied(x, y) {
-    return this[y][x];
+    // return this[y][x];
+    return this[y][x] !== 0;
   }
 
   *[Symbol.iterator]() {
