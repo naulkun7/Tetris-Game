@@ -81,6 +81,11 @@ export default class Game {
       console.error("An error occurred while starting the game loop:", error);
     });
   }
+
+  delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   // end of gameSpeed
 
   setDifficulty(difficulty) {
@@ -232,7 +237,6 @@ export default class Game {
           (this._playfield.columns - this._activePiece.width) / 2
         );
         this._activePiece.y = -1;
-        
       } else {
         let temp = this._activePiece;
         this._activePiece = this._holdPiece;
@@ -242,12 +246,12 @@ export default class Game {
         );
         this._activePiece.y = -1;
       }
-  
+
       // Set the position of the held piece within the "Hold" area
       this._holdPiece.x = 0;
       this._holdPiece.y = 0;
       this._hasSwapped = true;
-      
+
       // Generate new Ghost piece for the new piece generated
       this._ghostPiece = new Piece(
         this._activePiece.type,
@@ -256,7 +260,7 @@ export default class Game {
       );
       this._updateGhostPiece();
     }
-  }  
+  }
 
   _update() {
     this._updatePlayfield();
