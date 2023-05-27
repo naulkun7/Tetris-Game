@@ -226,23 +226,36 @@ export default class Game {
         this._holdPiece = this._activePiece;
         this._activePiece = this._nextPiece; // Get the next piece from the queue
         this._nextPiece = new Piece();
+        // Reset the position of the active piece
+        this._activePiece.x = Math.floor(
+          (this._playfield.columns - this._activePiece.width) / 2
+        );
+        this._activePiece.y = -1;
+        
       } else {
         let temp = this._activePiece;
         this._activePiece = this._holdPiece;
         this._holdPiece = temp;
+        this._activePiece.x = Math.floor(
+          (this._playfield.columns - this._activePiece.width) / 2
+        );
+        this._activePiece.y = -1;
       }
-      // Reset the position of the active piece
-      this._activePiece.x = Math.floor(
-        (this._playfield.columns - this._activePiece.width) / 2
-      );
-      this._activePiece.y = -1;
-
+  
       // Set the position of the held piece within the "Hold" area
       this._holdPiece.x = 0;
       this._holdPiece.y = 0;
       this._hasSwapped = true;
+      
+      // Generate new Ghost piece for the new piece generated
+      this._ghostPiece = new Piece(
+        this._activePiece.type,
+        this._activePiece.x,
+        this._activePiece.y
+      );
+      this._updateGhostPiece();
     }
-  }
+  }  
 
   _update() {
     this._updatePlayfield();
