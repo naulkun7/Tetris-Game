@@ -10,7 +10,7 @@ export default class Playfield extends Array {
     }
   }
 
-  // Create clone to store game state and save to saveState
+  //undo function
   clone() {
     const clone = new Playfield(this.rows, this.columns);
 
@@ -59,19 +59,6 @@ export default class Playfield extends Array {
     }
   }
 
-  // // Create clone to store game state and save to saveState
-  // clone() {
-  //   const clone = new Playfield(this.rows, this.columns);
-
-  //   for (let y = 0; y < this.rows; y++) {
-  //     for (let x = 0; x < this.columns; x++) {
-  //       clone[y][x] = this[y][x];
-  //     }
-  //   }
-
-  //   return clone;
-  // }
-
   _getLinesToRemove() {
     let lines = [];
 
@@ -98,20 +85,11 @@ export default class Playfield extends Array {
 
   _removeLines(lines) {
     for (let index of lines) {
-      this.deleteRowWithEffect(index);
+      this.splice(index, 1);
+      this.unshift(new Array(this.columns).fill(0));
     }
 
     return lines.length;
-  }
-
-  deleteRowWithEffect(index) {
-    // Fill the row with a color
-    this[index].fill("white");
-    // After 100 milliseconds, remove the row and add a new empty one at the top
-    setTimeout(() => {
-      this.splice(index, 1);
-      this.unshift(new Array(this.columns).fill(0));
-    }, 100);
   }
 
   _isOutOfBounds(x, y) {

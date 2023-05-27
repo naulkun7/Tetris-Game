@@ -17,8 +17,10 @@ export default class Controller {
   }
 
   update() {
-    this._game.movePieceDown();
-    this._updateView();
+    if (this._isPlaying) {
+      this._game.movePieceDown();
+      this._updateView();
+    }
   }
 
   pauseAudio() {
@@ -171,9 +173,11 @@ export default class Controller {
         this._game._score += 1;
         break;
       case 32: // SPACE
-        this._game.dropPiece();
-        this.playLockEffect();
-        this._updateView();
+        if (this._isPlaying) {
+          this._game.dropPiece();
+          this.playLockEffect();
+          this._updateView();
+        }
         break;
       case 82: // R key
         if (event.repeat) {

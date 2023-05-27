@@ -25,15 +25,11 @@ export default class Game {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
     this._updateGhostPiece();
-  
-    // Create a stack to save state
     this._states = [];
-
     this.baseLevel = 0;
     this.linesPerLevel = 10;
     this._speed = 1000; // Set initial speed to 1000 milliseconds
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
-
     document.addEventListener("keydown", (event) => {
       if (this._gameInProgress) {
         // Check if the game is in progress
@@ -54,7 +50,36 @@ export default class Game {
     this.gameLoop();
   }
 
+  //undo()
+  saveState() {
+    this._states.push({
+      score: this._score,
+      lines: this._lines,
+      topOut: this._topOut,
+      playfield: this._playfield.clone(),
+      activePiece: this._activePiece.clone(),
+      nextPiece: this._nextPiece.clone(),
+      ghostPiece: this._ghostPiece.clone(),
+    });
+  }
 
+  restoreState() {
+    if (this._states.length > 0) {
+      const prevState = this._states.pop();
+      this._score = prevState.score;
+      this._lines = prevState.lines;
+      this._topOut = prevState.topOut;
+      this._playfield = prevState.playfield;
+      this._activePiece = prevState.activePiece;
+      this._nextPiece = prevState.nextPiece;
+      this._ghostPiece = prevState.ghostPiece;
+    }
+  }
+
+  undo() {
+    this.restoreState();
+  }
+  //end of undo
 
   //Use to create gameSpeed
   get speed() {
@@ -65,8 +90,12 @@ export default class Game {
     const loop = async () => {
       try {
         while (!this._topOut) {
-          await this.delay(this.speed); // Delay the next loop iteration based on the current speed
-          this.movePieceDown();
+          if (this._isPlaying) {
+            await this.delay(this.speed); // Delay the next loop iteration based on the current speed
+            this.movePieceDown();
+          } else {
+            await this.delay(100); // Delay the loop iteration by a fixed amount when the game is paused
+          }
         }
       } catch (error) {
         console.error("An error occurred in the game loop:", error);
@@ -76,10 +105,6 @@ export default class Game {
     loop().catch((error) => {
       console.error("An error occurred while starting the game loop:", error);
     });
-  }
-
-  delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
   }
   // end of gameSpeed
 
@@ -98,8 +123,6 @@ export default class Game {
   }
 
   get level() {
-    console.log(this.linesPerLevel);
-    console.log(this.baseLevel);
     return Math.floor(this._lines / this._linesPerLevel) + this._baseLevel;
   }
 
@@ -125,6 +148,7 @@ export default class Game {
   }
 
   movePieceLeft() {
+    // this.saveState(); // <-- save state before the move
     this._activePiece.x -= 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -135,6 +159,7 @@ export default class Game {
   }
 
   movePieceRight() {
+    // this.saveState(); // <-- save state before the move
     this._activePiece.x += 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -145,6 +170,7 @@ export default class Game {
   }
 
   movePieceDown() {
+    // this.saveState(); // <-- save state before the move
     if (this._topOut) return;
 
     this._activePiece.y += 1;
@@ -158,6 +184,7 @@ export default class Game {
   }
 
   dropPiece() {
+    this.saveState(); // <-- save state before the move
     if (this._topOut) return;
 
     let cellsDropped = 0;
@@ -179,6 +206,7 @@ export default class Game {
   }
 
   rotatePiece() {
+    // this.saveState(); // <-- save state before the move
     const initialX = this._activePiece.x; // Store the initial x-coordinate of the active piece
     const maxShifts = 3; // Maximum number of shifts to try before reverting the rotation
 
@@ -213,41 +241,7 @@ export default class Game {
     this._updateGhostPiece(); // Update the ghost piece's position after rotation
   }
 
-  //<------ Undo() ------> //
-  // Create a save to save state
-  saveState() {
-    this._states.push({
-      score: this._score,
-      lines: this._lines,
-      topOut: this._topOut,
-      playfield: this._playfield.clone(),
-      activePiece: this._activePiece.clone(),
-      nextPiece: this._nextPiece.clone(),
-      ghostPiece: this._ghostPiece.clone(),
-    });
-  }
-
-  // Create a previous state to pop back the state
-  restoreState() {
-    if (this._states.length > 0) {
-      const prevState = this._states.pop();
-      this._score = prevState.score;
-      this._lines = prevState.lines;
-      this._topOut = prevState.topOut;
-      this._playfield = prevState.playfield;
-      this._activePiece = prevState.activePiece;
-      this._nextPiece = prevState.nextPiece;
-      this._ghostPiece = prevState.ghostPiece;
-    }
-  }
-
-  undo() {
-    this.restoreState();
-  }
-  //<------ End Undo() ------> //
-
   _update() {
-    // this._savePlayfieldState();
     this._updatePlayfield();
     this._updateScore();
     this._updatePieces();
