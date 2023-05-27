@@ -185,6 +185,12 @@ export default class Controller {
         }
         this.restartGame();
         break;
+      case 85: // U key
+        if (this._isPlaying) {
+          this._game.undo();
+          this._updateView();
+        }
+        break;
     }
   }
 

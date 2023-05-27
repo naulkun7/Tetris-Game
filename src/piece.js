@@ -91,6 +91,14 @@ export default class Piece {
       }
     }
   }
+  clone() {
+    const clone = new Piece(this.type);
+    clone.x = this.x;
+    clone.y = this.y;
+    clone.rotation = this.rotation;
+
+    return clone;
+  }
 
   *[Symbol.iterator]() {
     for (let y = 0; y < this.blocks.length; y++) {

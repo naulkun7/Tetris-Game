@@ -25,6 +25,7 @@ export default class Game {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
     this._updateGhostPiece();
+    this._states = [];
     this.baseLevel = 0;
     this.linesPerLevel = 10;
     this._speed = 1000; // Set initial speed to 1000 milliseconds
@@ -48,6 +49,37 @@ export default class Game {
     });
     this.gameLoop();
   }
+
+  //undo()
+  saveState() {
+    this._states.push({
+      score: this._score,
+      lines: this._lines,
+      topOut: this._topOut,
+      playfield: this._playfield.clone(),
+      activePiece: this._activePiece.clone(),
+      nextPiece: this._nextPiece.clone(),
+      ghostPiece: this._ghostPiece.clone(),
+    });
+  }
+
+  restoreState() {
+    if (this._states.length > 0) {
+      const prevState = this._states.pop();
+      this._score = prevState.score;
+      this._lines = prevState.lines;
+      this._topOut = prevState.topOut;
+      this._playfield = prevState.playfield;
+      this._activePiece = prevState.activePiece;
+      this._nextPiece = prevState.nextPiece;
+      this._ghostPiece = prevState.ghostPiece;
+    }
+  }
+
+  undo() {
+    this.restoreState();
+  }
+  //end of undo
 
   //Use to create gameSpeed
   get speed() {
@@ -116,6 +148,7 @@ export default class Game {
   }
 
   movePieceLeft() {
+    this.saveState(); // <-- save state before the move
     this._activePiece.x -= 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -126,6 +159,7 @@ export default class Game {
   }
 
   movePieceRight() {
+    this.saveState(); // <-- save state before the move
     this._activePiece.x += 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -136,6 +170,7 @@ export default class Game {
   }
 
   movePieceDown() {
+    this.saveState(); // <-- save state before the move
     if (this._topOut) return;
 
     this._activePiece.y += 1;
@@ -149,6 +184,7 @@ export default class Game {
   }
 
   dropPiece() {
+    this.saveState(); // <-- save state before the move
     if (this._topOut) return;
 
     let cellsDropped = 0;
@@ -170,6 +206,7 @@ export default class Game {
   }
 
   rotatePiece() {
+    this.saveState(); // <-- save state before the move
     const initialX = this._activePiece.x; // Store the initial x-coordinate of the active piece
     const maxShifts = 3; // Maximum number of shifts to try before reverting the rotation
 
