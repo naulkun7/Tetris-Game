@@ -91,6 +91,8 @@ export default class Piece {
       }
     }
   }
+
+  // Render cube of previous state (Location and rotation of previous state)
   clone() {
     const clone = new Piece(this.type);
     clone.x = this.x;

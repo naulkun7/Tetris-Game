@@ -50,7 +50,8 @@ export default class Game {
     this.gameLoop();
   }
 
-  //undo()
+  // <----- Start Undo -----> //
+  // Create a save to store state and push to the _stack[]
   saveState() {
     this._states.push({
       score: this._score,
@@ -63,6 +64,7 @@ export default class Game {
     });
   }
 
+  // Create a previous state to restore the game state from the _stack
   restoreState() {
     if (this._states.length > 0) {
       const prevState = this._states.pop();
@@ -79,7 +81,7 @@ export default class Game {
   undo() {
     this.restoreState();
   }
-  //end of undo
+  // <----- End Undo -----> //
 
   //Use to create gameSpeed
   get speed() {

@@ -10,7 +10,7 @@ export default class Playfield extends Array {
     }
   }
 
-  //undo function
+  // Create a clone to save the playField to render when restore the state
   clone() {
     const clone = new Playfield(this.rows, this.columns);
 
