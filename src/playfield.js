@@ -10,6 +10,19 @@ export default class Playfield extends Array {
     }
   }
 
+  // Create clone to store game state and save to saveState
+  clone() {
+    const clone = new Playfield(this.rows, this.columns);
+
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.columns; x++) {
+        clone[y][x] = this[y][x];
+      }
+    }
+
+    return clone;
+  }
+
   hasCollision(piece) {
     for (let block of piece) {
       if (
@@ -45,6 +58,19 @@ export default class Playfield extends Array {
       }
     }
   }
+
+  // // Create clone to store game state and save to saveState
+  // clone() {
+  //   const clone = new Playfield(this.rows, this.columns);
+
+  //   for (let y = 0; y < this.rows; y++) {
+  //     for (let x = 0; x < this.columns; x++) {
+  //       clone[y][x] = this[y][x];
+  //     }
+  //   }
+
+  //   return clone;
+  // }
 
   _getLinesToRemove() {
     let lines = [];
