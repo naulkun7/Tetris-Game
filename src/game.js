@@ -148,7 +148,7 @@ export default class Game {
   }
 
   movePieceLeft() {
-    this.saveState(); // <-- save state before the move
+    // this.saveState(); // <-- save state before the move
     this._activePiece.x -= 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -159,7 +159,7 @@ export default class Game {
   }
 
   movePieceRight() {
-    this.saveState(); // <-- save state before the move
+    // this.saveState(); // <-- save state before the move
     this._activePiece.x += 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -170,7 +170,7 @@ export default class Game {
   }
 
   movePieceDown() {
-    this.saveState(); // <-- save state before the move
+    // this.saveState(); // <-- save state before the move
     if (this._topOut) return;
 
     this._activePiece.y += 1;
@@ -206,7 +206,7 @@ export default class Game {
   }
 
   rotatePiece() {
-    this.saveState(); // <-- save state before the move
+    // this.saveState(); // <-- save state before the move
     const initialX = this._activePiece.x; // Store the initial x-coordinate of the active piece
     const maxShifts = 3; // Maximum number of shifts to try before reverting the rotation
 
