@@ -35,6 +35,8 @@ body {
     display: none !important;
 }
 
+/* Mobile */
+
 @media screen and (max-width: 1024px) {
     #virtual-keys {
         display: block;
@@ -70,3 +72,5 @@ body {
         background-color: #d9d9d9;
     }
 }
+
+/* End Mobile */
