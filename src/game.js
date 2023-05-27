@@ -68,13 +68,15 @@ export default class Game {
   restoreState() {
     if (this._states.length > 0) {
       const prevState = this._states.pop();
-      this._score = prevState.score;
-      this._lines = prevState.lines;
-      this._topOut = prevState.topOut;
-      this._playfield = prevState.playfield;
-      this._activePiece = prevState.activePiece;
-      this._nextPiece = prevState.nextPiece;
-      this._ghostPiece = prevState.ghostPiece;
+      if (!this._playfield.hasCollision(prevState.activePiece)) {
+        this._score = prevState.score;
+        this._lines = prevState.lines;
+        this._topOut = prevState.topOut;
+        this._playfield = prevState.playfield;
+        this._activePiece = prevState.activePiece;
+        this._nextPiece = prevState.nextPiece;
+        this._ghostPiece = prevState.ghostPiece;
+      }
     }
   }
 

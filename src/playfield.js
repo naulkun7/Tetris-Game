@@ -93,11 +93,13 @@ export default class Playfield extends Array {
   }
 
   _isOutOfBounds(x, y) {
-    return this[y] === undefined || this[y][x] === undefined;
+    // return this[y] === undefined || this[y][x] === undefined;
+    return x < 0 || x >= this.columns || y < 0 || y >= this.rows;
   }
 
   _isOccupied(x, y) {
-    return this[y][x];
+    // return this[y][x];
+    return this[y][x] !== 0;
   }
 
   *[Symbol.iterator]() {
