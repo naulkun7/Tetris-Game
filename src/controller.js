@@ -184,7 +184,7 @@ export default class Controller {
         }
         break;
       case 82: // R key
-        if (event.repeat) {
+        if (event.repeat && !this._isPlaying) {
           return; // Do nothing if the R key is held down
         }
         this.restartGame();

@@ -36,6 +36,7 @@ export default class Game {
     this._holdPiece = null;
     this._hasSwapped = false;
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
+
     document.addEventListener("keydown", (event) => {
       if (this._gameInProgress) {
         // Check if the game is in progress
@@ -53,6 +54,7 @@ export default class Game {
         }
       }
     });
+
     this.gameLoop();
   }
 
@@ -66,7 +68,7 @@ export default class Game {
       try {
         while (!this._topOut) {
           if (this._isPlaying) {
-            await this.delay(this.speed); // Delay the next loop iteration based on the current speed
+            await this.delay(this._speed); // Delay the next loop iteration based on the current speed
             this.movePieceDown();
           } else {
             await this.delay(100); // Delay the loop iteration by a fixed amount when the game is paused
@@ -232,7 +234,6 @@ export default class Game {
           (this._playfield.columns - this._activePiece.width) / 2
         );
         this._activePiece.y = -1;
-        
       } else {
         let temp = this._activePiece;
         this._activePiece = this._holdPiece;
@@ -242,12 +243,12 @@ export default class Game {
         );
         this._activePiece.y = -1;
       }
-  
+
       // Set the position of the held piece within the "Hold" area
       this._holdPiece.x = 0;
       this._holdPiece.y = 0;
       this._hasSwapped = true;
-      
+
       // Generate new Ghost piece for the new piece generated
       this._ghostPiece = new Piece(
         this._activePiece.type,
@@ -256,7 +257,7 @@ export default class Game {
       );
       this._updateGhostPiece();
     }
-  }  
+  }
 
   _update() {
     this._updatePlayfield();
