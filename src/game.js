@@ -66,7 +66,7 @@ export default class Game {
       try {
         while (!this._topOut) {
           if (this._isPlaying) {
-            await this.delay(this.speed); // Delay the next loop iteration based on the current speed
+            await this.delay(this._speed); // Delay the next loop iteration based on the current speed
             this.movePieceDown();
           } else {
             await this.delay(100); // Delay the loop iteration by a fixed amount when the game is paused
@@ -254,9 +254,17 @@ export default class Game {
         this._activePiece.x,
         this._activePiece.y
       );
+
+      // Ensure the ghost piece has the same rotation state as the active piece
+      while(this._ghostPiece.blocks.toString() != this._activePiece.blocks.toString()){
+        this._ghostPiece.rotate();
+      }
+      
       this._updateGhostPiece();
     }
-  }  
+  }
+
+   
 
   _update() {
     this._updatePlayfield();
