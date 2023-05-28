@@ -20,84 +20,28 @@ export default class View {
     this.context = this.canvas.getContext("2d");
 
     this.playfieldBorderWidth = 4;
-    this.playfieldX = this.playfieldBorderWidth;
+    this.playfieldX = this.width / 4;
     this.playfieldY = this.playfieldBorderWidth;
-    this.playfieldWidth = (this.width * 2) / 3;
-    this.playfieldHeight = this.height;
-    this.playfieldInnerWidth =
-      this.playfieldWidth - this.playfieldBorderWidth * 2;
-    this.playfieldInnerHeight =
-      this.playfieldHeight - this.playfieldBorderWidth * 2;
+    this.playfieldWidth = (this.width * 2) / 4;
+    this.playfieldHeight = this.height - this.playfieldBorderWidth * 2;
+    this.playfieldInnerWidth = this.playfieldWidth - this.playfieldBorderWidth * 2;
+    this.playfieldInnerHeight = this.playfieldHeight - this.playfieldBorderWidth * 2;
 
     this.blockWidth = this.playfieldInnerWidth / columns;
     this.blockHeight = this.playfieldInnerHeight / rows;
-
-    this.panelX = this.playfieldWidth + 10;
+    // Render on Right Side
+    this.panelX = this.playfieldWidth + 185;
     this.panelY = 0;
-    this.panelWidth = this.width / 3;
+    // Render on Left Side
+    this.panelX1 = 0;
+    this.panelY1 = 0; // Updated position for high score panel
+
+    this.panelWidth = this.width / 4; // adjusted size to fit the screen properly
     this.panelHeight = this.height;
 
     this.element.appendChild(this.canvas);
   }
 
-  // constructor({ element, width, height, rows, columns }) {
-  //   this.element = element;
-  //   this.width = width;
-  //   this.height = height;
-
-  //   this.canvas = document.createElement("canvas");
-  //   this.adjustCanvasSize();
-  //   window.addEventListener("resize", () => this.adjustCanvasSize());
-
-  //   this.context = this.canvas.getContext("2d");
-
-  //   this.playfieldBorderWidth = 4;
-  //   this.playfieldX = this.playfieldBorderWidth;
-  //   this.playfieldY = this.playfieldBorderWidth;
-  //   this.playfieldWidth = (this.width * 2) / 3;
-  //   this.playfieldHeight = this.height;
-  //   this.playfieldInnerWidth =
-  //     this.playfieldWidth - this.playfieldBorderWidth * 2;
-  //   this.playfieldInnerHeight =
-  //     this.playfieldHeight - this.playfieldBorderWidth * 2;
-
-  //   this.blockWidth = this.playfieldInnerWidth / columns;
-  //   this.blockHeight = this.playfieldInnerHeight / rows;
-
-  //   this.panelX = this.playfieldWidth + 10;
-  //   this.panelY = 0;
-  //   this.panelWidth = this.width / 3;
-  //   this.panelHeight = this.height;
-
-  //   this.element.appendChild(this.canvas);
-  // }
-
-  // adjustCanvasSize() {
-  //   const isMobile = window.innerWidth < 768; // Adjust the threshold as needed
-  //   const maxWidth = Math.min(window.innerWidth, this.width);
-  //   const maxHeight = Math.min(window.innerHeight, this.height);
-  //   let canvasWidth, canvasHeight;
-
-  //   if (isMobile) {
-  //     canvasWidth = this.width;
-  //     canvasHeight = this.height;
-  //   } else {
-  //     const totalColumns = 3;
-  //     const mainColumnWidthRatio = 7 / totalColumns;
-  //     const aspectRatio = mainColumnWidthRatio / (mainColumnWidthRatio + 1);
-
-  //     if (maxWidth / maxHeight > aspectRatio) {
-  //       canvasWidth = maxHeight * aspectRatio;
-  //       canvasHeight = maxHeight;
-  //     } else {
-  //       canvasWidth = maxWidth;
-  //       canvasHeight = maxWidth / aspectRatio;
-  //     }
-  //   }
-
-  //   this.canvas.width = canvasWidth;
-  //   this.canvas.height = canvasHeight;
-  // }
 
   on(event, handler) {
     document.addEventListener(event, handler);
@@ -189,10 +133,11 @@ export default class View {
 
   renderMainScreen(state) {
     this._clearScreen();
+    this._renderHighScore(state);
+    this._renderBorder();
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
     this._renderPanel(state);
-    this._renderBorder();
   }
 
   renderPauseScreen() {
@@ -476,9 +421,24 @@ export default class View {
   }
 
   _renderBorder() {
+    // Define the border
+    const borderX = this.playfieldX - this.playfieldBorderWidth;
+    const borderY = this.playfieldY - this.playfieldBorderWidth;
+    const borderWidth = this.playfieldWidth + this.playfieldBorderWidth * 2 - 8;
+    const borderHeight = this.playfieldHeight + this.playfieldBorderWidth * 2 - 8;
+  
     this.context.strokeStyle = "white";
     this.context.lineWidth = this.playfieldBorderWidth;
-    this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
+    this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
+  }
+
+  _renderHighScore() {
+    this.context.textAlign = "start";
+    this.context.textBaseline = "top";
+    this.context.fillStyle = "white";
+    this.context.font = '14px "Press Start 2P"';
+
+    this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
   }
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
@@ -527,7 +487,6 @@ export default class View {
     this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 48);
     this.context.fillText("Next:", this.panelX, this.panelY + 96);
     this.context.fillText("Hold:", this.panelX, this.panelY + 192);
-    this.context.fillText("High Scores", this.panelX, this.panelY + 288);
 
     if (nextPiece) {
       this._renderPiece(nextPiece, {
