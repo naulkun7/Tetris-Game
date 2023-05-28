@@ -123,37 +123,48 @@ export default class View {
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = "center";
     this.context.textBaseline = "middle";
-    // this.context.fillText(
-    //   "Press ENTER to Start",
-    //   this.width / 2,
-    //   this.height / 3
-    // );
+    this.context.fillText(
+      "TUTORIAL",
+      this.width / 2,
+      this.height / 3
+    );
 
     // Render tutorial text below the "Press ENTER to Start" text
     this.context.font = '13px "Press Start 2P"';
-    this.context.fillText("TUTORIAL", this.width / 2, this.height / 2 - 20);
-
+    this.context.textAlign = "left";
+    this.context.textBaseline = "middle";
     this.context.fillText(
-      "Use the <-|-> to move left and right",
-      this.width / 2,
+      "* Use the 🡸|🡺 to move left and right",
+      this.width / 2 - 230,
       this.height / 2
     );
     this.context.fillText(
-      "Use the ↑ to rotate 90° clockwise ",
-      this.width / 2,
+      "* Use the ↑ to rotate 90° clockwise ",
+      this.width / 2 - 230,
       this.height / 2 + 30
     );
     this.context.fillText(
-      "Press C to hold the Piece",
-      this.width / 2,
+      "* Use C to hold the Piece",
+      this.width / 2 - 230,
       this.height / 2 + 60
     );
 
     this.context.fillText(
-      "Use space to drop down",
-      this.width / 2,
+      "* Use Space to drop down",
+      this.width / 2 - 230,
       this.height / 2 + 90
     );
+    this.context.fillText(
+      "* Use U to undo",
+      this.width / 2 - 230,
+      this.height / 2 + 120
+    );
+    this.context.fillText(
+      "* Use R to restart",
+      this.width / 2 - 230,
+      this.height / 2 + 150
+    );
+
   }
 
   renderChoosingDifficulty() {
