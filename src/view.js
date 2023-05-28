@@ -40,65 +40,6 @@ export default class View {
     this.element.appendChild(this.canvas);
   }
 
-  // constructor({ element, width, height, rows, columns }) {
-  //   this.element = element;
-  //   this.width = width;
-  //   this.height = height;
-
-  //   this.canvas = document.createElement("canvas");
-  //   this.adjustCanvasSize();
-  //   window.addEventListener("resize", () => this.adjustCanvasSize());
-
-  //   this.context = this.canvas.getContext("2d");
-
-  //   this.playfieldBorderWidth = 4;
-  //   this.playfieldX = this.playfieldBorderWidth;
-  //   this.playfieldY = this.playfieldBorderWidth;
-  //   this.playfieldWidth = (this.width * 2) / 3;
-  //   this.playfieldHeight = this.height;
-  //   this.playfieldInnerWidth =
-  //     this.playfieldWidth - this.playfieldBorderWidth * 2;
-  //   this.playfieldInnerHeight =
-  //     this.playfieldHeight - this.playfieldBorderWidth * 2;
-
-  //   this.blockWidth = this.playfieldInnerWidth / columns;
-  //   this.blockHeight = this.playfieldInnerHeight / rows;
-
-  //   this.panelX = this.playfieldWidth + 10;
-  //   this.panelY = 0;
-  //   this.panelWidth = this.width / 3;
-  //   this.panelHeight = this.height;
-
-  //   this.element.appendChild(this.canvas);
-  // }
-
-  // adjustCanvasSize() {
-  //   const isMobile = window.innerWidth < 768; // Adjust the threshold as needed
-  //   const maxWidth = Math.min(window.innerWidth, this.width);
-  //   const maxHeight = Math.min(window.innerHeight, this.height);
-  //   let canvasWidth, canvasHeight;
-
-  //   if (isMobile) {
-  //     canvasWidth = this.width;
-  //     canvasHeight = this.height;
-  //   } else {
-  //     const totalColumns = 3;
-  //     const mainColumnWidthRatio = 7 / totalColumns;
-  //     const aspectRatio = mainColumnWidthRatio / (mainColumnWidthRatio + 1);
-
-  //     if (maxWidth / maxHeight > aspectRatio) {
-  //       canvasWidth = maxHeight * aspectRatio;
-  //       canvasHeight = maxHeight;
-  //     } else {
-  //       canvasWidth = maxWidth;
-  //       canvasHeight = maxWidth / aspectRatio;
-  //     }
-  //   }
-
-  //   this.canvas.width = canvasWidth;
-  //   this.canvas.height = canvasHeight;
-  // }
-
   on(event, handler) {
     document.addEventListener(event, handler);
   }
@@ -115,7 +56,11 @@ export default class View {
     this.context.textBaseline = "middle";
     this.context.fillText("WELCOME", this.width / 2, this.height / 2 - 30);
 
-    this.context.fillText("Enter your name ", this.width / 2, this.height / 2 + 30);
+    this.context.fillText(
+      "Enter your name ",
+      this.width / 2,
+      this.height / 2 + 30
+    );
   }
 
   renderStartScreen() {
@@ -125,11 +70,7 @@ export default class View {
     this.context.font = '18px "Press Start 2P"';
     this.context.textAlign = "center";
     this.context.textBaseline = "middle";
-    this.context.fillText(
-      "TUTORIAL",
-      this.width / 2,
-      this.height / 3
-    );
+    this.context.fillText("TUTORIAL", this.width / 2, this.height / 3);
 
     // Render tutorial text below the "Press ENTER to Start" text
     this.context.font = '13px "Press Start 2P"';
@@ -166,7 +107,6 @@ export default class View {
       this.width / 2 - 230,
       this.height / 2 + 150
     );
-
   }
 
   renderChoosingDifficulty() {
@@ -290,7 +230,6 @@ export default class View {
       this.width / 2,
       this.height / 2 + 200
     );
-
   }
 
   _clearScreen(color = "black") {
