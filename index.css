@@ -8,7 +8,17 @@ body {
   height: auto;
   padding: 10px;
   text-align: center;
+  position: relative;
 }
+
+#root img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
 
 #root h1 {
   display: flex;
@@ -33,18 +43,6 @@ body {
 
 #virtual-keys {
   display: none !important;
-}
-
-.background-1 {
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-
-.background-1 img {
-  /* position: absolute; */
-  position: fixed;
-  opacity: 10%;
 }
 
 /* Mobile */
