@@ -14,7 +14,20 @@ export default class Game {
   _activePiece = null;
   _nextPiece = null;
   _ghostPiece = null;
-
+  _scoreArr = [
+    {
+      _name: "Phuc",
+      _score: 0,
+    },
+    {
+      _name: "",
+      _score: 0,
+    },
+    {
+      _name: "",
+      _score: 0,
+    },
+  ];
   difficulty = null;
   _baseLevel = 0;
   _linesPerLevel = 10;
@@ -157,6 +170,7 @@ export default class Game {
       score2: this._score2,
       count: this._count,
       holdPiece: this._holdPiece,
+      scoreArr: this._scoreArr,
     };
   }
 
@@ -171,7 +185,6 @@ export default class Game {
   }
 
   movePieceLeft() {
-    // this.saveState(); // <-- save state before the move
     this._activePiece.x -= 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -182,7 +195,6 @@ export default class Game {
   }
 
   movePieceRight() {
-    // this.saveState(); // <-- save state before the move
     this._activePiece.x += 1;
 
     if (this._playfield.hasCollision(this._activePiece)) {
@@ -193,7 +205,6 @@ export default class Game {
   }
 
   movePieceDown() {
-    // this.saveState(); // <-- save state before the move
     if (this._topOut) return;
 
     this._activePiece.y += 1;
@@ -229,7 +240,6 @@ export default class Game {
   }
 
   rotatePiece() {
-    // this.saveState(); // <-- save state before the move
     const initialX = this._activePiece.x; // Store the initial x-coordinate of the active piece
     const maxShifts = 3; // Maximum number of shifts to try before reverting the rotation
 
@@ -298,42 +308,48 @@ export default class Game {
       );
 
       // Ensure the ghost piece has the same rotation state as the active piece
-      while(this._ghostPiece.blocks.toString() != this._activePiece.blocks.toString()){
+      while (
+        this._ghostPiece.blocks.toString() !=
+        this._activePiece.blocks.toString()
+      ) {
         this._ghostPiece.rotate();
       }
-      
+
       this._updateGhostPiece();
     }
   }
-
-   
 
   _update() {
     this._updatePlayfield();
     if (this._count == 0) {
       this._updateScore();
-      this._score4 = this._score;
+      this._scoreArr[0]._score = this._score;
     }
     if (this._count == 1) {
       this._updateScore();
-      this._score1 = this._score;
+      this._scoreArr[1]._score = this._score;
     }
 
     if (this._count == 2) {
       this._updateScore();
-      this._score2 = this._score;
+      this._scoreArr[2]._score = this._score;
     }
     if (this._count == 0) {
       this._updateName();
+      this._scoreArr[0]._name = this._name;
     }
     if (this._count == 1) {
       this._updateName1();
+      this._scoreArr[1]._name = this._name1;
     }
     if (this._count == 2) {
       this._updateName2();
+      this._scoreArr[2]._name = this._name2;
     }
+
     this._updatePieces();
     this._updateGhostPiece();
+    this._updateScore();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
