@@ -132,6 +132,11 @@ export default class Game {
       console.error("An error occurred while starting the game loop:", error);
     });
   }
+
+  delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   // end of gameSpeed
 
   setDifficulty(difficulty) {
