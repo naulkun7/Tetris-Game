@@ -308,6 +308,7 @@ export default class Game {
 
     this._updatePieces();
     this._updateGhostPiece();
+    this._updateScore();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
