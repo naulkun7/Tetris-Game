@@ -19,42 +19,28 @@ export default class View {
     this.element.appendChild(this.canvas);
 
     this.playfieldBorderWidth = 4;
-
-    this.rows = rows;
-    this.columns = columns;
-
-    window.addEventListener("resize", () =>
-      this.adjustCanvasSize(width, height)
-    );
-    this.adjustCanvasSize(width, height);
-  }
-
-  adjustCanvasSize(width, height) {
-    console.log("adjustCanvasSize is being called");
-
-    // set canvas dimensions
-    this.canvas.width = width;
-    this.canvas.height = height;
-
-    // set playfield dimensions
-    this.playfieldX = this.playfieldBorderWidth;
+    this.playfieldX = this.width / 4;
     this.playfieldY = this.playfieldBorderWidth;
-    this.playfieldWidth = (width * 2) / 3;
-    this.playfieldHeight = height;
+    this.playfieldWidth = (this.width * 2) / 4;
+    this.playfieldHeight = this.height - this.playfieldBorderWidth * 2;
     this.playfieldInnerWidth =
       this.playfieldWidth - this.playfieldBorderWidth * 2;
     this.playfieldInnerHeight =
       this.playfieldHeight - this.playfieldBorderWidth * 2;
 
-    // set block dimensions
-    this.blockWidth = this.playfieldInnerWidth / this.columns;
-    this.blockHeight = this.playfieldInnerHeight / this.rows;
-
-    // set panel dimensions
-    this.panelX = this.playfieldWidth + 10;
+    this.blockWidth = this.playfieldInnerWidth / columns;
+    this.blockHeight = this.playfieldInnerHeight / rows;
+    // Render on Right Side
+    this.panelX = this.playfieldWidth + 185;
     this.panelY = 0;
-    this.panelWidth = width / 3;
-    this.panelHeight = height;
+    // Render on Left Side
+    this.panelX1 = 0;
+    this.panelY1 = 0; // Updated position for high score panel
+
+    this.panelWidth = this.width / 4; // adjusted size to fit the screen properly
+    this.panelHeight = this.height;
+
+    this.element.appendChild(this.canvas);
   }
 
   on(event, handler) {
@@ -169,10 +155,11 @@ export default class View {
 
   renderMainScreen(state) {
     this._clearScreen();
+    this._renderHighScore(state);
+    this._renderBorder();
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
     this._renderPanel(state);
-    this._renderBorder();
   }
 
   renderPauseScreen() {
@@ -255,9 +242,25 @@ export default class View {
   }
 
   _renderBorder() {
+    // Define the border
+    const borderX = this.playfieldX - this.playfieldBorderWidth;
+    const borderY = this.playfieldY - this.playfieldBorderWidth;
+    const borderWidth = this.playfieldWidth + this.playfieldBorderWidth * 2 - 8;
+    const borderHeight =
+      this.playfieldHeight + this.playfieldBorderWidth * 2 - 8;
+
     this.context.strokeStyle = "white";
     this.context.lineWidth = this.playfieldBorderWidth;
-    this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
+    this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
+  }
+
+  _renderHighScore() {
+    this.context.textAlign = "start";
+    this.context.textBaseline = "top";
+    this.context.fillStyle = "white";
+    this.context.font = '14px "Press Start 2P"';
+
+    this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
   }
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
@@ -301,7 +304,7 @@ export default class View {
     this.context.fillStyle = "white";
     this.context.font = '13px "Press Start 2P"';
 
-    this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 0);
+    this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 2);
     this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 24);
     this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 48);
     this.context.fillText("Next:", this.panelX, this.panelY + 96);

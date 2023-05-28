@@ -11,7 +11,7 @@ const element = document.querySelector("#root");
 const game = new Game(GRID_ROWS, GRID_COLUMNS);
 const view = new View({
   element,
-  width: 480,
+  width: 720,
   height: 640,
   rows: GRID_ROWS,
   columns: GRID_COLUMNS,
