@@ -114,6 +114,8 @@ export default class View {
     this.context.textAlign = "center";
     this.context.textBaseline = "middle";
     this.context.fillText("WELCOME", this.width / 2, this.height / 2 - 30);
+
+    this.context.fillText("Enter your name ", this.width / 2, this.height / 2 + 30);
   }
 
   renderStartScreen() {
@@ -144,13 +146,13 @@ export default class View {
       this.height / 2 + 30
     );
     this.context.fillText(
-      "* Use C to hold the Piece",
+      "* Use Space to drop down",
       this.width / 2 - 230,
       this.height / 2 + 60
     );
 
     this.context.fillText(
-      "* Use Space to drop down",
+      "* Use C to hold the Piece",
       this.width / 2 - 230,
       this.height / 2 + 90
     );
