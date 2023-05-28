@@ -7,13 +7,13 @@ body {
 #root {
     height: auto;
     padding: 10px;
-    text-align: center
+    text-align: center;
 }
 
 #root h1 {
     display: flex;
     justify-content: center;
-    font-family: 'Press Start 2P', Consolas, monospace;
+    font-family: "Press Start 2P", Consolas, monospace;
     color: white;
     margin-bottom: 10px;
 }
@@ -34,6 +34,8 @@ body {
 #virtual-keys {
     display: none !important;
 }
+
+/* Mobile */
 
 @media screen and (max-width: 1024px) {
     #virtual-keys {
@@ -70,3 +72,5 @@ body {
         background-color: #d9d9d9;
     }
 }
+
+/* End Mobile */
