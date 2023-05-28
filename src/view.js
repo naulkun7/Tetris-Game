@@ -156,7 +156,7 @@ export default class View {
 
   renderMainScreen(state) {
     this._clearScreen();
-    this._renderHighScore(state);
+    // this._renderHighScore(state);
     this._renderBorder();
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
@@ -276,7 +276,7 @@ export default class View {
     this.context.font = '14px "Press Start 2P"';
     // Title
     this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
-    // Content 
+    // Content
     this.context.fillStyle = "white";
     // 1st
     this.context.fillText("1st", this.panelX1, this.panelY1 + 30);

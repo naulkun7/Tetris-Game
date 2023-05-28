@@ -326,30 +326,20 @@ export default class Game {
 
   _update() {
     this._updatePlayfield();
-    if (this._count == 0) {
-      this._updateScore();
-      this._scoreArr[0]._score = this._score;
-    }
-    if (this._count == 1) {
-      this._updateScore();
-      this._scoreArr[1]._score = this._score;
+
+    //Check player number
+    for (let i = 0; i < 3; i++) {
+      if (this._count == i) {
+        this._updateScore();
+        this._scoreArr[i]._score = this._score;
+      }
     }
 
-    if (this._count == 2) {
-      this._updateScore();
-      this._scoreArr[2]._score = this._score;
-    }
-    if (this._count == 0) {
-      this._updateName();
-      this._scoreArr[0]._name = this._name;
-    }
-    if (this._count == 1) {
-      this._updateName1();
-      this._scoreArr[1]._name = this._name1;
-    }
-    if (this._count == 2) {
-      this._updateName2();
-      this._scoreArr[2]._name = this._name2;
+    for (let i = 0; i < 3; i++) {
+      if (this._count == i) {
+        this._updateName();
+        this._scoreArr[i]._name = this._name;
+      }
     }
 
     this._updatePieces();
