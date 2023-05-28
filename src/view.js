@@ -130,11 +130,21 @@ export default class View {
     // );
 
     // Render tutorial text below the "Press ENTER to Start" text
-    this.context.font = '10px "Press Start 2P"';
-    this.context.fillText("TUTORIAL", this.width / 2, this.height / 2 + 40);
+    this.context.font = '13px "Press Start 2P"';
+    this.context.fillText("TUTORIAL", this.width / 2, this.height / 2 - 20);
 
     this.context.fillText(
       "Use the <-|-> to move left and right",
+      this.width / 2,
+      this.height / 2
+    );
+    this.context.fillText(
+      "Use the ↑ to rotate 90° clockwise ",
+      this.width / 2,
+      this.height / 2 + 30
+    );
+    this.context.fillText(
+      "Press C to hold the Piece",
       this.width / 2,
       this.height / 2 + 60
     );
@@ -142,7 +152,7 @@ export default class View {
     this.context.fillText(
       "Use space to drop down",
       this.width / 2,
-      this.height / 2 + 80
+      this.height / 2 + 90
     );
   }
 
@@ -220,254 +230,54 @@ export default class View {
     );
   }
 
-  renderEndScreen({ score4, name, score1, name1, score2, name2 }) {
+  renderEndScreen({ scoreArr }) {
     this._clearScreen();
-
+    scoreArr.sort((a, b) => b._score - a._score);
     this.context.fillStyle = "white";
     this.context.font = '15px "Press Start 2P"';
     this.context.textAlign = "center";
     this.context.textBaseline = "middle";
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 100);
-    if (score4 >= score1 && score1 >= score2) {
-      this.context.fillText(
-        `Name:${name}`,
-        this.width / 2 - 75,
-        this.height / 2 - 50
-      );
-      this.context.fillText(
-        `Score: ${score4}`,
-        this.width / 2 + 125,
-        this.height / 2 - 50
-      );
 
-      this.context.fillText(
-        `Name: ${name1}`,
-        this.width / 2 - 75,
-        this.height / 2
-      );
-      this.context.fillText(
-        `Score: ${score1}`,
-        this.width / 2 + 125,
-        this.height / 2
-      );
+    this.context.fillText(
+      `Name:${scoreArr[0]._name}`,
+      this.width / 2 - 75,
+      this.height / 2 - 50
+    );
+    this.context.fillText(
+      `Score: ${scoreArr[0]._score}`,
+      this.width / 2 + 125,
+      this.height / 2 - 50
+    );
 
-      this.context.fillText(
-        `Name: ${name2}`,
-        this.width / 2 - 75,
-        this.height / 2 + 50
-      );
-      this.context.fillText(
-        `Score: ${score2}`,
-        this.width / 2 + 125,
-        this.height / 2 + 50
-      );
+    this.context.fillText(
+      `Name: ${scoreArr[1]._name}`,
+      this.width / 2 - 75,
+      this.height / 2
+    );
+    this.context.fillText(
+      `Score: ${scoreArr[1]._score}`,
+      this.width / 2 + 125,
+      this.height / 2
+    );
 
-      this.context.fillText(
-        "Press ENTER to Restart",
-        this.width / 2,
-        this.height / 2 + 200
-      );
-    }
-    if (score4 > score2 && score2 > score1) {
-      this.context.fillText(
-        `Name: ${name}`,
-        this.width / 2 - 75,
-        this.height / 2 - 50
-      );
-      this.context.fillText(
-        `Score: ${score4}`,
-        this.width / 2 + 125,
-        this.height / 2 - 50
-      );
+    this.context.fillText(
+      `Name: ${scoreArr[2]._name}`,
+      this.width / 2 - 75,
+      this.height / 2 + 50
+    );
+    this.context.fillText(
+      `Score: ${scoreArr[2]._score}`,
+      this.width / 2 + 125,
+      this.height / 2 + 50
+    );
 
-      this.context.fillText(
-        `Name: ${name2}`,
-        this.width / 2 - 75,
-        this.height / 2
-      );
-      this.context.fillText(
-        `Score: ${score2}`,
-        this.width / 2 + 125,
-        this.height / 2
-      );
+    this.context.fillText(
+      "Press ENTER to Restart",
+      this.width / 2,
+      this.height / 2 + 200
+    );
 
-      this.context.fillText(
-        `Name: ${name1}`,
-        this.width / 2 - 75,
-        this.height / 2 + 50
-      );
-      this.context.fillText(
-        `Score: ${score1}`,
-        this.width / 2 + 125,
-        this.height / 2 + 50
-      );
-
-      this.context.fillText(
-        "Press ENTER to Restart",
-        this.width / 2,
-        this.height / 2 + 200
-      );
-    }
-    if (score1 > score4 && score4 > score2) {
-      this.context.fillText(
-        `Name: ${name1}`,
-        this.width / 2 - 75,
-        this.height / 2 - 50
-      );
-      this.context.fillText(
-        `Score: ${score1}`,
-        this.width / 2 + 125,
-        this.height / 2 - 50
-      );
-
-      this.context.fillText(
-        `Name: ${name}`,
-        this.width / 2 - 75,
-        this.height / 2
-      );
-      this.context.fillText(
-        `Score: ${score4}`,
-        this.width / 2 + 125,
-        this.height / 2
-      );
-
-      this.context.fillText(
-        `Name: ${name2}`,
-        this.width / 2 - 75,
-        this.height / 2 + 50
-      );
-      this.context.fillText(
-        `Score: ${score2}`,
-        this.width / 2 + 125,
-        this.height / 2 + 50
-      );
-
-      this.context.fillText(
-        "Press ENTER to Restart",
-        this.width / 2,
-        this.height / 2 + 200
-      );
-    }
-    if (score1 >= score2 && score2 >= score4) {
-      this.context.fillText(
-        `Name: ${name1}`,
-        this.width / 2 - 75,
-        this.height / 2 - 50
-      );
-      this.context.fillText(
-        `Score: ${score1}`,
-        this.width / 2 + 125,
-        this.height / 2 - 50
-      );
-
-      this.context.fillText(
-        `Name: ${name2}`,
-        this.width / 2 - 75,
-        this.height / 2
-      );
-      this.context.fillText(
-        `Score: ${score2}`,
-        this.width / 2 + 125,
-        this.height / 2
-      );
-
-      this.context.fillText(
-        `Name: ${name}`,
-        this.width / 2 - 75,
-        this.height / 2 + 50
-      );
-      this.context.fillText(
-        `Score: ${score4}`,
-        this.width / 2 + 125,
-        this.height / 2 + 50
-      );
-
-      this.context.fillText(
-        "Press ENTER to Restart",
-        this.width / 2,
-        this.height / 2 + 200
-      );
-    }
-    if (score2 > score4 && score4 >= score1) {
-      this.context.fillText(
-        `Name: ${name2}`,
-        this.width / 2 - 75,
-        this.height / 2 - 50
-      );
-      this.context.fillText(
-        `Score: ${score2}`,
-        this.width / 2 + 125,
-        this.height / 2 - 50
-      );
-
-      this.context.fillText(
-        `Name: ${name}`,
-        this.width / 2 - 75,
-        this.height / 2
-      );
-      this.context.fillText(
-        `Score: ${score4}`,
-        this.width / 2 + 125,
-        this.height / 2
-      );
-
-      this.context.fillText(
-        `Name: ${name1}`,
-        this.width / 2 - 75,
-        this.height / 2 + 50
-      );
-      this.context.fillText(
-        `Score: ${score1}`,
-        this.width / 2 + 125,
-        this.height / 2 + 50
-      );
-
-      this.context.fillText(
-        "Press ENTER to Restart",
-        this.width / 2,
-        this.height / 2 + 200
-      );
-    }
-    if (score2 > score1 && score1 >= score4) {
-      this.context.fillText(
-        `Name: ${name2}`,
-        this.width / 2 - 75,
-        this.height / 2 - 50
-      );
-      this.context.fillText(
-        `Score: ${score2}`,
-        this.width / 2 + 125,
-        this.height / 2 - 50
-      );
-
-      this.context.fillText(
-        `Name: ${name1}`,
-        this.width / 2 - 75,
-        this.height / 2
-      );
-      this.context.fillText(
-        `Score: ${score1}`,
-        this.width / 2 + 125,
-        this.height / 2
-      );
-
-      this.context.fillText(
-        `Name: ${name}`,
-        this.width / 2 - 75,
-        this.height / 2 + 50
-      );
-      this.context.fillText(
-        `Score: ${score4}`,
-        this.width / 2 + 125,
-        this.height / 2 + 50
-      );
-
-      this.context.fillText(
-        "Press ENTER to Restart",
-        this.width / 2,
-        this.height / 2 + 200
-      );
-    }
   }
 
   _clearScreen(color = "black") {
@@ -520,7 +330,7 @@ export default class View {
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
     this.context.fillStyle = "white";
-    this.context.font = '14px "Press Start 2P"';
+    this.context.font = '13px "Press Start 2P"';
 
     this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 0);
     this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 24);

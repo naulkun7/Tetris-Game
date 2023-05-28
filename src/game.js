@@ -14,7 +14,20 @@ export default class Game {
   _activePiece = null;
   _nextPiece = null;
   _ghostPiece = null;
-
+  _scoreArr = [
+    {
+      _name: "Phuc",
+      _score: 0,
+    },
+    {
+      _name: "",
+      _score: 0,
+    },
+    {
+      _name: "",
+      _score: 0,
+    },
+  ];
   difficulty = null;
   _baseLevel = 0;
   _linesPerLevel = 10;
@@ -119,10 +132,13 @@ export default class Game {
       score2: this._score2,
       count: this._count,
       holdPiece: this._holdPiece,
+      scoreArr: this._scoreArr,
     };
   }
 
+
   reset() {
+
     this._count++;
     this._score = 0;
     this._lines = 0;
@@ -130,6 +146,8 @@ export default class Game {
     this._holdPiece = null;
     this._playfield.reset();
     this._updatePieces();
+
+
   }
 
   movePieceLeft() {
@@ -232,7 +250,7 @@ export default class Game {
           (this._playfield.columns - this._activePiece.width) / 2
         );
         this._activePiece.y = -1;
-        
+
       } else {
         let temp = this._activePiece;
         this._activePiece = this._holdPiece;
@@ -242,12 +260,12 @@ export default class Game {
         );
         this._activePiece.y = -1;
       }
-  
+
       // Set the position of the held piece within the "Hold" area
       this._holdPiece.x = 0;
       this._holdPiece.y = 0;
       this._hasSwapped = true;
-      
+
       // Generate new Ghost piece for the new piece generated
       this._ghostPiece = new Piece(
         this._activePiece.type,
@@ -256,32 +274,38 @@ export default class Game {
       );
       this._updateGhostPiece();
     }
-  }  
+  }
 
   _update() {
     this._updatePlayfield();
     if (this._count == 0) {
       this._updateScore();
-      this._score4 = this._score;
+      this._scoreArr[0]._score = this._score;
     }
     if (this._count == 1) {
       this._updateScore();
-      this._score1 = this._score;
+      this._scoreArr[1]._score = this._score;
     }
 
     if (this._count == 2) {
       this._updateScore();
-      this._score2 = this._score;
+      this._scoreArr[2]._score = this._score;
     }
     if (this._count == 0) {
       this._updateName();
+      this._scoreArr[0]._name = this._name;
     }
     if (this._count == 1) {
+
       this._updateName1();
+      this._scoreArr[1]._name = this._name1;
     }
     if (this._count == 2) {
+
       this._updateName2();
+      this._scoreArr[2]._name = this._name2;
     }
+
     this._updatePieces();
     this._updateGhostPiece();
 
@@ -315,12 +339,15 @@ export default class Game {
   }
   _updateName() {
     this._name = document.getElementById("name").value;
+
   }
   _updateName1() {
     this._name1 = document.getElementById("name").value;
+
   }
   _updateName2() {
     this._name2 = document.getElementById("name").value;
+
   }
 
   _updatePieces() {

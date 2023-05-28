@@ -8,6 +8,7 @@ export default class Controller {
 
     this.difficultySelected = false; // Add this
     this.update = this.update.bind(this);
+    this._isWelcomeScreen = true;
 
     view.on("keypress", this._handleKeyPress.bind(this));
     view.on("keydown", this._handleKeyDown.bind(this));
@@ -51,6 +52,7 @@ export default class Controller {
   }
 
   play() {
+    this._isWelcomeScreen = false;
     this._isPlaying = true;
     this._startTimer();
     this._updateView();
@@ -115,6 +117,10 @@ export default class Controller {
     }
   }
   _handleKeyPress(event) {
+    if (this._isWelcomeScreen && event.keyCode !== 13) {
+      return;
+    }
+
     switch (event.keyCode) {
       case 13: // ENTER
         document.getElementById("name").blur();
@@ -153,6 +159,9 @@ export default class Controller {
   }
 
   _handleKeyDown(event) {
+    if (this._isWelcomeScreen && event.keyCode !== 13) {
+      return;
+    }
     if (!this._isPlaying && event.keyCode !== 82) {
       return; // Do nothing if the game is paused and the key is not "R"
     }
@@ -184,7 +193,7 @@ export default class Controller {
         }
         break;
       case 82: // R key
-        if (event.repeat) {
+        if (event.repeat && !this._isPlaying) {
           return; // Do nothing if the R key is held down
         }
         this.restartGame();
@@ -197,6 +206,9 @@ export default class Controller {
   }
 
   _handleKeyUp(event) {
+    if (this._isWelcomeScreen && event.keyCode !== 13) {
+      return;
+    }
     switch (event.keyCode) {
       case 40: // DOWN ARROW
         this._startTimer();
