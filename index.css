@@ -40,10 +40,10 @@ body {
   height: auto;
   position: relative;
 }
+
 .background-1 img {
-  position: absolute;
-  width: 100%;
-  height: auto;
+  /* position: absolute; */
+  position: fixed;
   opacity: 10%;
 }
 
