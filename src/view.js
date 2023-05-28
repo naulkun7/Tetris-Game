@@ -268,13 +268,52 @@ export default class View {
     this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
   }
 
-  _renderHighScore() {
+  _renderHighScore({ scoreArr }) {
+    this.bubbleSort(scoreArr);
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
-    this.context.fillStyle = "white";
+    this.context.fillStyle = "red";
     this.context.font = '14px "Press Start 2P"';
-
+    // Title
     this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
+    // Content 
+    this.context.fillStyle = "white";
+    // 1st
+    this.context.fillText("1st", this.panelX1, this.panelY1 + 30);
+    this.context.fillText(
+      `Name:${scoreArr[0]._name}`,
+      this.panelX1,
+      this.panelY1 + 50
+    );
+    this.context.fillText(
+      `Score: ${scoreArr[0]._score}`,
+      this.panelX1,
+      this.panelY1 + 70
+    );
+    // 2nd
+    this.context.fillText("2nd", this.panelX1, this.panelY1 + 100);
+    this.context.fillText(
+      `Name:${scoreArr[1]._name}`,
+      this.panelX1,
+      this.panelY1 + 120
+    );
+    this.context.fillText(
+      `Score: ${scoreArr[1]._score}`,
+      this.panelX1,
+      this.panelY1 + 140
+    );
+    // 3rd
+    this.context.fillText("3rd", this.panelX1, this.panelY1 + 170);
+    this.context.fillText(
+      `Name:${scoreArr[2]._name}`,
+      this.panelX1,
+      this.panelY1 + 190
+    );
+    this.context.fillText(
+      `Score: ${scoreArr[2]._score}`,
+      this.panelX1,
+      this.panelY1 + 210
+    );
   }
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {

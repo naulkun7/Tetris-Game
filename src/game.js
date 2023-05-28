@@ -16,7 +16,7 @@ export default class Game {
   _ghostPiece = null;
   _scoreArr = [
     {
-      _name: "Phuc",
+      _name: "",
       _score: 0,
     },
     {
