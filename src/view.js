@@ -15,8 +15,9 @@ export default class View {
     this.height = height;
 
     this.canvas = document.createElement("canvas");
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
     this.context = this.canvas.getContext("2d");
-    this.element.appendChild(this.canvas);
 
     this.playfieldBorderWidth = 4;
     this.playfieldX = this.width / 4;
