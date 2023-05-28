@@ -296,9 +296,17 @@ export default class Game {
         this._activePiece.x,
         this._activePiece.y
       );
+
+      // Ensure the ghost piece has the same rotation state as the active piece
+      while(this._ghostPiece.blocks.toString() != this._activePiece.blocks.toString()){
+        this._ghostPiece.rotate();
+      }
+      
       this._updateGhostPiece();
     }
   }
+
+   
 
   _update() {
     this._updatePlayfield();
