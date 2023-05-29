@@ -163,7 +163,7 @@ export default class View {
 
   renderMainScreen(state) {
     this._clearScreen();
-    // this._renderHighScore(state);
+    this._renderHighScore(state);
     this._renderBorder();
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
