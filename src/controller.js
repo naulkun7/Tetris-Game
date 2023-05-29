@@ -65,6 +65,9 @@ export default class Controller {
 
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "block";
+
+    const highscoreBox_3 = document.getElementById("highscore-box-3");
+    highscoreBox_3.style.display = "none";
   }
 
   pause() {

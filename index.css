@@ -74,6 +74,21 @@ body {
   opacity: 50% !important;
 }
 
+#root .highscore-box-3 {
+  position: relative;
+  top: 150px;
+  left: 725px;
+  pointer-events: none;
+  display: none;
+}
+
+#root .highscore-box-3 img {
+  position: absolute;
+  width: 450px;
+  height: 300px;
+  opacity: 35% !important;
+  border-radius: 30%;
+}
 /* Mobile */
 
 @media screen and (max-width: 1024px) {
