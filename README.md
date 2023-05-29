@@ -71,6 +71,8 @@ Main skills: Debugs, Team work
 Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis report, Git and Github Usage
 
 ## Demo <a name="demo"></a>  
+https://tetris-game-zeta.vercel.app/
+
 ### How to play
 ...
 
