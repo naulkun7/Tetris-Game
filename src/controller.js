@@ -116,6 +116,7 @@ export default class Controller {
       this._interval = null;
     }
   }
+
   _handleKeyPress(event) {
     if (this._isWelcomeScreen && event.keyCode !== 13) {
       return;
@@ -126,22 +127,16 @@ export default class Controller {
         document.getElementById("name").blur();
         if (this.difficultySelected) {
           if (this._game.state.isGameOver) {
-            document.getElementById("name").blur();
             this.reset();
           } else if (this._isPlaying) {
-            document.getElementById("name").blur();
             this.pause();
             this.pauseLockEffect();
           } else {
-            document.getElementById("name").blur();
             this.play();
           }
         } else {
           this.renderChoosingDifficulty();
         }
-        break;
-      case 48: // 0 key
-        this._toggleMute();
         break;
     }
   }
@@ -162,8 +157,9 @@ export default class Controller {
     if (this._isWelcomeScreen && event.keyCode !== 13) {
       return;
     }
-    if (!this._isPlaying && event.keyCode !== 82) {
-      return; // Do nothing if the game is paused and the key is not "R"
+    // Check if the game is not playing and the key is not 'R' or 'M'
+    if (!this._isPlaying && event.keyCode !== 82 && event.keyCode !== 77) {
+      return; // Do nothing if the game is paused and the key is not "R" or "M"
     }
 
     switch (event.keyCode) {
@@ -193,10 +189,10 @@ export default class Controller {
         }
         break;
       case 82: // R key
-        if (event.repeat && !this._isPlaying) {
-          return; // Do nothing if the R key is held down
+        if (!this._isPlaying) {
+          // This allows restarting the game when it's paused
+          this.restartGame();
         }
-        this.restartGame();
         break;
       case 67: // 'c' key
         this._game._swapPiece();
@@ -207,6 +203,10 @@ export default class Controller {
           this._game.undo();
           this._updateView();
         }
+        break;
+      case 77: // M key
+        // Removed check to allow muting/unmuting whether game is paused or not
+        this._toggleMute();
         break;
     }
   }

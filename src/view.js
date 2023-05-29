@@ -10,6 +10,7 @@ export default class View {
   };
 
   constructor({ element, width, height, rows, columns }) {
+    //Render game
     this.element = element;
     this.width = width;
     this.height = height;
@@ -42,7 +43,11 @@ export default class View {
     this.panelHeight = this.height;
 
     this.element.appendChild(this.canvas);
+    //End render
 
+    //For game logic
+    this.isGameActive = false;
+    //show name in welcome message
     this.userInput = "";
 
     document.getElementById("name").addEventListener("input", (event) => {
@@ -51,6 +56,7 @@ export default class View {
     });
 
     document.getElementById("name").focus();
+    //end show name
   }
 
   on(event, handler) {
@@ -121,6 +127,7 @@ export default class View {
   }
 
   renderChoosingDifficulty() {
+    this.isGameActive = false;
     this._clearScreen();
 
     this.context.fillStyle = "white";
@@ -144,24 +151,30 @@ export default class View {
     );
 
     // Listen to user input
-    this.on("keydown", (event) => {
-      if (event.key.toLowerCase() === "e") {
-        document.dispatchEvent(
-          new CustomEvent("difficultySelected", { detail: "easy" })
-        );
-      } else if (event.key.toLowerCase() === "n") {
-        document.dispatchEvent(
-          new CustomEvent("difficultySelected", { detail: "normal" })
-        );
-      } else if (event.key.toLowerCase() === "h") {
-        document.dispatchEvent(
-          new CustomEvent("difficultySelected", { detail: "hard" })
-        );
+    const handleKeydown = (event) => {
+      if (!this.isGameActive) {
+        if (event.key.toLowerCase() === "e") {
+          document.dispatchEvent(
+            new CustomEvent("difficultySelected", { detail: "easy" })
+          );
+        } else if (event.key.toLowerCase() === "n") {
+          document.dispatchEvent(
+            new CustomEvent("difficultySelected", { detail: "normal" })
+          );
+        } else if (event.key.toLowerCase() === "h") {
+          document.dispatchEvent(
+            new CustomEvent("difficultySelected", { detail: "hard" })
+          );
+        }
       }
-    });
+    };
+
+    // Add the event listener
+    document.addEventListener("keydown", handleKeydown);
   }
 
   renderMainScreen(state) {
+    this.isGameActive = true;
     this._clearScreen();
     this._renderHighScore(state);
     this._renderBorder();
@@ -189,7 +202,7 @@ export default class View {
       this.height / 2 + 48
     );
     this.context.fillText(
-      "Press 0 to MUTE ALL",
+      "Press M to MUTE ALL",
       this.width / 2,
       this.height / 2 + 96
     );
@@ -275,7 +288,7 @@ export default class View {
     this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
   }
   _renderHighScore({ scoreArr }) {
-    var scoreArr1 = [
+    let scoreArr1 = [
       {
         _name: scoreArr[0]._name,
         _score: scoreArr[0]._score,
@@ -338,7 +351,6 @@ export default class View {
       this.panelY1 + 210
     );
   }
-
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
     for (let y = 0; y < playfield.length; y++) {

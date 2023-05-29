@@ -7,6 +7,7 @@ export default class Game {
     3: 300,
     4: 1200,
   };
+
   _name = document.getElementById("name").value;
   _score = 0;
   _lines = 0;
@@ -15,30 +16,17 @@ export default class Game {
   _nextPiece = null;
   _ghostPiece = null;
   _scoreArr = [
-    {
-      _name: "",
-      _score: 0,
-    },
-    {
-      _name: "",
-      _score: 0,
-    },
-    {
-      _name: "",
-      _score: 0,
-    },
+    { _name: "", _score: 0 },
+    { _name: "", _score: 0 },
+    { _name: "", _score: 0 },
   ];
-  difficulty = null;
   _baseLevel = 0;
   _linesPerLevel = 10;
   _isSoundMuted = false;
-  _gameInProgress = false;
-  _name1 = "";
-  _score1 = 0;
-  _name2 = "";
-  _score2 = 0;
-  _score4 = 0;
   _count = 0;
+  _holdPiece = null;
+  _hasSwapped = false;
+
   constructor(rows, columns) {
     this._playfield = new Playfield(rows, columns);
     this._updatePieces();
@@ -50,25 +38,9 @@ export default class Game {
     this._holdPiece = null;
     this._hasSwapped = false;
     this.setDifficulty = this.setDifficulty.bind(this); // Bind the method to the class instance
-
-    document.addEventListener("keydown", (event) => {
-      if (this._gameInProgress) {
-        // Check if the game is in progress
-        event.preventDefault(); // Prevent the default behavior of the keys
-
-        // Handle other gameplay-related key actions here...
-      } else {
-        // Handle difficulty selection keys
-        if (event.key.toLowerCase() === "e") {
-          this.setDifficulty("easy");
-        } else if (event.key.toLowerCase() === "n") {
-          this.setDifficulty("normal");
-        } else if (event.key.toLowerCase() === "h") {
-          this.setDifficulty("hard");
-        }
-      }
+    document.addEventListener("difficultySelected", (event) => {
+      this.setDifficulty(event.detail);
     });
-
     this.gameLoop();
   }
 
