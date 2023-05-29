@@ -212,10 +212,18 @@ export default class View {
 
   renderMainScreen(state) {
     this._clearScreen();
+<<<<<<< Updated upstream
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
     this._renderPanel(state);
     this._renderBorder();
+=======
+    this._renderBorder();
+    this._renderPlayfield(state);
+    this._renderGrid(); // render the grid after playfield
+    this._renderPanel(state);
+    this._renderHighScore(state);
+>>>>>>> Stashed changes
   }
 
   renderPauseScreen() {
@@ -314,7 +322,240 @@ export default class View {
   _renderBorder() {
     this.context.strokeStyle = "white";
     this.context.lineWidth = this.playfieldBorderWidth;
+<<<<<<< Updated upstream
     this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
+=======
+    this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
+  }
+
+  _renderHighScore({ score4, name, score1, name1, score2, name2 }) {
+
+    this.context.textAlign = "start";
+    this.context.textBaseline = "top";
+    this.context.fillStyle = "red";
+    this.context.font = '14px "Press Start 2P"';
+    // Title
+    this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
+    // Content 
+    this.context.fillStyle = "white";
+    // 1st
+    if (score4 >= score1 && score1 >= score2) {
+      this.context.fillText(
+        `Name: ${name}`,
+        this.panelX1,
+        this.panelY1 + 50
+      );
+      this.context.fillText(
+        `Score: ${score4}`,
+        this.panelX1,
+        this.panelY1 + 70
+      );
+
+      this.context.fillText(
+        `Name: ${name1}`,
+        this.panelX1,
+        this.panelY1 + 120
+      );
+      this.context.fillText(
+        `Score: ${score1}`,
+        this.panelX1,
+        this.panelY1 + 140
+      );
+
+      this.context.fillText(
+        `Name: ${name2}`,
+        this.panelX1,
+        this.panelY1 + 190
+      );
+      this.context.fillText(
+        `Score: ${score2}`,
+        this.panelX1,
+        this.panelY1 + 210
+      );
+
+
+    }
+    if (score4 > score2 && score2 > score1) {
+      this.context.fillText(
+        `Name: ${name}`,
+        this.panelX1,
+        this.panelY1 + 50
+      );
+      this.context.fillText(
+        `Score: ${score4}`,
+        this.panelX1,
+        this.panelY1 + 70
+      );
+
+      this.context.fillText(
+        `Name: ${name2}`,
+        this.panelX1,
+        this.panelY1 + 120
+      );
+      this.context.fillText(
+        `Score: ${score2}`,
+        this.panelX1,
+        this.panelY1 + 140
+      );
+
+      this.context.fillText(
+        `Name: ${name1}`,
+        this.panelX1,
+        this.panelY1 + 190
+      );
+      this.context.fillText(
+        `Score: ${score1}`,
+        this.panelX1,
+        this.panelY1 + 210
+      );
+
+
+    }
+    if (score1 > score4 && score4 > score2) {
+      this.context.fillText(
+        `Name: ${name1}`,
+        this.panelX1,
+        this.panelY1 + 50
+      );
+      this.context.fillText(
+        `Score: ${score1}`,
+        this.panelX1,
+        this.panelY1 + 70
+      );
+
+      this.context.fillText(
+        `Name: ${name}`,
+        this.panelX1,
+        this.panelY1 + 120
+      );
+      this.context.fillText(
+        `Score: ${score4}`,
+        this.panelX1,
+        this.panelY1 + 140
+      );
+
+      this.context.fillText(
+        `Name: ${name2}`,
+        this.panelX1,
+        this.panelY1 + 190
+      );
+      this.context.fillText(
+        `Score: ${score2}`,
+        this.panelX1,
+        this.panelY1 + 210
+      );
+
+
+    }
+    if (score1 >= score2 && score2 >= score4) {
+      this.context.fillText(
+        `Name: ${name1}`,
+        this.panelX1,
+        this.panelY1 + 50
+      );
+      this.context.fillText(
+        `Score: ${score1}`,
+        this.panelX1,
+        this.panelY1 + 70
+      );
+
+      this.context.fillText(
+        `Name: ${name2}`,
+        this.panelX1,
+        this.panelY1 + 120
+      );
+      this.context.fillText(
+        `Score: ${score2}`,
+        this.panelX1,
+        this.panelY1 + 140
+      );
+
+      this.context.fillText(
+        `Name: ${name}`,
+        this.panelX1,
+        this.panelY1 + 190
+      );
+      this.context.fillText(
+        `Score: ${score4}`,
+        this.panelX1,
+        this.panelY1 + 210
+      );
+
+
+    }
+    if (score2 > score4 && score4 >= score1) {
+      this.context.fillText(
+        `Name: ${name2}`,
+        this.panelX1,
+        this.panelY1 + 50
+      );
+      this.context.fillText(
+        `Score: ${score2}`,
+        this.panelX1,
+        this.panelY1 + 70
+      );
+
+      this.context.fillText(
+        `Name: ${name}`,
+        this.panelX1,
+        this.panelY1 + 120
+      );
+      this.context.fillText(
+        `Score: ${score4}`,
+        this.panelX1,
+        this.panelY1 + 140
+      );
+
+      this.context.fillText(
+        `Name: ${name1}`,
+        this.panelX1,
+        this.panelY1 + 190
+      );
+      this.context.fillText(
+        `Score: ${score1}`,
+        this.panelX1,
+        this.panelY1 + 210
+      );
+
+
+    }
+    if (score2 > score1 && score1 >= score4) {
+      this.context.fillText(
+        `Name: ${name2}`,
+        this.panelX1,
+        this.panelY1 + 50
+      );
+      this.context.fillText(
+        `Score: ${score2}`,
+        this.panelX1,
+        this.panelY1 + 70
+      );
+
+      this.context.fillText(
+        `Name: ${name1}`,
+        this.panelX1,
+        this.panelY1 + 120
+      );
+      this.context.fillText(
+        `Score: ${score1}`,
+        this.panelX1,
+        this.panelY1 + 140
+      );
+
+      this.context.fillText(
+        `Name: ${name}`,
+        this.panelX1,
+        this.panelY1 + 190
+      );
+      this.context.fillText(
+        `Score: ${score4}`,
+        this.panelX1,
+        this.panelY1 + 210
+      );
+
+
+    }
+>>>>>>> Stashed changes
   }
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
@@ -352,7 +593,7 @@ export default class View {
     }); // Render the ghost piece in a different style
   }
 
-  _renderPanel({ level, score, lines, nextPiece, holdPiece }) {
+  _renderPanel({ level, score, lines, nextPiece, holdPiece, state }) {
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
     this.context.fillStyle = "white";

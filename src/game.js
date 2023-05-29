@@ -281,19 +281,23 @@ export default class Game {
     if (this._count == 0) {
       this._updateScore();
       this._scoreArr[0]._score = this._score;
+      this._score4 = this._score
     }
     if (this._count == 1) {
       this._updateScore();
       this._scoreArr[1]._score = this._score;
+      this._score1 = this._score
     }
 
     if (this._count == 2) {
       this._updateScore();
       this._scoreArr[2]._score = this._score;
+      this._score2 = this._score
     }
     if (this._count == 0) {
       this._updateName();
       this._scoreArr[0]._name = this._name;
+
     }
     if (this._count == 1) {
 
@@ -308,7 +312,7 @@ export default class Game {
 
     this._updatePieces();
     this._updateGhostPiece();
-    this._updateScore();
+
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
