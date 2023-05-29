@@ -49,7 +49,7 @@ export default class View {
   }
 
   renderWelcomeScreen() {
-    this._clearScreen();
+    this.context.clearRect(0, 0, this.width, this.height);
 
     this.context.fillStyle = "black";
     this.context.fillRect(0, 0, this.width, this.height);
@@ -60,11 +60,9 @@ export default class View {
     this.context.textBaseline = "middle";
     this.context.fillText("WELCOME", this.width / 2, this.height / 2 - 30);
 
-    this.context.fillText(
-      "Enter your name ",
-      this.width / 2,
-      this.height / 2 + 30
-    );
+    this.context.fillText("Enter your name ", this.width / 2, this.height / 2);
+
+    this.context.fillText(this.userInput, this.width / 2, this.height / 2 + 30);
   }
 
   renderStartScreen() {
