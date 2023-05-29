@@ -50,13 +50,14 @@ body {
   left: 550px;
   pointer-events: none;
   display: none;
+  filter: contrast(200%) brightness(150%);
 }
 
 #root .highscore-box img {
   position: absolute;
   width: 190px;
-  height: auto;
-  opacity: 50% !important;
+  height: 300px;
+  opacity: 30% !important;
 }
 
 #root .highscore-box-2 {
@@ -65,13 +66,15 @@ body {
   left: 1112px;
   pointer-events: none;
   display: none;
+  background-color: #EBC931;
+  filter: contrast(200%) brightness(150%);
 }
 
 #root .highscore-box-2 img {
   position: absolute;
   width: 190px;
-  height: auto;
-  opacity: 50% !important;
+  height: 300px;
+  opacity: 30% !important;
 }
 
 #root .highscore-box-3 {
@@ -80,6 +83,7 @@ body {
   left: 725px;
   pointer-events: none;
   display: none;
+  filter: contrast(200%) brightness(150%);
 }
 
 #root .highscore-box-3 img {
