@@ -72,6 +72,9 @@ export default class View {
     this.context.fillText("Enter your name ", this.width / 2, this.height / 2);
 
     this.context.fillText(this.userInput, this.width / 2, this.height / 2 + 30);
+
+    const inputName = document.getElementById("name-background");
+    inputName.style.display = "block";
   }
 
   renderStartScreen() {
@@ -264,6 +267,9 @@ export default class View {
 
     const highscoreBox_3 = document.getElementById("highscore-box-3");
     highscoreBox_3.style.display = "block";
+
+    const inputName = document.getElementById("name-background");
+    inputName.style.display = "block";
   }
 
   _clearScreen(color = "black") {
@@ -380,6 +386,9 @@ export default class View {
       height: this.blockHeight,
       color: "rgba(127,127,127,0.5)",
     }); // Render the ghost piece in a different style
+
+    const inputName = document.getElementById("name-background");
+    inputName.style.display = "none";
   }
 
   _renderPanel({ level, score, lines, nextPiece, holdPiece }) {

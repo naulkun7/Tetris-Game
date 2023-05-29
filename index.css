@@ -4,19 +4,36 @@ body {
   overflow: hidden;
 }
 
+button {
+  padding: 0 0;
+  margin: 0 0;
+  border-width: 0;
+  border-style: none;
+  border-color: rgb(0, 0, 0);
+}
+
 #root {
-  height: auto;
   padding: 10px;
   text-align: center;
   position: relative;
 }
 
-#root img {
+#root .name-background {
+  display: none;
+}
+
+#root .background {
+  pointer-events: none;
+}
+
+#root .background img {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0.2;
-  pointer-events: none;
+  width: 100%;
+  height: auto;
+  right: 0;
+  opacity: 15%;
 }
 
 #root h1 {
@@ -37,60 +54,58 @@ body {
 
 #root canvas {
   display: block;
-  margin: 0 auto;
+  margin: auto;
 }
 
 #virtual-keys {
   display: none !important;
 }
 
+#virtual-keys button img {
+  width: 70%;
+}
+
 #root .highscore-box {
   position: relative;
-  top: 0px;
-  left: 550px;
+  padding-right: 760px;
   pointer-events: none;
   display: none;
-  filter: contrast(200%) brightness(150%);
 }
 
 #root .highscore-box img {
   position: absolute;
   width: 190px;
   height: 300px;
-  opacity: 30% !important;
+  opacity: 35%;
 }
 
 #root .highscore-box-2 {
   position: relative;
-  top: 0px;
-  left: 1112px;
+  padding-left: 365px;
   pointer-events: none;
   display: none;
-  background-color: #EBC931;
-  filter: contrast(200%) brightness(150%);
 }
 
 #root .highscore-box-2 img {
   position: absolute;
   width: 190px;
   height: 300px;
-  opacity: 30% !important;
+  opacity: 35%;
 }
 
 #root .highscore-box-3 {
   position: relative;
   top: 150px;
-  left: 725px;
+  padding-right: 400px;
   pointer-events: none;
   display: none;
-  filter: contrast(200%) brightness(150%);
 }
 
 #root .highscore-box-3 img {
   position: absolute;
   width: 450px;
   height: 300px;
-  opacity: 35% !important;
+  opacity: 35%;
   border-radius: 30%;
 }
 /* Mobile */
@@ -122,12 +137,23 @@ body {
   }
 
   #virtual-keys button:hover {
-    background-color: #eaeaea;
     cursor: pointer;
   }
 
   #virtual-keys button:active {
     background-color: #d9d9d9;
+  }
+
+  #root .highscore-box img {
+    opacity: 0%;
+  }
+
+  #root .highscore-box-2 img {
+    opacity: 0%;
+  }
+
+  #root .background img {
+    display: none;
   }
 }
 
