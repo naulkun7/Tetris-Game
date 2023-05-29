@@ -255,6 +255,12 @@ export default class View {
       this.width / 2,
       this.height / 2 + 200
     );
+
+    const highscoreBox = document.getElementById("highscore-box");
+    highscoreBox.style.display = "none";
+
+    const highscoreBox_2 = document.getElementById("highscore-box-2");
+    highscoreBox_2.style.display = "none";
   }
 
   _clearScreen(color = "black") {

@@ -59,6 +59,12 @@ export default class Controller {
     if (!this._isMuted) {
       this.resumeAudio();
     }
+
+    const highscoreBox = document.getElementById("highscore-box");
+    highscoreBox.style.display = "block";
+
+    const highscoreBox_2 = document.getElementById("highscore-box-2");
+    highscoreBox_2.style.display = "block";
   }
 
   pause() {

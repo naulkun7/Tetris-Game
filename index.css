@@ -1,86 +1,115 @@
 body {
-    margin: 0;
-    background: black;
-    overflow: hidden;
+  margin: 0;
+  background: black;
+  overflow: hidden;
 }
 
 #root {
-    height: auto;
-    padding: 10px;
-    text-align: center;
-    position: relative;
+  height: auto;
+  padding: 10px;
+  text-align: center;
+  position: relative;
 }
 
 #root img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.1;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
+  pointer-events: none;
 }
 
-
 #root h1 {
-    display: flex;
-    justify-content: center;
-    font-family: "Press Start 2P", Consolas, monospace;
-    color: white;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  font-family: "Press Start 2P", Consolas, monospace;
+  color: white;
+  margin-bottom: 10px;
 }
 
 #root h1 span {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 
 #root #name {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 #root canvas {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 #virtual-keys {
-    display: none !important;
+  display: none !important;
+}
+
+#root .highscore-box {
+  position: relative;
+  top: 0px;
+  left: 550px;
+  pointer-events: none;
+  display: none;
+}
+
+#root .highscore-box img {
+  position: absolute;
+  width: 190px;
+  height: auto;
+  opacity: 50% !important;
+}
+
+#root .highscore-box-2 {
+  position: relative;
+  top: 0px;
+  left: 1112px;
+  pointer-events: none;
+  display: none;
+}
+
+#root .highscore-box-2 img {
+  position: absolute;
+  width: 190px;
+  height: auto;
+  opacity: 50% !important;
 }
 
 /* Mobile */
 
 @media screen and (max-width: 1024px) {
-    #virtual-keys {
-        display: block;
-    }
+  #virtual-keys {
+    display: block;
+  }
 
-    #virtual-keys {
-        display: flex !important;
-        position: fixed;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        /* Adjust the width as needed */
-        justify-content: space-around;
-    }
+  #virtual-keys {
+    display: flex !important;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /* Adjust the width as needed */
+    justify-content: space-around;
+  }
 
-    #virtual-keys button {
-        padding: 10px;
-        font-size: 20px;
-        background-color: #f1f1f1;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 48px;
-        text-align: center;
-    }
+  #virtual-keys button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 48px;
+    text-align: center;
+  }
 
-    #virtual-keys button:hover {
-        background-color: #eaeaea;
-        cursor: pointer;
-    }
+  #virtual-keys button:hover {
+    background-color: #eaeaea;
+    cursor: pointer;
+  }
 
-    #virtual-keys button:active {
-        background-color: #d9d9d9;
-    }
+  #virtual-keys button:active {
+    background-color: #d9d9d9;
+  }
 }
 
 /* End Mobile */
