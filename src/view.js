@@ -274,9 +274,23 @@ export default class View {
     this.context.lineWidth = this.playfieldBorderWidth;
     this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
   }
-
   _renderHighScore({ scoreArr }) {
-    this.bubbleSort(scoreArr);
+    var scoreArr1 = [
+      {
+        _name: scoreArr[0]._name,
+        _score: scoreArr[0]._score,
+      },
+      {
+        _name: scoreArr[1]._name,
+        _score: scoreArr[1]._score,
+      },
+      {
+        _name: scoreArr[2]._name,
+        _score: scoreArr[2]._score,
+      },
+    ];
+
+    this.bubbleSort(scoreArr1);
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
     this.context.fillStyle = "red";
@@ -288,40 +302,41 @@ export default class View {
     // 1st
     this.context.fillText("1st", this.panelX1, this.panelY1 + 30);
     this.context.fillText(
-      `Name:${scoreArr[0]._name}`,
+      `Name:${scoreArr1[0]._name}`,
       this.panelX1,
       this.panelY1 + 50
     );
     this.context.fillText(
-      `Score: ${scoreArr[0]._score}`,
+      `Score: ${scoreArr1[0]._score}`,
       this.panelX1,
       this.panelY1 + 70
     );
     // 2nd
     this.context.fillText("2nd", this.panelX1, this.panelY1 + 100);
     this.context.fillText(
-      `Name:${scoreArr[1]._name}`,
+      `Name:${scoreArr1[1]._name}`,
       this.panelX1,
       this.panelY1 + 120
     );
     this.context.fillText(
-      `Score: ${scoreArr[1]._score}`,
+      `Score: ${scoreArr1[1]._score}`,
       this.panelX1,
       this.panelY1 + 140
     );
     // 3rd
     this.context.fillText("3rd", this.panelX1, this.panelY1 + 170);
     this.context.fillText(
-      `Name:${scoreArr[2]._name}`,
+      `Name:${scoreArr1[2]._name}`,
       this.panelX1,
       this.panelY1 + 190
     );
     this.context.fillText(
-      `Score: ${scoreArr[2]._score}`,
+      `Score: ${scoreArr1[2]._score}`,
       this.panelX1,
       this.panelY1 + 210
     );
   }
+
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
     for (let y = 0; y < playfield.length; y++) {
