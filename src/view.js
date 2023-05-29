@@ -293,12 +293,12 @@ export default class View {
     this.bubbleSort(scoreArr1);
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
-    this.context.fillStyle = "red";
+    this.context.fillStyle = "white";
     this.context.font = '14px "Press Start 2P"';
     // Title
     this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
     // Content
-    this.context.fillStyle = "white";
+    this.context.fillStyle = "#EBC931";
     // 1st
     this.context.fillText("1st", this.panelX1, this.panelY1 + 30);
     this.context.fillText(
@@ -312,6 +312,7 @@ export default class View {
       this.panelY1 + 70
     );
     // 2nd
+    this.context.fillStyle = "#c0c0c0";
     this.context.fillText("2nd", this.panelX1, this.panelY1 + 100);
     this.context.fillText(
       `Name:${scoreArr1[1]._name}`,
@@ -324,6 +325,7 @@ export default class View {
       this.panelY1 + 140
     );
     // 3rd
+    this.context.fillStyle = "#cc6600";
     this.context.fillText("3rd", this.panelX1, this.panelY1 + 170);
     this.context.fillText(
       `Name:${scoreArr1[2]._name}`,
