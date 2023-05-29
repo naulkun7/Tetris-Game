@@ -212,18 +212,11 @@ export default class View {
 
   renderMainScreen(state) {
     this._clearScreen();
-<<<<<<< Updated upstream
-    this._renderPlayfield(state);
-    this._renderGrid(); // render the grid after playfield
-    this._renderPanel(state);
-    this._renderBorder();
-=======
     this._renderBorder();
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
     this._renderPanel(state);
     this._renderHighScore(state);
->>>>>>> Stashed changes
   }
 
   renderPauseScreen() {
@@ -322,9 +315,6 @@ export default class View {
   _renderBorder() {
     this.context.strokeStyle = "white";
     this.context.lineWidth = this.playfieldBorderWidth;
-<<<<<<< Updated upstream
-    this.context.strokeRect(0, 0, this.playfieldWidth, this.playfieldHeight);
-=======
     this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
   }
 
@@ -555,7 +545,6 @@ export default class View {
 
 
     }
->>>>>>> Stashed changes
   }
 
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
