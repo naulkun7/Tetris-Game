@@ -42,6 +42,15 @@ export default class View {
     this.panelHeight = this.height;
 
     this.element.appendChild(this.canvas);
+
+    this.userInput = "";
+
+    document.getElementById("name").addEventListener("input", (event) => {
+      this.userInput = event.target.value;
+      this.renderWelcomeScreen();
+    });
+
+    document.getElementById("name").focus();
   }
 
   on(event, handler) {
