@@ -1,86 +1,168 @@
 body {
-    margin: 0;
-    background: black;
-    overflow: hidden;
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+
+button {
+  padding: 0 0;
+  margin: 0 0;
+  border-width: 0;
+  border-style: none;
+  border-color: rgb(0, 0, 0);
 }
 
 #root {
-    height: auto;
-    padding: 10px;
-    text-align: center;
-    position: relative;
+  padding: 10px;
+  text-align: center;
+  position: relative;
 }
 
-#root img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.1;
-    pointer-events: none;
+#root .name-background {
+  display: none;
 }
 
+/* Background */
+#root .background {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root .background img {
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 15%;
+}
+
+#root .background-2 img {
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 20%;
+}
+
+#root .background-3 {
+  display: none;
+}
+
+#root .background-3 img {
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 30%;
+}
+
+/* End Background */
 
 #root h1 {
-    display: flex;
-    justify-content: center;
-    font-family: "Press Start 2P", Consolas, monospace;
-    color: white;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  font-family: "Press Start 2P", Consolas, monospace;
+  color: white;
+  margin-bottom: 10px;
 }
 
 #root h1 span {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 
 #root #name {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 #root canvas {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: auto;
 }
 
 #virtual-keys {
-    display: none !important;
+  display: none !important;
 }
+
+#virtual-keys button img {
+  width: 70%;
+}
+
+/* HightScore-box */
+#root .highscore-box {
+  position: relative;
+  pointer-events: none;
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+#root .highscore-box-1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-210%);
+  position: absolute;
+  width: 175px;
+  height: 250px;
+  border: 2px solid #ddd;
+}
+
+#root .highscore-box-2 {
+  top: 0;
+  right: 50%;
+  transform: translateX(208%);
+  position: absolute;
+  width: 170px;
+  height: 295px;
+  border: 2px solid #ddd;
+}
+
+/* End HightScore-box */
 
 /* Mobile */
 
-@media screen and (max-width: 1024px) {
-    #virtual-keys {
-        display: block;
-    }
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+  #virtual-keys {
+    display: block;
+  }
 
-    #virtual-keys {
-        display: flex !important;
-        position: fixed;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        /* Adjust the width as needed */
-        justify-content: space-around;
-    }
+  #virtual-keys {
+    display: flex !important;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /* Adjust the width as needed */
+    justify-content: space-around;
+  }
 
-    #virtual-keys button {
-        padding: 10px;
-        font-size: 20px;
-        background-color: #f1f1f1;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 48px;
-        text-align: center;
-    }
+  #virtual-keys button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 48px;
+    text-align: center;
+  }
 
-    #virtual-keys button:hover {
-        background-color: #eaeaea;
-        cursor: pointer;
-    }
+  #virtual-keys button:hover {
+    cursor: pointer;
+  }
 
-    #virtual-keys button:active {
-        background-color: #d9d9d9;
-    }
+  #virtual-keys button:active {
+    background-color: #d9d9d9;
+  }
 }
 
 /* End Mobile */

@@ -78,6 +78,12 @@ export default class View {
     this.context.fillText("Enter your name ", this.width / 2, this.height / 2);
 
     this.context.fillText(this.userInput, this.width / 2, this.height / 2 + 30);
+
+    const inputName = document.getElementById("name-background");
+    inputName.style.display = "block";
+
+    const background = document.getElementById("background");
+    background.style.display = "block";
   }
 
   renderStartScreen() {
@@ -124,6 +130,9 @@ export default class View {
       this.width / 2 - 230,
       this.height / 2 + 150
     );
+
+    const background = document.getElementById("background");
+    background.style.display = "none";
   }
 
   renderChoosingDifficulty() {
@@ -206,6 +215,15 @@ export default class View {
       this.width / 2,
       this.height / 2 + 96
     );
+
+    const background = document.getElementById("background");
+    background.style.display = "none";
+
+    const highscore = document.getElementById("highscore-box");
+    highscore.style.opacity = "0.2";
+
+    const highscore_2 = document.getElementById("highscore-box-2");
+    highscore_2.style.opacity = "0.2";
   }
   bubbleSort(arr) {
     let len = arr.length;
@@ -222,6 +240,24 @@ export default class View {
   }
 
   renderEndScreen({ scoreArr }) {
+    const highscoreBox = document.getElementById("highscore-box");
+    highscoreBox.style.display = "none";
+
+    const highscoreBox_2 = document.getElementById("highscore-box-2");
+    highscoreBox_2.style.display = "none";
+
+    const inputName = document.getElementById("name-background");
+    inputName.style.display = "block";
+
+    const background_3 = document.getElementById("background-3");
+    background_3.style.display = "block";
+
+    const background = document.getElementById("background");
+    background.style.display = "block";
+
+    const background_2 = document.getElementById("background-2");
+    background_2.style.display = "none";
+
     this._clearScreen();
     this.bubbleSort(scoreArr);
     this.context.fillStyle = "white";
@@ -231,35 +267,35 @@ export default class View {
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 100);
 
     this.context.fillText(
-      `Name:${scoreArr[0]._name}`,
-      this.width / 2 - 75,
+      `Name: ${scoreArr[0]._name}`,
+      this.width / 2 - 110,
       this.height / 2 - 50
     );
     this.context.fillText(
       `Score: ${scoreArr[0]._score}`,
-      this.width / 2 + 125,
+      this.width / 2 + 110,
       this.height / 2 - 50
     );
 
     this.context.fillText(
       `Name: ${scoreArr[1]._name}`,
-      this.width / 2 - 75,
+      this.width / 2 - 110,
       this.height / 2
     );
     this.context.fillText(
       `Score: ${scoreArr[1]._score}`,
-      this.width / 2 + 125,
+      this.width / 2 + 110,
       this.height / 2
     );
 
     this.context.fillText(
       `Name: ${scoreArr[2]._name}`,
-      this.width / 2 - 75,
+      this.width / 2 - 110,
       this.height / 2 + 50
     );
     this.context.fillText(
       `Score: ${scoreArr[2]._score}`,
-      this.width / 2 + 125,
+      this.width / 2 + 110,
       this.height / 2 + 50
     );
 
@@ -309,20 +345,20 @@ export default class View {
     this.context.fillStyle = "white";
     this.context.font = '14px "Press Start 2P"';
     // Title
-    this.context.fillText("High Scores", this.panelX1, this.panelY1 + 2);
+    this.context.fillText("High Scores", this.panelX1, this.panelY1 + 10);
     // Content
     this.context.fillStyle = "#EBC931";
     // 1st
-    this.context.fillText("1st", this.panelX1, this.panelY1 + 30);
+    this.context.fillText("1st", this.panelX1, this.panelY1 + 40);
     this.context.fillText(
       `Name:${scoreArr1[0]._name}`,
       this.panelX1,
-      this.panelY1 + 50
+      this.panelY1 + 60
     );
     this.context.fillText(
       `Score: ${scoreArr1[0]._score}`,
       this.panelX1,
-      this.panelY1 + 70
+      this.panelY1 + 80
     );
     // 2nd
     this.context.fillStyle = "#c0c0c0";
@@ -330,12 +366,12 @@ export default class View {
     this.context.fillText(
       `Name:${scoreArr1[1]._name}`,
       this.panelX1,
-      this.panelY1 + 120
+      this.panelY1 + 130
     );
     this.context.fillText(
       `Score: ${scoreArr1[1]._score}`,
       this.panelX1,
-      this.panelY1 + 140
+      this.panelY1 + 150
     );
     // 3rd
     this.context.fillStyle = "#cc6600";
@@ -343,12 +379,12 @@ export default class View {
     this.context.fillText(
       `Name:${scoreArr1[2]._name}`,
       this.panelX1,
-      this.panelY1 + 190
+      this.panelY1 + 200
     );
     this.context.fillText(
       `Score: ${scoreArr1[2]._score}`,
       this.panelX1,
-      this.panelY1 + 210
+      this.panelY1 + 220
     );
   }
 
@@ -385,6 +421,15 @@ export default class View {
       height: this.blockHeight,
       color: "rgba(127,127,127,0.5)",
     }); // Render the ghost piece in a different style
+
+    const inputName = document.getElementById("name-background");
+    inputName.style.display = "none";
+
+    const highscore = document.getElementById("highscore-box");
+    highscore.style.opacity = "1";
+
+    const highscore_2 = document.getElementById("highscore-box-2");
+    highscore_2.style.opacity = "1";
   }
 
   _renderPanel({ level, score, lines, nextPiece, holdPiece }) {
@@ -393,15 +438,27 @@ export default class View {
     this.context.fillStyle = "white";
     this.context.font = '13px "Press Start 2P"';
 
-    this.context.fillText(`Level: ${level}`, this.panelX, this.panelY + 2);
-    this.context.fillText(`Score: ${score}`, this.panelX, this.panelY + 24);
-    this.context.fillText(`Lines: ${lines}`, this.panelX, this.panelY + 48);
-    this.context.fillText("Next:", this.panelX, this.panelY + 96);
-    this.context.fillText("Hold:", this.panelX, this.panelY + 192);
+    this.context.fillText(
+      `Level: ${level}`,
+      this.panelX + 15,
+      this.panelY + 10
+    );
+    this.context.fillText(
+      `Score: ${score}`,
+      this.panelX + 15,
+      this.panelY + 34
+    );
+    this.context.fillText(
+      `Lines: ${lines}`,
+      this.panelX + 15,
+      this.panelY + 58
+    );
+    this.context.fillText("Next:", this.panelX + 15, this.panelY + 106);
+    this.context.fillText("Hold:", this.panelX + 15, this.panelY + 202);
 
     if (nextPiece) {
       this._renderPiece(nextPiece, {
-        x: this.panelX,
+        x: this.panelX + 15,
         y: this.panelY + 120,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
@@ -411,7 +468,7 @@ export default class View {
 
     if (holdPiece) {
       this._renderPiece(holdPiece, {
-        x: this.panelX,
+        x: this.panelX + 15,
         y: this.panelY + 220,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
