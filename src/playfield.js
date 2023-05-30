@@ -10,7 +10,7 @@ export default class Playfield extends Array {
     }
   }
 
-  // Create a clone to save the playField to render when restore the state
+  // Create a clone to save the playField to render when restoring the state
   clone() {
     const clone = new Playfield(this.rows, this.columns);
 
@@ -45,6 +45,7 @@ export default class Playfield extends Array {
     }
   }
 
+  // Clear Lines
   clearLines() {
     const linesToRemove = this._getLinesToRemove();
     return this._removeLines(linesToRemove);
