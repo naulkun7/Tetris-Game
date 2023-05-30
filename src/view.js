@@ -362,7 +362,7 @@ export default class View {
     );
     // 2nd
     this.context.fillStyle = "#c0c0c0";
-    this.context.fillText("2nd", this.panelX1, this.panelY1 + 100);
+    this.context.fillText("2nd", this.panelX1, this.panelY1 + 110);
     this.context.fillText(
       `Name:${scoreArr1[1]._name}`,
       this.panelX1,
@@ -375,7 +375,7 @@ export default class View {
     );
     // 3rd
     this.context.fillStyle = "#cc6600";
-    this.context.fillText("3rd", this.panelX1, this.panelY1 + 170);
+    this.context.fillText("3rd", this.panelX1, this.panelY1 + 180);
     this.context.fillText(
       `Name:${scoreArr1[2]._name}`,
       this.panelX1,
