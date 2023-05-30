@@ -231,7 +231,7 @@ export default class View {
     this.context.fillText("GAME OVER", this.width / 2, this.height / 2 - 100);
 
     this.context.fillText(
-      `Name:${scoreArr[0]._name}`,
+      `Name: ${scoreArr[0]._name}`,
       this.width / 2 - 75,
       this.height / 2 - 50
     );
