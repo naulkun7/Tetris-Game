@@ -185,11 +185,11 @@ export default class View {
   renderMainScreen(state) {
     this.isGameActive = true;
     this._clearScreen();
-    this._renderHighScore(state);
     this._renderBorder();
     this._renderPlayfield(state);
     this._renderGrid(); // render the grid after playfield
     this._renderPanel(state);
+    this._renderHighScore(state);
   }
 
   renderPauseScreen() {
@@ -224,6 +224,19 @@ export default class View {
 
     const highscore_2 = document.getElementById("highscore-box-2");
     highscore_2.style.opacity = "0.2";
+  }
+  bubbleSort(arr) {
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+      for (let j = 0; j < len - i - 1; j++) {
+        if (arr[j]._score < arr[j + 1]._score) {
+          let tmp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = tmp;
+        }
+      }
+    }
+    return arr;
   }
   bubbleSort(arr) {
     let len = arr.length;
@@ -440,7 +453,7 @@ export default class View {
     highscore_2.style.opacity = "1";
   }
 
-  _renderPanel({ level, score, lines, nextPiece, holdPiece }) {
+  _renderPanel({ level, score, lines, nextPiece, holdPiece, state }) {
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
     this.context.fillStyle = "white";
