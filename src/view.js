@@ -411,9 +411,6 @@ export default class View {
     const inputName = document.getElementById("name-background");
     inputName.style.display = "none";
 
-    // const background = document.getElementById("background");
-    // background.style.display = "none";
-
     const highscore = document.getElementById("highscore-box");
     highscore.style.opacity = "1";
 
