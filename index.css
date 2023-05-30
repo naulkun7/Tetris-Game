@@ -63,7 +63,7 @@ button {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  opacity: 30%;
+  opacity: 20%;
 }
 
 /* End Background */
@@ -126,6 +126,17 @@ button {
   border: 2px solid #ddd;
 }
 
+#root .highscore-box-3 {
+  margin-top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  width: 500px;
+  height: 295px;
+  box-shadow: 100px 100px 500px 100px #56144D;
+  border-radius: 20px;
+  opacity: 100%;
+}
 /* End HightScore-box */
 
 /* Mobile */

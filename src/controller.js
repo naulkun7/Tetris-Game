@@ -85,20 +85,31 @@ export default class Controller {
       this.resumeAudio();
     }
 
+    //<----- Render background and highscore-box ----->//
+    // This allows when in playing game then background is hidden
     const background = document.getElementById("background");
     background.style.display = "none";
 
+    // This allows when in playing game then background is shown
     const background_2 = document.getElementById("background-2");
     background_2.style.display = "block";
 
+    // This allows when in playing game then background is hidden
     const background_3 = document.getElementById("background-3");
     background_3.style.display = "none";
 
+    // This allows when in playing game then background is shown
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "block";
 
+    // This allows when in playing game then background is shown
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "block";
+    
+    // This allows when in playing game then background is hidden
+    const highscoreBox_3 = document.getElementById("highscore-box-3");
+    highscoreBox_3.style.display = "none";
+    //<----- End Render background and highscore-box ----->//
   }
 
   pause() {
@@ -124,11 +135,13 @@ export default class Controller {
     this._isPlaying = false; // The game should not be playing at the start screen
     this._stopTimer(); // Stop the game timer, if it's running
 
+    //<----- Render highscore-box ----->//
+    // This allows when in rendering restart game then highscore is hidden
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "none";
-
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "none";
+    //<----- End Render highscore-box ----->//
   }
 
   _updateView() {
@@ -285,10 +298,12 @@ export default class Controller {
       this._view.renderStartScreen(); // Re-render the start screen
     });
 
+    //<----- Render highscore-box ----->//
+    // This allows when in render choosing difficulty then highscore-box is hidden
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "none";
-
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "none";
+    //<----- End Render highscore-box ----->//
   }
 }
