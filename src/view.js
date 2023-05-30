@@ -337,6 +337,14 @@ export default class View {
         _name: scoreArr[2]._name,
         _score: scoreArr[2]._score,
       },
+      {
+        _name: scoreArr[3]._name,
+        _score: scoreArr[3]._score,
+      },
+      {
+        _name: scoreArr[4]._name,
+        _score: scoreArr[4]._score,
+      },
     ];
 
     this.bubbleSort(scoreArr1);

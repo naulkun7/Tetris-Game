@@ -19,6 +19,8 @@ export default class Game {
     { _name: "", _score: 0 },
     { _name: "", _score: 0 },
     { _name: "", _score: 0 },
+    { _name: "", _score: 0 },
+    { _name: "", _score: 0 },
   ];
   _baseLevel = 0;
   _linesPerLevel = 10;
@@ -131,7 +133,6 @@ export default class Game {
 
   get state() {
     return {
-      score4: this._score4,
       name: this._name,
       score: this._score,
       level: this.level,
@@ -141,10 +142,6 @@ export default class Game {
       nextPiece: this._nextPiece,
       isGameOver: this._topOut,
       ghostPiece: this._ghostPiece,
-      name1: this._name1,
-      score1: this._score1,
-      name2: this._name2,
-      score2: this._score2,
       count: this._count,
       holdPiece: this._holdPiece,
       scoreArr: this._scoreArr,
@@ -300,14 +297,14 @@ export default class Game {
     this._updatePlayfield();
 
     //Check player number
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       if (this._count == i) {
         this._updateScore();
         this._scoreArr[i]._score = this._score;
       }
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       if (this._count == i) {
         this._updateName();
         this._scoreArr[i]._name = this._name;
@@ -349,12 +346,8 @@ export default class Game {
   _updateName() {
     this._name = document.getElementById("name").value;
   }
-  _updateName1() {
-    this._name1 = document.getElementById("name").value;
-  }
-  _updateName2() {
-    this._name2 = document.getElementById("name").value;
-  }
+
+
 
   _updatePieces() {
     this._activePiece = this._nextPiece || new Piece();
