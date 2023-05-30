@@ -1,13 +1,10 @@
 export default class VirtualKeyboard {
   constructor() {
     this.keyCodes = {
-      ArrowLeft: 37,
-      ArrowUp: 38,
-      ArrowRight: 39,
-      ArrowDown: 40,
       Enter: 13,
-      Space: 32,
-      E: 69,
+      C: 67,
+      U: 85,
+      M: 77,
     };
 
     this.attachEventListeners();
@@ -15,28 +12,17 @@ export default class VirtualKeyboard {
 
   attachEventListeners() {
     document
-      .getElementById("left-button")
-      .addEventListener("click", (e) => this.handleButtonClick(e, "ArrowLeft"));
-    document
-      .getElementById("right-button")
-      .addEventListener("click", (e) =>
-        this.handleButtonClick(e, "ArrowRight")
-      );
-    document
-      .getElementById("up-button")
-      .addEventListener("click", (e) => this.handleButtonClick(e, "ArrowUp"));
-    document
-      .getElementById("down-button")
-      .addEventListener("click", (e) => this.handleButtonClick(e, "ArrowDown"));
-    document
       .getElementById("enter-button")
       .addEventListener("click", (e) => this.handleButtonClick(e, "Enter"));
     document
-      .getElementById("E-button")
-      .addEventListener("click", (e) => this.handleButtonClick(e, "E"));
+      .getElementById("C-button")
+      .addEventListener("click", (e) => this.handleButtonClick(e, "C"));
     document
-      .getElementById("space-button")
-      .addEventListener("click", (e) => this.handleButtonClick(e, "Space"));
+      .getElementById("U-button")
+      .addEventListener("click", (e) => this.handleButtonClick(e, "U"));
+    document
+      .getElementById("M-button")
+      .addEventListener("click", (e) => this.handleButtonClick(e, "M"));
   }
 
   handleButtonClick(e, key) {
