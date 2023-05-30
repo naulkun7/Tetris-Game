@@ -313,6 +313,7 @@ export default class Game {
 
     this._updatePieces();
     this._updateGhostPiece();
+    this._updateScore();
 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
@@ -345,6 +346,8 @@ export default class Game {
   _updateName() {
     this._name = document.getElementById("name").value;
   }
+
+
 
   _updatePieces() {
     this._activePiece = this._nextPiece || new Piece();
