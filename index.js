@@ -22,5 +22,8 @@ const controller = new Controller(game, view);
 const motion = new Motion(game, view);
 const virtualKeyboard = new VirtualKeyboard();
 
+//Adjust all audio volumes
 let audio = document.getElementById("soundtrack");
 audio.volume = 0.1;
+let rotateSound = document.createElement("rotate");
+rotateSound.volume = 0.3;
