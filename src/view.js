@@ -442,29 +442,26 @@ export default class View {
     this.context.strokeStyle = "black";
     this.context.lineWidth = lineWidth;
 
-    // Add box-shadow properties
-    this.context.shadowColor = "rgba(0, 0, 0, 0.16)";
-    this.context.shadowBlur = 6;
-    this.context.shadowOffsetX = 0;
-    this.context.shadowOffsetY = 3;
-
+    // Draw the main block
     this.context.fillRect(x, y, width, height);
-    this.context.strokeRect(x, y, width, height);
 
-    // Add additional box-shadow properties for a second shadow
-    this.context.shadowColor = "rgba(0, 0, 0, 0.23)";
-    this.context.shadowBlur = 6;
-    this.context.shadowOffsetX = 0;
-    this.context.shadowOffsetY = 3;
-
-    this.context.fillRect(x, y, width, height);
-    this.context.strokeRect(x, y, width, height);
-
-    // Reset box-shadow properties
-    this.context.shadowColor = "transparent";
+    // Apply an "outer" shadow by drawing a 1px outline
+    this.context.shadowColor = "rgba(0, 0, 0, 0.9)";
     this.context.shadowBlur = 0;
     this.context.shadowOffsetX = 0;
     this.context.shadowOffsetY = 0;
+    this.context.strokeRect(x, y, width, height);
+
+    // Apply an "inner" shadow effect
+    // Draw four thin, clear rectangles around the inside of the main block to simulate an "inset" shadow
+    this.context.shadowColor = "rgba(255, 255, 255, 0.2)";
+    this.context.fillRect(x + 1, y, width - 2, 1); // top
+    this.context.fillRect(x + 1, y + height - 1, width - 2, 1); // bottom
+    this.context.fillRect(x, y + 1, 1, height - 2); // left
+    this.context.fillRect(x + width - 1, y + 1, 1, height - 2); // right
+
+    // Reset shadow properties
+    this.context.shadowColor = "transparent";
   }
 
   _renderGrid() {
