@@ -25,27 +25,28 @@ button {
 /* Background */
 #root .background {
   pointer-events: none;
-  width: 100%;
-  height: auto;
-}
-
-#root .background img {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#root .background img {
+  top: 0;
+  left: 0;
+  object-fit: cover;
   width: 100%;
-  height: auto;
-  right: 0;
+  height: 100%;
   opacity: 15%;
 }
 
 #root .background-2 img {
-  position: absolute;
   top: 0;
   left: 0;
+  object-fit: cover;
   width: 100%;
-  height: auto;
-  right: 0;
+  height: 100%;
   opacity: 20%;
 }
 
@@ -54,13 +55,12 @@ button {
 }
 
 #root .background-3 img{
-  position: absolute;
   top: 0;
   left: 0;
+  object-fit: cover;
   width: 100%;
-  height: auto;
-  right: 0;
-  opacity: 40%;
+  height: 100%;
+  opacity: 30%;
 }
 /* End Background */
 
@@ -98,42 +98,27 @@ button {
   position: relative;
   pointer-events: none;
   display: none;
+  width: 100%;
+  height: auto;
 }
 
-#root .highscore-box .img {
+#root .highscore-box-1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-212%);
   position: absolute;
   width: 170px;
   height: 250px;
-  margin-left: 560px;
   border: 2px solid #ddd;
 }
 
-#root .highscore-box-2 .img {
-  right: 0;
+#root .highscore-box-2 {
+  top: 0;
+  right: 50%;
+  transform: translateX(208%);
   position: absolute;
   width: 170px;
   height: 295px;
-  margin-right: 570px;
-  border: 2px solid #ddd;
-}
-
-#root .highscore-box-3 {
-  background-size: cover;
-  color: white;
-  font-size: 24px;
-  padding: 10px;
-  display: inline-block;
-  background-clip: text;
-  -webkit-background-clip: text; /* For Safari/WebKit browsers */
-  color: transparent;
-}
-
-#root .highscore-box-3 img {
-  right: 0;
-  position: absolute;
-  width: 170px;
-  height: 295px;
-  margin-right: 570px;
   border: 2px solid #ddd;
 }
 /* End HightScore-box */
