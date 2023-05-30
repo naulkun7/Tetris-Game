@@ -39,6 +39,13 @@ Click here and enjoy the game --> [Tetris Game](tetris-game-zeta.vercel.app)
 | 4     | Member |     Ngọc Nhân     |          25%      |  
 
 
+| Name | Tasks |
+|:------|:-------------------------------------------------------------|
+| Hoàng Luân     | Overall Framework, Ghostpiece func, Mobile, Set Difficulty func, Miscellaneous   |   
+| Quang Trí     | Readme, Holdpiece func, Sound Effect, Miscellaneous     |    
+| Thiên Phúc     | Score Board, Class Diagram, Algorithm (Sort), Miscellaneous  |     
+| Ngọc Nhân     | Unđo func, Class Diagram, Miscellaneous |      
+| All members    | Report, PowerPoint, Front-end |
 ### Environment :computer:
 Language:  
 
@@ -59,14 +66,14 @@ Platform:
 - Play field
 
 **Extra feature:**  
-- Undo piece
+- Undo state
 - Hold piece
-- Future piece
+- Next piece
 - Ghost piece
 - Score board
-- Game Speed, Level
+- Game Speed, Level, Set Difficulty
 - UI (Responsive)
-- Mobile Support
+- Mobile Support (Ipad only)
 
 **Future feature:**
 - User Score Database
@@ -82,7 +89,7 @@ Platform:
 - And some other smaller issues...  
 
 ### What we have learned :pencil: 
-Soft skills: works in GitHub, Google docs, Canva,...  
+Soft skills: works in GitHub, Google docs, Google slides,...  
 Main skills: Debugs, Team work  
 Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis report, Git and Github Usage
 
@@ -100,24 +107,44 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 #### Play Screen 
 ![image](./screenshot/game/playing.png)
 ![image](./screenshot/game/playing2.png)
+
 #### Pause Screen 
-![image](...)
+![image](./screenshot/game/pause.png)
 
 #### End Screen 
 ![image](./screenshot/game/gameover.png)
 
 #### Mobile 
-![image](https://scontent.fvca1-2.fna.fbcdn.net/v/t1.15752-9/350373858_279781317804423_7244818505805099240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=AryMEDPsMzMAX-nzcib&_nc_ht=scontent.fvca1-2.fna&oh=03_AdRhq3WYMZHFBfUbZITpu1ZDA3A_0vhMxDN_27vRZ319_w&oe=649D9B59)
+![image](./screenshot/game/mobile.jpg)
 
 ### How to play
-...
+## Desktop 🖥️
+* Use the 🡸|🡺 to move left and right
+* Use the ↑ to rotate 90° clockwise
+* Use Space to drop down
+* Use C to hold the Piece
+* Use U to undo
+* Use R to restart
+
+## Mobile 📱
+* Swipe Left and Right to move
+* Swipe up or tap to rotate
+* Swipe down to drop piece
+* Press "||" button to interact
+* Press "Gift" button to hold
+* Press "Undo" button to undo
+* Press "Mute" to toggle mute
 
 ## PowerPoint and Report <a name="powerPoint"></a> 📖
-   Support: Canva
-   (Sceen Shot)
+   Support: Google slides
+   (Screen Shot)
    
    Direct: [src)
    
+   Support: Google docs
+   (Screen Shot)
+   
+   Direct: 
 ## Installation <a name="installation"></a> 
 1. Step 1: Access to https://github.com/naulkun7/Tetris-Game
 - Download and unzip the file
