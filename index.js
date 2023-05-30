@@ -2,6 +2,7 @@ import Game from "./src/game.js";
 import View from "./src/view.js";
 import Controller from "./src/controller.js";
 import VirtualKeyboard from "./src/virtualkeyboard.js";
+import Motion from "./src/motion.js";
 
 const GRID_ROWS = 20;
 const GRID_COLUMNS = 10;
@@ -18,6 +19,7 @@ const view = new View({
 });
 
 const controller = new Controller(game, view);
+const motion = new Motion(game, view);
 const virtualKeyboard = new VirtualKeyboard();
 
 let audio = document.getElementById("soundtrack");
