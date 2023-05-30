@@ -125,7 +125,7 @@ button {
 
 /* Mobile */
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 700px) and (max-width: 1024px) {
   #virtual-keys {
     display: block;
   }
@@ -157,14 +157,6 @@ button {
 
   #virtual-keys button:active {
     background-color: #d9d9d9;
-  }
-
-  #root .highscore-box img {
-    opacity: 0%;
-  }
-
-  #root .highscore-box-2 img {
-    opacity: 0%;
   }
 }
 /* End Mobile */
