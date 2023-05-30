@@ -46,6 +46,31 @@ export default class Controller {
     lockSound.pause();
   }
 
+  playRotateEffect() {
+    if (!this._isMuted) {
+      let rotateSound = document.getElementById("rotate");
+      rotateSound.play();
+    }
+  }
+
+  pauseRotateEffect() {
+    let rotateSound = document.getElementById("rotate");
+    rotateSound.pause();
+  }
+
+  // Sound Game Over 
+  playGameOverEffect() {
+    if (!this._isMuted) {
+      const gameoverSound = document.getElementById("gameover");
+      gameoverSound.play();
+  
+      setTimeout(() => {
+        gameoverSound.pause();
+      }, 2000); // Pause after 2 seconds (2000 milliseconds)
+    }
+  }
+  
+
   resumeAudio() {
     let audio = document.getElementById("soundtrack");
     audio.play();
@@ -69,6 +94,7 @@ export default class Controller {
       this.pauseAudio();
       this.pause_Effect();
       this.pauseLockEffect();
+      this.pauseRotateEffect();
     }
   }
 
@@ -90,6 +116,7 @@ export default class Controller {
     if (state.isGameOver) {
       this._view.renderEndScreen(state);
       this.pauseAudio();
+      this.playGameOverEffect();
     } else if (!this._isPlaying) {
       this._view.renderPauseScreen(state);
     } else {
@@ -131,6 +158,7 @@ export default class Controller {
           } else if (this._isPlaying) {
             this.pause();
             this.pauseLockEffect();
+            this.pauseRotateEffect();
           } else {
             this.play();
           }
@@ -148,6 +176,7 @@ export default class Controller {
     if (this._isMuted) {
       this.pauseAudio();
       this.pauseLockEffect(); // Pause the lock effect sound
+      this.pauseRotateEffect(); //Pause the rotate effect sound
     } else {
       this.resumeAudio();
     }
@@ -169,6 +198,7 @@ export default class Controller {
         break;
       case 38: // UP ARROW
         this._game.rotatePiece();
+        this.playRotateEffect();
         this._updateView();
         break;
       case 39: // RIGHT ARROW
