@@ -82,8 +82,10 @@ export default class View {
     const inputName = document.getElementById("name-background");
     inputName.style.display = "block";
 
+    //<----- Render background ----->//
     const background = document.getElementById("background");
     background.style.display = "block";
+    //<----- End Render background ----->//
   }
 
   renderStartScreen() {
@@ -222,14 +224,19 @@ export default class View {
       this.height / 2 + 96
     );
 
+    // This allows when in rendering pause screen then background is hidden
     const background = document.getElementById("background");
     background.style.display = "none";
 
+    //<----- Render highscore ----->//
+    // This allows when in rendering pause screen then highscore box is blur
     const highscore = document.getElementById("highscore-box");
     highscore.style.opacity = "0.2";
 
+    // This allows when in render pause screen then highscore box is blur
     const highscore_2 = document.getElementById("highscore-box-2");
     highscore_2.style.opacity = "0.2";
+    //<----- End Render highscore ----->//
   }
   bubbleSort(arr) {
     let len = arr.length;
@@ -246,11 +253,15 @@ export default class View {
   }
 
   renderEndScreen({ scoreArr }) {
+    //<----- Render highscore-box and background ----->//
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "none";
 
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "none";
+
+    const highscoreBox_3 = document.getElementById("highscore-box-3");
+    highscoreBox_3.style.display = "block";
 
     const inputName = document.getElementById("name-background");
     inputName.style.display = "block";
@@ -259,10 +270,11 @@ export default class View {
     background_3.style.display = "block";
 
     const background = document.getElementById("background");
-    background.style.display = "block";
+    background.style.display = "none";
 
     const background_2 = document.getElementById("background-2");
     background_2.style.display = "none";
+    //<----- End Render highscore-box and background ----->//
 
     this._clearScreen();
     this.bubbleSort(scoreArr);
@@ -451,11 +463,13 @@ export default class View {
     const inputName = document.getElementById("name-background");
     inputName.style.display = "none";
 
+    //<----- Render highscore-box ----->//
     const highscore = document.getElementById("highscore-box");
     highscore.style.opacity = "1";
 
     const highscore_2 = document.getElementById("highscore-box-2");
     highscore_2.style.opacity = "1";
+    //<----- End Render highscore-box ----->//
   }
 
   // Right Side of Play Field
