@@ -91,17 +91,23 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 
 ## Demo <a name="demo"></a>  🤖
 
-### Start Screen 
+#### Start Screen 
+![image](./screenshot/game/startscreen.png)
+
+#### Set Difficulty 
+![image](./screenshot/game/startscreen.png)
+
+#### Play Screen 
+![image](./screenshot/game/playing.png)
+![image](./screenshot/game/playing2.png)
+#### Pause Screen 
 ![image](...)
 
-### Play Screen 
-![image](...)
+#### End Screen 
+![image](./screenshot/game/gameover.png)
 
-### Pause Screen 
-![image](...)
-
-### End Screen 
-![image](...)
+#### Mobile 
+![image](https://scontent.fvca1-2.fna.fbcdn.net/v/t1.15752-9/350373858_279781317804423_7244818505805099240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=AryMEDPsMzMAX-nzcib&_nc_ht=scontent.fvca1-2.fna&oh=03_AdRhq3WYMZHFBfUbZITpu1ZDA3A_0vhMxDN_27vRZ319_w&oe=649D9B59)
 
 ### How to play
 ...
