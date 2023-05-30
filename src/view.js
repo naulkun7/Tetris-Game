@@ -311,7 +311,7 @@ export default class View {
     this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
   }
   _renderHighScore({ scoreArr }) {
-    var scoreArr1 = [
+    let scoreArr1 = [
       {
         _name: scoreArr[0]._name,
         _score: scoreArr[0]._score,
@@ -373,7 +373,6 @@ export default class View {
     );
   }
 
-
   _renderPlayfield({ playfield, activePiece, ghostPiece }) {
     for (let y = 0; y < playfield.length; y++) {
       const line = playfield[y];
@@ -424,9 +423,21 @@ export default class View {
     this.context.fillStyle = "white";
     this.context.font = '13px "Press Start 2P"';
 
-    this.context.fillText(`Level: ${level}`, this.panelX + 15, this.panelY + 10);
-    this.context.fillText(`Score: ${score}`, this.panelX + 15, this.panelY + 34);
-    this.context.fillText(`Lines: ${lines}`, this.panelX + 15, this.panelY + 58);
+    this.context.fillText(
+      `Level: ${level}`,
+      this.panelX + 15,
+      this.panelY + 10
+    );
+    this.context.fillText(
+      `Score: ${score}`,
+      this.panelX + 15,
+      this.panelY + 34
+    );
+    this.context.fillText(
+      `Lines: ${lines}`,
+      this.panelX + 15,
+      this.panelY + 58
+    );
     this.context.fillText("Next:", this.panelX + 15, this.panelY + 106);
     this.context.fillText("Hold:", this.panelX + 15, this.panelY + 202);
 

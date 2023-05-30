@@ -35,6 +35,7 @@ button {
 #root .background img {
   top: 0;
   left: 0;
+  -o-object-fit: cover;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -44,6 +45,7 @@ button {
 #root .background-2 img {
   top: 0;
   left: 0;
+  -o-object-fit: cover;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -54,14 +56,16 @@ button {
   display: none;
 }
 
-#root .background-3 img{
+#root .background-3 img {
   top: 0;
   left: 0;
+  -o-object-fit: cover;
   object-fit: cover;
   width: 100%;
   height: 100%;
   opacity: 30%;
 }
+
 /* End Background */
 
 #root h1 {
@@ -121,6 +125,7 @@ button {
   height: 295px;
   border: 2px solid #ddd;
 }
+
 /* End HightScore-box */
 
 /* Mobile */
@@ -159,4 +164,5 @@ button {
     background-color: #d9d9d9;
   }
 }
+
 /* End Mobile */
