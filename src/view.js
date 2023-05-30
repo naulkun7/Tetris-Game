@@ -424,15 +424,15 @@ export default class View {
     this.context.fillStyle = "white";
     this.context.font = '13px "Press Start 2P"';
 
-    this.context.fillText(`Level: ${level}`, this.panelX + 10, this.panelY + 10);
-    this.context.fillText(`Score: ${score}`, this.panelX + 10, this.panelY + 34);
-    this.context.fillText(`Lines: ${lines}`, this.panelX + 10, this.panelY + 58);
-    this.context.fillText("Next:", this.panelX + 10, this.panelY + 106);
-    this.context.fillText("Hold:", this.panelX + 10, this.panelY + 202);
+    this.context.fillText(`Level: ${level}`, this.panelX + 15, this.panelY + 10);
+    this.context.fillText(`Score: ${score}`, this.panelX + 15, this.panelY + 34);
+    this.context.fillText(`Lines: ${lines}`, this.panelX + 15, this.panelY + 58);
+    this.context.fillText("Next:", this.panelX + 15, this.panelY + 106);
+    this.context.fillText("Hold:", this.panelX + 15, this.panelY + 202);
 
     if (nextPiece) {
       this._renderPiece(nextPiece, {
-        x: this.panelX + 10,
+        x: this.panelX + 15,
         y: this.panelY + 120,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
@@ -442,7 +442,7 @@ export default class View {
 
     if (holdPiece) {
       this._renderPiece(holdPiece, {
-        x: this.panelX + 10,
+        x: this.panelX + 15,
         y: this.panelY + 220,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
