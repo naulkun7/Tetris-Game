@@ -1,8 +1,8 @@
 import Game from "./src/game.js";
 import View from "./src/view.js";
 import Controller from "./src/controller.js";
-import VirtualKeyboard from "./src/virtualkeyboard.js";
-import Motion from "./src/motion.js";
+import VirtualKeyboard from "./src/mobile/virtualkeyboard.js";
+import Motion from "./src/mobile/motion.js";
 
 const GRID_ROWS = 20;
 const GRID_COLUMNS = 10;
