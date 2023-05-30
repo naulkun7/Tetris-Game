@@ -126,11 +126,11 @@ export default class Game {
       this._baseLevel = 5;
     }
   }
-
+  // get current level
   get level() {
     return Math.floor(this._lines / this._linesPerLevel) + this._baseLevel;
   }
-
+  // get curent state
   get state() {
     return {
       name: this._name,
@@ -147,7 +147,7 @@ export default class Game {
       scoreArr: this._scoreArr,
     };
   }
-
+  // reset to some attribute to play again
   reset() {
     this._count++;
     this._score = 0;
@@ -157,27 +157,27 @@ export default class Game {
     this._playfield.reset();
     this._updatePieces();
   }
-
+  // Move Piece  to the left
   movePieceLeft() {
     this._activePiece.x -= 1;
 
-    if (this._playfield.hasCollision(this._activePiece)) {
+    if (this._playfield.hasCollision(this._activePiece)) {  // check Collision
       this._activePiece.x += 1;
     } else {
       this._updateGhostPiece();
     }
   }
-
+  // Move Piece  to the right
   movePieceRight() {
     this._activePiece.x += 1;
 
-    if (this._playfield.hasCollision(this._activePiece)) {
+    if (this._playfield.hasCollision(this._activePiece)) { // check Collision
       this._activePiece.x -= 1;
     } else {
       this._updateGhostPiece();
     }
   }
-
+  // Move Piece downward
   movePieceDown() {
     if (this._topOut) return;
 
@@ -292,7 +292,7 @@ export default class Game {
       this._updateGhostPiece();
     }
   }
-
+  // Update the state of game
   _update() {
     this._updatePlayfield();
 
@@ -303,7 +303,7 @@ export default class Game {
         this._scoreArr[i]._score = this._score;
       }
     }
-
+    // Get the name of player in each play turn
     for (let i = 0; i < 5; i++) {
       if (this._count == i) {
         this._updateName();
@@ -314,7 +314,7 @@ export default class Game {
     this._updatePieces();
     this._updateGhostPiece();
     this._updateScore();
-
+    // Check the collision 
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
     } else {
@@ -329,11 +329,11 @@ export default class Game {
     // Reset the swap flag when a new piece becomes active
     this._hasSwapped = false;
   }
-
+  // Update playfield of game
   _updatePlayfield() {
     this._playfield.lockPiece(this._activePiece);
   }
-
+  // Update score when get score
   _updateScore() {
     const clearedLines = this._playfield.clearLines();
 
@@ -343,12 +343,13 @@ export default class Game {
       this._lines += clearedLines;
     }
   }
+  // Update Name of player
   _updateName() {
     this._name = document.getElementById("name").value;
   }
 
 
-
+  // Update the Pieces 
   _updatePieces() {
     this._activePiece = this._nextPiece || new Piece();
     this._nextPiece = new Piece();
@@ -357,7 +358,7 @@ export default class Game {
       (this._playfield.columns - this._activePiece.width) / 2
     );
     this._activePiece.y = 0;
-    this._ghostPiece = new Piece(
+    this._ghostPiece = new Piece( // Create a ghost Piece
       this._activePiece.type,
       this._activePiece.x,
       this._activePiece.y
@@ -376,7 +377,7 @@ export default class Game {
     // Move the ghost piece up by one, as the last move caused a collision
     this._ghostPiece.y -= 1;
   }
-
+  // Make a sound when clear a line
   _playClearLineSoundEffect() {
     if (this._isSoundMuted) {
       let clearLineAudio = document.getElementById("getScore");

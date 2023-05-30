@@ -82,8 +82,10 @@ export default class View {
     const inputName = document.getElementById("name-background");
     inputName.style.display = "block";
 
+    //<----- Render background ----->//
     const background = document.getElementById("background");
     background.style.display = "block";
+    //<----- End Render background ----->//
   }
 
   renderStartScreen() {
@@ -99,16 +101,19 @@ export default class View {
     this.context.font = '13px "Press Start 2P"';
     this.context.textAlign = "left";
     this.context.textBaseline = "middle";
+
     this.context.fillText(
       "* Use the 🡸|🡺 to move left and right",
       this.width / 2 - 230,
       this.height / 2
     );
+
     this.context.fillText(
       "* Use the ↑ to rotate 90° clockwise ",
       this.width / 2 - 230,
       this.height / 2 + 30
     );
+
     this.context.fillText(
       "* Use Space to drop down",
       this.width / 2 - 230,
@@ -120,11 +125,13 @@ export default class View {
       this.width / 2 - 230,
       this.height / 2 + 90
     );
+
     this.context.fillText(
       "* Use U to undo",
       this.width / 2 - 230,
       this.height / 2 + 120
     );
+
     this.context.fillText(
       "* Use R to restart",
       this.width / 2 - 230,
@@ -153,6 +160,7 @@ export default class View {
       this.width / 2,
       this.height / 2 + 40
     );
+
     this.context.fillText(
       "Press H for HARD",
       this.width / 2,
@@ -216,14 +224,19 @@ export default class View {
       this.height / 2 + 96
     );
 
+    // This allows when in rendering pause screen then background is hidden
     const background = document.getElementById("background");
     background.style.display = "none";
 
+    //<----- Render highscore ----->//
+    // This allows when in rendering pause screen then highscore box is blur
     const highscore = document.getElementById("highscore-box");
     highscore.style.opacity = "0.2";
 
+    // This allows when in render pause screen then highscore box is blur
     const highscore_2 = document.getElementById("highscore-box-2");
     highscore_2.style.opacity = "0.2";
+    //<----- End Render highscore ----->//
   }
   bubbleSort(arr) {
     let len = arr.length;
@@ -240,11 +253,15 @@ export default class View {
   }
 
   renderEndScreen({ scoreArr }) {
+    //<----- Render highscore-box and background ----->//
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "none";
 
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "none";
+
+    const highscoreBox_3 = document.getElementById("highscore-box-3");
+    highscoreBox_3.style.display = "block";
 
     const inputName = document.getElementById("name-background");
     inputName.style.display = "block";
@@ -253,10 +270,11 @@ export default class View {
     background_3.style.display = "block";
 
     const background = document.getElementById("background");
-    background.style.display = "block";
+    background.style.display = "none";
 
     const background_2 = document.getElementById("background-2");
     background_2.style.display = "none";
+    //<----- End Render highscore-box and background ----->//
 
     this._clearScreen();
     this.bubbleSort(scoreArr);
@@ -271,6 +289,7 @@ export default class View {
       this.width / 2 - 110,
       this.height / 2 - 50
     );
+
     this.context.fillText(
       `Score: ${scoreArr[0]._score}`,
       this.width / 2 + 110,
@@ -282,6 +301,7 @@ export default class View {
       this.width / 2 - 110,
       this.height / 2
     );
+
     this.context.fillText(
       `Score: ${scoreArr[1]._score}`,
       this.width / 2 + 110,
@@ -293,6 +313,7 @@ export default class View {
       this.width / 2 - 110,
       this.height / 2 + 50
     );
+
     this.context.fillText(
       `Score: ${scoreArr[2]._score}`,
       this.width / 2 + 110,
@@ -323,6 +344,8 @@ export default class View {
     this.context.lineWidth = this.playfieldBorderWidth;
     this.context.strokeRect(borderX, borderY, borderWidth, borderHeight);
   }
+
+  // Left Side of Play Field
   _renderHighScore({ scoreArr }) {
     let scoreArr1 = [
       {
@@ -352,10 +375,13 @@ export default class View {
     this.context.textBaseline = "top";
     this.context.fillStyle = "white";
     this.context.font = '14px "Press Start 2P"';
+
     // Title
     this.context.fillText("High Scores", this.panelX1, this.panelY1 + 10);
+
     // Content
     this.context.fillStyle = "#EBC931";
+
     // 1st
     this.context.fillText("1st", this.panelX1, this.panelY1 + 40);
     this.context.fillText(
@@ -368,6 +394,7 @@ export default class View {
       this.panelX1,
       this.panelY1 + 80
     );
+
     // 2nd
     this.context.fillStyle = "#c0c0c0";
     this.context.fillText("2nd", this.panelX1, this.panelY1 + 110);
@@ -381,6 +408,7 @@ export default class View {
       this.panelX1,
       this.panelY1 + 150
     );
+
     // 3rd
     this.context.fillStyle = "#cc6600";
     this.context.fillText("3rd", this.panelX1, this.panelY1 + 180);
@@ -415,6 +443,7 @@ export default class View {
       }
     }
 
+    // Active Piece
     this._renderPiece(activePiece, {
       x: this.playfieldX,
       y: this.playfieldY,
@@ -422,6 +451,7 @@ export default class View {
       height: this.blockHeight,
     });
 
+    // Ghost Piece
     this._renderPiece(ghostPiece, {
       x: this.playfieldX,
       y: this.playfieldY,
@@ -433,13 +463,16 @@ export default class View {
     const inputName = document.getElementById("name-background");
     inputName.style.display = "none";
 
+    //<----- Render highscore-box ----->//
     const highscore = document.getElementById("highscore-box");
     highscore.style.opacity = "1";
 
     const highscore_2 = document.getElementById("highscore-box-2");
     highscore_2.style.opacity = "1";
+    //<----- End Render highscore-box ----->//
   }
 
+  // Right Side of Play Field
   _renderPanel({ level, score, lines, nextPiece, holdPiece }) {
     this.context.textAlign = "start";
     this.context.textBaseline = "top";
@@ -470,7 +503,6 @@ export default class View {
         y: this.panelY + 120,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
-        // color: "white",
       });
     }
 
@@ -480,7 +512,6 @@ export default class View {
         y: this.panelY + 220,
         width: this.blockWidth * 0.5,
         height: this.blockHeight * 0.5,
-        // color: "white",
       });
     }
   }

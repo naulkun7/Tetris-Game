@@ -4,9 +4,9 @@ export default class Controller {
     this._view = view;
     this._isPlaying = false;
     this._interval = null;
-    this._isMuted = true;
+    this._isMuted = false;
 
-    this.difficultySelected = false; // Add this
+    this.difficultySelected = false; // Indicates if difficulty has been selected
     this.update = this.update.bind(this);
     this._isWelcomeScreen = true;
 
@@ -17,6 +17,7 @@ export default class Controller {
     this._view.renderWelcomeScreen();
   }
 
+  // Update function to move the piece down and update the view
   update() {
     if (this._isPlaying) {
       this._game.movePieceDown();
@@ -24,16 +25,19 @@ export default class Controller {
     }
   }
 
+  // Pause the game audio
   pauseAudio() {
     let audio = document.getElementById("soundtrack");
     audio.pause();
   }
 
-  pause_Effect() {
+  // Play the pause effect sound
+  playPauseEffect() {
     let pauseEffect = document.getElementById("pauseEffect");
     pauseEffect.play();
   }
 
+  // Play the lock effect sound
   playLockEffect() {
     if (!this._isMuted) {
       let lockSound = document.getElementById("lockSound");
@@ -41,11 +45,13 @@ export default class Controller {
     }
   }
 
+  // Pause the lock effect sound
   pauseLockEffect() {
     let lockSound = document.getElementById("lockSound");
     lockSound.pause();
   }
 
+  // Play the rotate effect sound
   playRotateEffect() {
     if (!this._isMuted) {
       let rotateSound = document.getElementById("rotate");
@@ -53,29 +59,31 @@ export default class Controller {
     }
   }
 
+  // Pause the rotate effect sound
   pauseRotateEffect() {
     let rotateSound = document.getElementById("rotate");
     rotateSound.pause();
   }
 
-  // Sound Game Over 
+  // Play the game over effect sound with a delay
   playGameOverEffect() {
     if (!this._isMuted) {
       const gameoverSound = document.getElementById("gameover");
       gameoverSound.play();
-  
+
       setTimeout(() => {
         gameoverSound.pause();
       }, 2000); // Pause after 2 seconds (2000 milliseconds)
     }
   }
-  
 
+  // Resume the game audio
   resumeAudio() {
     let audio = document.getElementById("soundtrack");
     audio.play();
   }
 
+  // Start the game
   play() {
     this._isWelcomeScreen = false;
     this._isPlaying = true;
@@ -85,52 +93,69 @@ export default class Controller {
       this.resumeAudio();
     }
 
+    //<----- Render background and highscore-box ----->//
+    // This allows when in playing game then background is hidden
     const background = document.getElementById("background");
     background.style.display = "none";
 
+    // This allows when in playing game then background is shown
     const background_2 = document.getElementById("background-2");
     background_2.style.display = "block";
 
+    // This allows when in playing game then background is hidden
     const background_3 = document.getElementById("background-3");
     background_3.style.display = "none";
 
+    // This allows when in playing game then background is shown
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "block";
 
+    // This allows when in playing game then background is shown
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "block";
+    
+    // This allows when in playing game then background is hidden
+    const highscoreBox_3 = document.getElementById("highscore-box-3");
+    highscoreBox_3.style.display = "none";
+    //<----- End Render background and highscore-box ----->//
   }
 
+  // Pause the game
   pause() {
     this._isPlaying = false;
     this._stopTimer();
     this._updateView();
     if (!this._isMuted) {
       this.pauseAudio();
-      this.pause_Effect();
+      this.playPauseEffect();
       this.pauseLockEffect();
       this.pauseRotateEffect();
     }
   }
 
+  // Reset the game and start playing
   reset() {
     this._game.reset();
     this.play();
   }
 
+  // Restart the game from the beginning
   restartGame() {
-    this._game.reset(); // Assuming this method resets your game
+    this._game.reset();
     this._view.renderChoosingDifficulty(); // Render the start screen
     this._isPlaying = false; // The game should not be playing at the start screen
     this._stopTimer(); // Stop the game timer, if it's running
 
+    //<----- Render highscore-box ----->//
+    // This allows when in rendering restart game then highscore is hidden
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "none";
-
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "none";
+    //<----- End Render highscore-box ----->//
   }
 
+  // Update the game view based on the current state
   _updateView() {
     const state = this._game.state;
 
@@ -145,19 +170,18 @@ export default class Controller {
     }
   }
 
+  // Start the game timer
   _startTimer() {
     const speed = 1000 - this._game.level * 100;
 
     if (!this._interval) {
-      this._interval = setInterval(
-        () => {
-          this.update();
-        },
-        speed > 0 ? speed : 100
-      );
+      this._interval = setInterval(() => {
+        this.update();
+      }, speed > 0 ? speed : 100);
     }
   }
 
+  // Stop the game timer
   _stopTimer() {
     if (this._interval) {
       clearInterval(this._interval);
@@ -165,6 +189,7 @@ export default class Controller {
     }
   }
 
+  // Handle key press events
   _handleKeyPress(event) {
     if (this._isWelcomeScreen && event.keyCode !== 13) {
       return;
@@ -190,14 +215,15 @@ export default class Controller {
     }
   }
 
+  // Toggle the mute state and update game and audio mute states accordingly
   _toggleMute() {
     this._isMuted = !this._isMuted;
     this._game._isSoundMuted = !this._game._isSoundMuted;
 
     if (this._isMuted) {
       this.pauseAudio();
-      this.pauseLockEffect(); // Pause the lock effect sound
-      this.pauseRotateEffect(); //Pause the rotate effect sound
+      this.pauseLockEffect();
+      this.pauseRotateEffect();
     } else {
       this.resumeAudio();
     }
@@ -262,6 +288,7 @@ export default class Controller {
     }
   }
 
+  // Handle key up events
   _handleKeyUp(event) {
     if (this._isWelcomeScreen && event.keyCode !== 13) {
       return;
@@ -273,22 +300,24 @@ export default class Controller {
     }
   }
 
+  // Render the difficulty selection screen
   renderChoosingDifficulty() {
-    // Render choosing difficulty screen
     this._view.renderChoosingDifficulty();
 
     // Listen to user input for difficulty selection
     this._view.on("difficultySelected", (difficulty) => {
-      this._game.setDifficulty(difficulty); // Assuming this method changes game's difficulty
+      this._game.setDifficulty(difficulty);
       this.difficultySelected = true;
       this._isPlaying = false;
-      this._view.renderStartScreen(); // Re-render the start screen
+      this._view.renderStartScreen();
     });
 
+    //<----- Render highscore-box ----->//
+    // This allows when in render choosing difficulty then highscore-box is hidden
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "none";
-
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "none";
+    //<----- End Render highscore-box ----->//
   }
 }
