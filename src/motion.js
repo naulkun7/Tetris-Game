@@ -4,7 +4,8 @@ export default class Motion {
     this._view = view;
     this.initialX = null;
     this.initialY = null;
-    this.isSwipe = false; // Add this flag
+    this.isSwipe = false;
+    this.moveInterval = null;
 
     this._view.element.addEventListener(
       "touchstart",
@@ -40,33 +41,63 @@ export default class Motion {
       // Sliding horizontally
       if (diffX > 0) {
         // Swiped left
-        this._game.movePieceLeft();
+        this.moveLeft();
       } else {
         // Swiped right
-        this._game.movePieceRight();
+        this.moveRight();
       }
     } else {
       // Sliding vertically
       if (diffY > 0) {
         // Swiped up
-        this._game.rotatePiece();
+        this.rotate();
       } else {
         // Swiped down
-        this._game.dropPiece();
+        this.drop();
       }
     }
 
-    this.isSwipe = true; // If we reach this point, it's a swipe
+    this.isSwipe = true;
     this.initialX = null;
     this.initialY = null;
     e.preventDefault();
   }
 
   endTouch(e) {
+    if (this.moveInterval) {
+      clearInterval(this.moveInterval);
+      this.moveInterval = null;
+    }
     if (!this.isSwipe) {
       // Here you can determine what a simple tap does, e.g. rotating the Tetris piece
       this._game.rotatePiece();
     }
-    this.isSwipe = false; // Reset the flag
+    this.isSwipe = false;
+  }
+
+  moveLeft() {
+    this._game.movePieceLeft();
+    if (!this.moveInterval) {
+      this.moveInterval = setInterval(() => {
+        this._game.movePieceLeft();
+      }, 100);
+    }
+  }
+
+  moveRight() {
+    this._game.movePieceRight();
+    if (!this.moveInterval) {
+      this.moveInterval = setInterval(() => {
+        this._game.movePieceRight();
+      }, 100);
+    }
+  }
+
+  rotate() {
+    this._game.rotatePiece();
+  }
+
+  drop() {
+    this._game.dropPiece();
   }
 }
