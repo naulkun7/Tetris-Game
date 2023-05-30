@@ -60,14 +60,20 @@ export default class Controller {
       this.resumeAudio();
     }
 
+    const background = document.getElementById("background");
+    background.style.display = "none";
+
+    const background_2 = document.getElementById("background-2");
+    background_2.style.display = "block";
+
+    const background_3 = document.getElementById("background-3");
+    background_3.style.display = "none";
+
     const highscoreBox = document.getElementById("highscore-box");
     highscoreBox.style.display = "block";
 
     const highscoreBox_2 = document.getElementById("highscore-box-2");
     highscoreBox_2.style.display = "block";
-
-    const highscoreBox_3 = document.getElementById("highscore-box-3");
-    highscoreBox_3.style.display = "none";
   }
 
   pause() {
@@ -91,6 +97,12 @@ export default class Controller {
     this._view.renderChoosingDifficulty(); // Render the start screen
     this._isPlaying = false; // The game should not be playing at the start screen
     this._stopTimer(); // Stop the game timer, if it's running
+
+    const highscoreBox = document.getElementById("highscore-box");
+    highscoreBox.style.display = "none";
+
+    const highscoreBox_2 = document.getElementById("highscore-box-2");
+    highscoreBox_2.style.display = "none";
   }
 
   _updateView() {
@@ -242,5 +254,11 @@ export default class Controller {
       this._isPlaying = false;
       this._view.renderStartScreen(); // Re-render the start screen
     });
+
+    const highscoreBox = document.getElementById("highscore-box");
+    highscoreBox.style.display = "none";
+
+    const highscoreBox_2 = document.getElementById("highscore-box-2");
+    highscoreBox_2.style.display = "none";
   }
 }

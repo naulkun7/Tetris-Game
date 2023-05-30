@@ -22,8 +22,11 @@ button {
   display: none;
 }
 
+/* Background */
 #root .background {
   pointer-events: none;
+  width: 100%;
+  height: auto;
 }
 
 #root .background img {
@@ -35,6 +38,31 @@ button {
   right: 0;
   opacity: 15%;
 }
+
+#root .background-2 img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  right: 0;
+  opacity: 20%;
+}
+
+#root .background-3 {
+  display: none;
+}
+
+#root .background-3 img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  right: 0;
+  opacity: 40%;
+}
+/* End Background */
 
 #root h1 {
   display: flex;
@@ -65,49 +93,51 @@ button {
   width: 70%;
 }
 
+/* HightScore-box */
 #root .highscore-box {
   position: relative;
-  padding-right: 760px;
   pointer-events: none;
   display: none;
 }
 
-#root .highscore-box img {
+#root .highscore-box .img {
   position: absolute;
-  width: 190px;
-  height: 300px;
-  opacity: 35%;
+  width: 170px;
+  height: 250px;
+  margin-left: 560px;
+  border: 2px solid #ddd;
 }
 
-#root .highscore-box-2 {
-  position: relative;
-  padding-left: 365px;
-  pointer-events: none;
-  display: none;
-}
-
-#root .highscore-box-2 img {
+#root .highscore-box-2 .img {
+  right: 0;
   position: absolute;
-  width: 190px;
-  height: 300px;
-  opacity: 35%;
+  width: 170px;
+  height: 295px;
+  margin-right: 570px;
+  border: 2px solid #ddd;
 }
 
 #root .highscore-box-3 {
-  position: relative;
-  top: 150px;
-  padding-right: 400px;
-  pointer-events: none;
-  display: none;
+  background-size: cover;
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari/WebKit browsers */
+  color: transparent;
 }
 
 #root .highscore-box-3 img {
+  right: 0;
   position: absolute;
-  width: 450px;
-  height: 300px;
-  opacity: 35%;
-  border-radius: 30%;
+  width: 170px;
+  height: 295px;
+  margin-right: 570px;
+  border: 2px solid #ddd;
 }
+/* End HightScore-box */
+
 /* Mobile */
 
 @media screen and (max-width: 1024px) {
@@ -156,5 +186,4 @@ button {
     display: none;
   }
 }
-
 /* End Mobile */
