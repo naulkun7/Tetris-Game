@@ -4,6 +4,9 @@ export default class Motion {
     this._view = view;
     this.initialX = null;
     this.initialY = null;
+    this.startTime = null;
+    this.threshold = 20; // modify this value to adjust sensitivity
+    this.timeLimit = 200; // maximum time in ms between touchstart and touchend to be considered a tap
 
     this._view.element.addEventListener(
       "touchstart",
@@ -17,7 +20,7 @@ export default class Motion {
     );
     this._view.element.addEventListener(
       "touchend",
-      this.tapTouch.bind(this),
+      this.endTouch.bind(this), // Change this to endTouch
       false
     );
   }
@@ -25,6 +28,7 @@ export default class Motion {
   startTouch(e) {
     this.initialX = e.touches[0].clientX;
     this.initialY = e.touches[0].clientY;
+    this.startTime = new Date().getTime(); // record the time at touchstart
   }
 
   moveTouch(e) {
@@ -37,21 +41,27 @@ export default class Motion {
 
     if (Math.abs(diffX) > Math.abs(diffY)) {
       // Sliding horizontally
-      if (diffX > 0) {
-        // Swiped left
-        this._game.movePieceLeft();
-      } else {
-        // Swiped right
-        this._game.movePieceRight();
+      if (Math.abs(diffX) > this.threshold) {
+        // Add this line
+        if (diffX > 0) {
+          // Swiped left
+          this._game.movePieceLeft();
+        } else {
+          // Swiped right
+          this._game.movePieceRight();
+        }
       }
     } else {
       // Sliding vertically
-      if (diffY > 0) {
-        // Swiped up
-        this._game.rotatePiece();
-      } else {
-        // Swiped down
-        this._game.dropPiece();
+      if (Math.abs(diffY) > this.threshold) {
+        // Add this line
+        if (diffY > 0) {
+          // Swiped up
+          this._game.rotatePiece();
+        } else {
+          // Swiped down
+          this._game.dropPiece();
+        }
       }
     }
 
@@ -59,6 +69,14 @@ export default class Motion {
     this.initialY = null;
 
     e.preventDefault();
+  }
+
+  endTouch(e) {
+    // Here you check the elapsed time to differentiate between a swipe and a tap
+    if (new Date().getTime() - this.startTime < this.timeLimit) {
+      // if the time between touchstart and touchend is less than timeLimit, it's considered a tap
+      this.tapTouch(e);
+    }
   }
 
   tapTouch(e) {

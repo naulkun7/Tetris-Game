@@ -153,7 +153,7 @@ export default class View {
     // Listen to user input
     const handleKeydown = (event) => {
       if (!this.isGameActive) {
-        if (event.key.toLowerCase() === "e") {
+        if (event.key.toLowerCase() === "e" || event.key === "Enter") {
           document.dispatchEvent(
             new CustomEvent("difficultySelected", { detail: "easy" })
           );
