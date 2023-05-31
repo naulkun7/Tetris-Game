@@ -44,7 +44,7 @@ Click here and enjoy the game --> [Tetris Game](tetris-game-zeta.vercel.app)
 | Hoàng Luân     | Overall Framework, Ghostpiece func, Mobile, Set Difficulty func, Miscellaneous   |   
 | Quang Trí     | Readme, Holdpiece func, Sound Effect, Miscellaneous     |    
 | Thiên Phúc     | Score Board, Class Diagram, Algorithm (Sort), Miscellaneous  |     
-| Ngọc Nhân     | Unđo func, Class Diagram, Miscellaneous |      
+| Ngọc Nhân     | Undo func, Class Diagram, Miscellaneous |      
 | All members    | Report, PowerPoint, Front-end |
 ### Environment :computer:
 Language:  
@@ -102,7 +102,7 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 ![image](./screenshot/game/startscreen.png)
 
 #### Set Difficulty 
-![image](./screenshot/game/startscreen.png)
+![image](./screenshot/game/difficult.png)
 
 #### Play Screen 
 ![image](./screenshot/game/playing.png)
