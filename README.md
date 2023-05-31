@@ -1,6 +1,6 @@
 ![image](https://scontent.fsgn20-1.fna.fbcdn.net/v/t1.6435-9/89227924_2886016274945769_1382393519808708608_n.png?_nc_cat=104&ccb=1-7&_nc_sid=e3f864&_nc_ohc=ZfnQXr4v5w4AX9Ww-GK&_nc_ht=scontent.fsgn20-1.fna&oh=00_AfCm2n4SLp2oYFEUjc_NswbUSdIyy2gZbyBum3D0qLIltw&oe=649AF0DD)
 # Tetris Game 
-Click here and enjoy the game --> <p target = "blank"> [Tetris Game](https://tetris-game-zeta.vercel.app/) </p> 
+Click here and enjoy the game --> <a href="https://tetris-game-zeta.vercel.app/" target="_blank">Tetris Game</a>
 
 ## Data Structures and Algorithms Project (Semester 2_2022-2023)
 
