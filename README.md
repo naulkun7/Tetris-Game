@@ -94,7 +94,7 @@ Main skills: Debugs, Team work
 Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis report, Git and Github Usage
 
 ## UML Class Diagram <a name="uml"></a> 📄
-...
+![image](./screenshot/Class_Diagram_Tetris.png)
 
 ## Demo <a name="demo"></a>  🤖
 
@@ -118,7 +118,7 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 ![image](./screenshot/game/mobile.jpg)
 
 ### How to play
-## Desktop 🖥️
+#### Desktop 🖥️
 * Use the 🡸|🡺 to move left and right
 * Use the ↑ to rotate 90° clockwise
 * Use Space to drop down
@@ -126,7 +126,7 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 * Use U to undo
 * Use R to restart
 
-## Mobile 📱
+#### Mobile 📱
 * Swipe Left and Right to move
 * Swipe up or tap to rotate
 * Swipe down to drop piece
