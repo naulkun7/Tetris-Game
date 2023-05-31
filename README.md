@@ -8,6 +8,7 @@ Click here and enjoy the game --> <a href="https://tetris-game-zeta.vercel.app/"
 ![GitHub top language](https://img.shields.io/github/languages/top/naulkun7/Tetris-Game) 
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/naulkun7/Tetris-Game/main)
 ![GitHub last commit](https://img.shields.io/github/last-commit/naulkun7/Tetris-Game)
+![Vercel](https://vercelbadge.vercel.app/api/naulkun7/Tetris-Game)
 
 # Table of contents :round_pushpin:  
 
@@ -57,6 +58,7 @@ Platform:
   
 ![image](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white) 
 ![image](https://img.shields.io/badge/WebStorm-000000?style=for-the-badge&logo=WebStorm&logoColor=white)  
+![image](http://therealsujitk-vercel-badge.vercel.app/?app=therealsujitk-vercel-badge&style=for-the-badge&logo=false)
 
 ## Features <a name="features"></a> :star2:
 **Main Feature:**  
@@ -117,11 +119,11 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 #### Mobile 
 ![image](./screenshot/game/mobile.jpg)
 
-### How to play
+### How to play 🎮
 #### Desktop 🖥️
-* Use the 🡸|🡺 to move left and right
-* Use the ↑ to rotate 90° clockwise
-* Use Space to drop down
+* Use the ⬅️|➡️ to move left and right  
+* Use the ⬆️ to rotate 90° clockwise 
+* Use Space to drop down 
 * Use C to hold the Piece
 * Use U to undo
 * Use R to restart
@@ -130,10 +132,10 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
 * Swipe Left and Right to move
 * Swipe up or tap to rotate
 * Swipe down to drop piece
-* Press "||" button to interact
-* Press "Gift" button to hold
-* Press "Undo" button to undo
-* Press "Mute" to toggle mute
+* Press ⏸️ button to interact 
+* Press 🎁 button to hold 
+* Press 🔄 button to undo  
+* Press 🔇 to toggle mute 
 
 ## PowerPoint and Report <a name="powerPoint"></a> 📖
    Support: Google slides
@@ -144,7 +146,7 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
    Support: Google docs
    (Screen Shot)
    
-   Direct: 
+   Direct: https://docs.google.com/document/d/1TFwiAUaH60dtllLl4o73U8S-MblfCmTzYT6-PXLCqNY/edit?usp=drive_link
 ## Installation <a name="installation"></a> 
 1. Step 1: Access to https://github.com/naulkun7/Tetris-Game
 - Download and unzip the file
