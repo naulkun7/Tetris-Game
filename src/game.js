@@ -161,7 +161,8 @@ export default class Game {
   movePieceLeft() {
     this._activePiece.x -= 1;
 
-    if (this._playfield.hasCollision(this._activePiece)) {  // check Collision
+    if (this._playfield.hasCollision(this._activePiece)) {
+      // check Collision
       this._activePiece.x += 1;
     } else {
       this._updateGhostPiece();
@@ -171,7 +172,8 @@ export default class Game {
   movePieceRight() {
     this._activePiece.x += 1;
 
-    if (this._playfield.hasCollision(this._activePiece)) { // check Collision
+    if (this._playfield.hasCollision(this._activePiece)) {
+      // check Collision
       this._activePiece.x -= 1;
     } else {
       this._updateGhostPiece();
@@ -314,7 +316,7 @@ export default class Game {
     this._updatePieces();
     this._updateGhostPiece();
     this._updateScore();
-    // Check the collision 
+    // Check the collision
     if (this._playfield.hasCollision(this._activePiece)) {
       this._topOut = true;
     } else {
@@ -348,8 +350,7 @@ export default class Game {
     this._name = document.getElementById("name").value;
   }
 
-
-  // Update the Pieces 
+  // Update the Pieces
   _updatePieces() {
     this._activePiece = this._nextPiece || new Piece();
     this._nextPiece = new Piece();
@@ -379,7 +380,7 @@ export default class Game {
   }
   // Make a sound when clear a line
   _playClearLineSoundEffect() {
-    if (this._isSoundMuted) {
+    if (!this._isSoundMuted) {
       let clearLineAudio = document.getElementById("getScore");
       clearLineAudio.volume = 0.5;
       clearLineAudio.play();
