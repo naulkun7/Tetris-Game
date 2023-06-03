@@ -148,7 +148,7 @@ Knowledge: HTML, CSS, JavaScript, Data Structures, Algorithms, UI design, Thesis
    Direct: [src)
    
    Support: Google docs
-   (Screen Shot)
+   Direct: 
    
    Direct: https://docs.google.com/document/d/1TFwiAUaH60dtllLl4o73U8S-MblfCmTzYT6-PXLCqNY/edit?usp=drive_link
 ## Installation <a name="installation"></a> 
@@ -165,3 +165,5 @@ Thanks to the incredibly rich resources that helped us make this project happen
 1. Data Structures and Algorithms Lectures (Dr. Tran Thanh Tung)
 2. Data Structures and Algorithms Labs (MSc. Nguyen Quang Phu)
 3. Tetris на JavaScript - CodeDojo: [Link](https://www.youtube.com/playlist?list=PLqHlAwsJRxAMa9HHLRZcHFZyM7SBHqJgt)
+4. Chat.openai.com. Available at: [Link](https://chat.openai.com/)
+5. Info@erdplus.com ERDPlus. Available at: [Link](https://erdplus.com/)
