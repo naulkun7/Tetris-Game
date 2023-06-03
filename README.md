@@ -60,6 +60,10 @@ Platform:
 ![image](https://img.shields.io/badge/WebStorm-000000?style=for-the-badge&logo=WebStorm&logoColor=white)  
 ![image](http://therealsujitk-vercel-badge.vercel.app/?app=therealsujitk-vercel-badge&style=for-the-badge&logo=false)
 
+Design Pattern:
+
+- MVC (Model-View-Controller) 
+- Template Method
 ## Features <a name="features"></a> :star2:
 **Main Feature:**  
 - Play, Restart, Pause
